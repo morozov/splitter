@@ -8,7 +8,6 @@
 /**
  * Утилита создания ссылки для скачивания через прокси.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Utils_ProxyLink
 	/**
 	 * Создает ссылку.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function generate($url, $splitSize, $encoding)

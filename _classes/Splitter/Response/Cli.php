@@ -12,7 +12,6 @@
  * виде демона, и вывод в основном будет использоваться только для отладки,
  * можно предположить, что на этом и остановимся :)
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  response
  * @see		 Splitter_Response_Abstract

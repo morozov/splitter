@@ -8,7 +8,6 @@
 /**
  * Хранилище-прокси (как сделаю - опишу).
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage
  * @see		 Splitter_Storage_Abstract
@@ -39,7 +38,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Конструктор. Отключает вывод лога в браузер (временно).
 	 *
-	 * @access  public
 	 * @param   string   $target
 	 * @return  Splitter_Storage_Proxy
 	 */
@@ -55,7 +53,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
-	 * @access  public
 	 * @return  integer
 	 */
 	function getResumePosition()
@@ -66,7 +63,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает, нужно ли сохранять данные в хранилище.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function isDownloadNeeded()
@@ -77,7 +73,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @access  public
 	 * @param   integer $size
 	 * @return  boolean
 	 */
@@ -91,7 +86,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Пишет данные в файл.
 	 *
-	 * @access  public
 	 * @param   string   $data   Данные для записи
 	 * @return  boolean		  Были ли данные успешно записаны
 	 */
@@ -113,7 +107,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	 * Обрезает файл до указанной длины. �?спользуется, если сервер не
 	 * поддерживает докачку.
 	 *
-	 * @access  public
 	 * @param   integer  $size
 	 * @return  boolean
 	 */
@@ -127,7 +120,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Отправляет HTTP-заголовки.
 	 *
-	 * @access  public
 	 */
 	function _sendHeaders()
 	{

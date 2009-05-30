@@ -8,7 +8,6 @@
 /**
  * Выполняет разбор содержимого указанного ресурса. Второй шаг.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Шаблон регулярного выражения поиска закодированного текста HTML.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_ESCAPED_HTML = "/var tt = '([^']+)'/i";
@@ -26,7 +24,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Возвращает дополнительные параметры ресурса
 	 *
-	 * @access  protected
 	 * @return  array
 	 */
 	function _getRequestParams()
@@ -41,7 +38,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Выполняет разбор содержимого страницы.
 	 *
-	 * @access  protected
 	 * @param   Lib_Url $url
 	 * @param   string $contents
 	 * @return  array
@@ -97,7 +93,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	 * Пытается определить закодированный кусок HTML, который появляется после
 	 * того, как отработает таймер.
 	 *
-	 * @access  public
 	 * @param   string $text
 	 * @return  string
 	 */
@@ -110,7 +105,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Пытается определить время, на которое запущен javascript-счетчик на странице.
 	 *
-	 * @access  private
 	 * @param   string $contents
 	 * @return  integer
 	 */
@@ -123,7 +117,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Пытается прочитать сообщение о том, что файл удвлен с сервера.
 	 *
-	 * @access  private
 	 * @param   string $contents
 	 * @return  boolean
 	 */
@@ -136,7 +129,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	 * Пытается прочитать сообщение о том, что файл скачивают слишком много
 	 * пользователей.
 	 *
-	 * @access  private
 	 * @param   string $contents
 	 * @return  boolean
 	 */

@@ -8,7 +8,6 @@
 /**
  * Объект обработчика ошибок.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  app
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Смещение, начиная с которого нужно выводить отладочные сообщения.
 	 *
-	 * @access  public
 	 * @var	 int
 	 */
 	var $BACKTRACE_OFFSET = 2;
@@ -26,7 +24,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Длина, до которой нужно обрезать значения строковых аргументов.
 	 *
-	 * @access  public
 	 * @var	 int
 	 */
 	var $BACKTRACE_MAX_STRLEN = 32;
@@ -34,7 +31,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Выполняет обработку ошибок.
 	 *
-	 * @access  public
 	 * @param   integer  $errno
 	 * @param   integer  $errstr
 	 * @param   string   $errfile
@@ -80,7 +76,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Возвращает текстовый префикс ошибки.
 	 *
-	 * @access  protected
 	 * @param   integer  $errno
 	 * @return  string
 	 */
@@ -112,7 +107,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Определяет, является ли ошибка фатальной.
 	 *
-	 * @access  protected
 	 * @param   integer  $errno
 	 * @return  boolean
 	 */
@@ -124,7 +118,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Определяет, является ли ошибка причиной невозможности скачивания файла.
 	 *
-	 * @access  protected
 	 * @param   integer  $errno
 	 * @return  boolean
 	 */
@@ -136,7 +129,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Определяет, является ли ошибка пользовательской.
 	 *
-	 * @access  protected
 	 * @param   integer  $errno
 	 * @return  boolean
 	 */
@@ -148,7 +140,6 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Возвращает стек вызовов до момента ошибки.
 	 *
-	 * @access  private
 	 * @return  array
 	 */
 	function _getBacktrace()

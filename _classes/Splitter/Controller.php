@@ -13,7 +13,6 @@ define('DOWNLOAD_STATUS_INCOMPLETE', 3);
 /**
  * Контроллер. Обрабатывает данные пользовательского запроса.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage
  * @see		 abstract_Object
@@ -23,7 +22,6 @@ class Splitter_Controller
 	/**
 	 * Выполняет обработку данных пользовательского запроса.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function process()
@@ -141,7 +139,6 @@ class Splitter_Controller
 	/**
 	 * Возвращает хранилище указанного типа.
 	 *
-	 * @access  private
 	 * @param   string $type
 	 * @return  Splitter_Storage_Abstract
 	 */
@@ -154,7 +151,6 @@ class Splitter_Controller
 	/**
 	 * Возвращает цель для хранилища указанного типа.
 	 *
-	 * @access  private
 	 * @param   string $type
 	 * @return  string
 	 */
@@ -167,7 +163,6 @@ class Splitter_Controller
 	/**
 	 * Возвращает обработчик файлового сервера для указанного URL.
 	 *
-	 * @access  private
 	 * @param   Lib_Url $url
 	 * @return  Splitter_Share_Abstract
 	 */
@@ -193,7 +188,6 @@ class Splitter_Controller
 	/**
 	 * Возвращает, нужно ли скачивать файл.
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function _isDownloadNeeded()

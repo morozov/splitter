@@ -14,7 +14,6 @@ define('SERVER_VAR_PREFIX', 'SERVER_');
  * объектов-синглтонов, плюс пространство имён кое-каких функций.
  * Стоит подумать о расформировании.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  app
  * @see		 abstract_Object
@@ -24,7 +23,6 @@ class Application
 	/**
 	 * Контекст приложения.
 	 *
-	 * @access  private
 	 * @var	 AppContext
 	 */
 	var $_context;
@@ -32,7 +30,6 @@ class Application
 	/**
 	 * Возвращает объект пользовательского запроса.
 	 *
-	 * @access  public
 	 * @return  Splitter_Request_Abstract
 	 * @static
 	 */
@@ -46,7 +43,6 @@ class Application
 	/**
 	 * Возвращает объект ответа пользователю.
 	 *
-	 * @access  public
 	 * @return  Splitter_Response_Abstract
 	 * @static
 	 */
@@ -60,7 +56,6 @@ class Application
 	/**
 	 * Возвращает объект настроек.
 	 *
-	 * @access  public
 	 * @return  Settings
 	 * @static
 	 */
@@ -74,7 +69,6 @@ class Application
 	/**
 	 * Перезапускает приложение в режимн командной строки.
 	 *
-	 * @access  public
 	 * @static
 	 */
 	function runAsCli()
@@ -92,7 +86,6 @@ class Application
 	/**
 	 * Возвращает, запущено ли приложение под Windows®.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 * @static
 	 */
@@ -104,7 +97,6 @@ class Application
 	/**
 	 * Возвращает путь временной директории для сохранения файла.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getTmpDir()
@@ -136,7 +128,6 @@ class Application
 	/**
 	 * Конструктор. Создает контекст приложения.
 	 *
-	 * @access  private
 	 * @return  Application
 	 */
 	function Application()
@@ -147,7 +138,6 @@ class Application
 	/**
 	 * Возвращает, запущено ли приложение из интерфейса командной строки.
 	 *
-	 * @access  private
 	 * @return  boolean
 	 * @static
 	 */
@@ -159,7 +149,6 @@ class Application
 	/**
 	 * Возвращает контекст приложения.
 	 *
-	 * @access  private
 	 * @return  Context Контекст приложения
 	 */
 	function _getContext()

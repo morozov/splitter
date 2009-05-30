@@ -12,7 +12,6 @@ require_once 'mail/RFC822.php';
 /**
  * Класс отправки скачанного файла по электронной почте.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage
  * @see		 Splitter_Storage_File
@@ -24,7 +23,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	 * то не всегда можно определить тип первоисточника. Да и не особенно вроде
 	 * надо. Поэтому оставим пока в общем случае.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $ATTACHMENT_TYPE = 'application/octet-stream';
@@ -32,7 +30,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Адрес, на который нужно отправить сообщение.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_to;
@@ -40,7 +37,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * �?мя вложения, которым будут отправлены данные.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_attachmentName;
@@ -51,7 +47,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	 * сообщения в случае, если клиент выполнит close() более одного раза для
 	 * одного файла.
 	 *
-	 * @access  private
 	 * @var	 boolean
 	 */
 	var $_sent = false;
@@ -59,7 +54,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @return  Splitter_Storage_Email
 	 */
 	function Splitter_Storage_Email($target)
@@ -73,7 +67,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает имя файла, в котором будут сохранены данные.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getFileName()
@@ -84,7 +77,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function setFileName($fileName)
@@ -95,7 +87,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @access  public
 	 * @param   integer $size
 	 * @return  boolean
 	 */
@@ -110,7 +101,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Завершает сохранение данных. �?нициирует отправку почтового сообщения.
 	 *
-	 * @access  protected
 	 * @return  boolean
 	 */
 	function _close()
@@ -137,7 +127,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает сообщение об успешном сохранении данных.
 	 *
-	 * @access  protected
 	 * @return  mixed
 	 */
 	function _getSucessMessage()
@@ -149,7 +138,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Проверяет правильность адреса для отправки файла.
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function _validateEmail()
@@ -177,7 +165,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Отправляет скачанные данные по e-mail.
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function _send()
@@ -225,7 +212,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает тему сообщения.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getSubject()
@@ -236,7 +222,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает e-mail отправителя сообщения.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getFrom()
@@ -247,7 +232,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает текст сообщения.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getText()

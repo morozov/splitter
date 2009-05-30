@@ -7,11 +7,10 @@
  */
 /**
  * Класс HTTP-запроса.
- * �?нтерфейс - аналогичен XMLHttpRequest или Microsoft.XMLHTTP за той разницей,
+ * Интерфейс - аналогичен XMLHttpRequest или Microsoft.XMLHTTP за той разницей,
  * что вместо синхронного/aсинхронного запроса используется получение ответа
  * сервера целиком (после завершения соединения) или чтение данных из потока.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  connection
  * @see		 Splitter_Connection_Abstract
@@ -21,7 +20,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Порт соединения по умолчанию.
 	 *
-	 * @access  public
 	 * @var	 integer
 	 */
 	var $DEFAULT_PORT = 80;
@@ -29,7 +27,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Регулярное выражение для разбора статуса ответа.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_STATUS = '/^HTTP\/1\.[0|1]\s+(\d{3})\s*(.*)/';
@@ -42,7 +39,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 *
 	 *:TODO: morozov 19012006: Разобраться с HTTP 1.1, читать про chunks.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REQUEST_PROTOCOL = 'HTTP/1.0';
@@ -50,7 +46,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Метод запроса (HEAD, GET, POST, etc.).
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_method;
@@ -58,7 +53,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Ассоциативный массив заголовков запроса.
 	 *
-	 * @access  private
 	 * @var	 array
 	 */
 	var $_requestHeaders = array();
@@ -66,7 +60,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Ассоциативный массив заголовков ответа.
 	 *
-	 * @access  private
 	 * @var	 array
 	 */
 	var $_responseHeaders = array();
@@ -74,7 +67,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Текст ответа.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_responseText;
@@ -82,7 +74,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Открывает соединение с сервером.
 	 *
-	 * @access  public
 	 * @param   string   $method
 	 * @param   string   $url
 	 */
@@ -99,7 +90,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос серверу.
 	 *
-	 * @access  public
 	 * @param   string   $body  - Тело запроса
 	 */
 	function send($body = null)

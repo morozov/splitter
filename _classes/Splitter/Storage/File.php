@@ -8,7 +8,6 @@
 /**
  * Класс объектов, сохраняющий скачанный файл в файловой системе.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage
  * @see		 Splitter_Storage_Abstract
@@ -18,7 +17,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Ресурс записи в файл файловой системы.
 	 *
-	 * @access  private
 	 * @var	 resource
 	 */
 	var $_resource;
@@ -26,7 +24,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
-	 * @access  public
 	 * @return  integer
 	 */
 	function getResumePosition()
@@ -44,7 +41,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	 * Пытается создать ресурс записи в файл файловой системы. Возвращает
 	 * результат попытки.
 	 *
-	 * @access  public
 	 * @param   integer $size
 	 * @return  boolean
 	 */
@@ -68,7 +64,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Пишет данные в файл.
 	 *
-	 * @access  public
 	 * @param   string   $data   Данные для записи
 	 * @return  boolean		  Были ли данные успешно записаны
 	 */
@@ -80,7 +75,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает содержимое хранилища.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getContents() {
@@ -91,7 +85,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	 * Обрезает файл до указанной длины. �?спользуется, если сервер не
 	 * поддерживает докачку.
 	 *
-	 * @access  public
 	 * @param   integer  $size
 	 * @return  boolean
 	 */
@@ -104,7 +97,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	 * Определяет, разрешеено ли указанное имя файла при сохранении в данный тип
 	 * хранилища.
 	 *
-	 * @access  protected
 	 * @param   string  $fileName
 	 * @return  boolean
 	 */
@@ -119,7 +111,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Устанавливает путь, по которому будет сохранен скачиваемый файл.
 	 *
-	 * @access  public
 	 */
 	function _setTarget($target)
 	{
@@ -131,7 +122,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Завершает сохранение данных. Закрывает хранилище.
 	 *
-	 * @access  protected
 	 * @return  boolean
 	 */
 	function _close()
@@ -149,7 +139,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает сообщение об успешном сохранении данных.
 	 *
-	 * @access  protected
 	 * @return  mixed
 	 */
 	function _getSucessMessage()
@@ -164,7 +153,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает полный путь файла, в который будут сохраняться данные.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getSavePath()
@@ -175,7 +163,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Ваозвращает, открыт ли целевой файл для записи.
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function _opened()
@@ -187,7 +174,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	 * Пишет данные в файл. Возвращает количество записанных байт или FALSE
 	 * в случае неудачи.
 	 *
-	 * @access  private
 	 * @param   string $data
 	 * @return  mixed
 	 */
@@ -200,7 +186,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает реализацию хранения файла.
 	 *
-	 * @access  private
 	 * @return  Splitter_Storage_File_Abstract
 	 */
 	function _getImplementation($path = null)

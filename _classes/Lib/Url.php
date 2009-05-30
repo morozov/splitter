@@ -8,7 +8,6 @@
 /**
  * Объектная обертка для parse_url.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  Lib
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Lib_Url
 	/**
 	 * Шаблон регулярного выражения для разбора строки в объект.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	//							 /	2	\	  /  4  \   / 6\	 /	7	\   /  9  \   /   11   \   / 13 \	 /15\
@@ -27,7 +25,6 @@ class Lib_Url
 	/**
 	 * Шаблон регулярного выражения определения полного URL.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_URL_FULL = '|^[a-z0-9]+://|i';
@@ -35,7 +32,6 @@ class Lib_Url
 	/**
 	 * Шаблон регулярного выражения определения абсолютного URL.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_URL_ABSOLUTE = '|^/|i';
@@ -43,7 +39,6 @@ class Lib_Url
 	/**
 	 * Схема.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_scheme;
@@ -51,7 +46,6 @@ class Lib_Url
 	/**
 	 * Хост.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_host;
@@ -59,15 +53,13 @@ class Lib_Url
 	/**
 	 * Порт.
 	 *
-	 * @access  private
 	 * @var	 integer
 	 */
 	var $_port;
 
 	/**
-	 * �?мя пользователя.
+	 * �?мя пользователя.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_userName;
@@ -75,7 +67,6 @@ class Lib_Url
 	/**
 	 * Пароль.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_password;
@@ -83,7 +74,6 @@ class Lib_Url
 	/**
 	 * Путь.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_path;
@@ -91,7 +81,6 @@ class Lib_Url
 	/**
 	 * Строка запроса.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_query;
@@ -99,16 +88,14 @@ class Lib_Url
 	/**
 	 * Фрагмент (якорь).
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_fragment;
 
 	/**
-	 * Конструктор. �?нициализирует разбор строки, переданной в качестве
+	 * Конструктор. �?нициализирует разбор строки, переданной в качестве
 	 * аргумента.
 	 *
-	 * @access  public
 	 * @param   string $string
 	 * @return  Url
 	 */
@@ -121,7 +108,6 @@ class Lib_Url
 	 * Возвращает схему. В случае, если URL не содержит схемы, возвращает
 	 * указанное значение по умолчанию.
 	 *
-	 * @access  public
 	 * @param   string $default
 	 * @return  string
 	 */
@@ -133,7 +119,6 @@ class Lib_Url
 	/**
 	 * Устанавливает схему.
 	 *
-	 * @access  public
 	 * @param   string   $scheme
 	 */
 	function setScheme($scheme)
@@ -144,7 +129,6 @@ class Lib_Url
 	/**
 	 * Возвращает имя пользователя.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getUserName()
@@ -155,7 +139,6 @@ class Lib_Url
 	/**
 	 * Устанавливает имя пользователя.
 	 *
-	 * @access  public
 	 * @param   string   $userName
 	 */
 	function setUserName($userName)
@@ -166,7 +149,6 @@ class Lib_Url
 	/**
 	 * Возвращает пароль.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getPassword()
@@ -177,7 +159,6 @@ class Lib_Url
 	/**
 	 * Устанавливает пароль.
 	 *
-	 * @access  public
 	 * @param   string   $password
 	 */
 	function setPassword($password)
@@ -188,7 +169,6 @@ class Lib_Url
 	/**
 	 * Возвращает хост.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getHost()
@@ -199,7 +179,6 @@ class Lib_Url
 	/**
 	 * Устанавливает хост.
 	 *
-	 * @access  public
 	 * @param   string   $host
 	 */
 	function setHost($host)
@@ -211,7 +190,6 @@ class Lib_Url
 	 * Возвращает порт. В случае, если URL не содержит порта, возвращает
 	 * указанное значение по умолчанию.
 	 *
-	 * @access  public
 	 * @param   integer  $default
 	 * @return  string
 	 */
@@ -223,7 +201,6 @@ class Lib_Url
 	/**
 	 * Устанавливает порт.
 	 *
-	 * @access  public
 	 * @param   integer  $port
 	 */
 	function setPort($port)
@@ -234,7 +211,6 @@ class Lib_Url
 	/**
 	 * Возвращает путь.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getPath()
@@ -245,7 +221,6 @@ class Lib_Url
 	/**
 	 * Устанавливает путь.
 	 *
-	 * @access  public
 	 * @param   string  $path
 	 */
 	function setPath($path)
@@ -256,7 +231,6 @@ class Lib_Url
 	/**
 	 * Возвращает строку запроса.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getQuery()
@@ -267,7 +241,6 @@ class Lib_Url
 	/**
 	 * Устанавливает путь.
 	 *
-	 * @access  public
 	 * @param   string  $query
 	 */
 	function setQuery($query)
@@ -291,7 +264,6 @@ class Lib_Url
 	/**
 	 * Возвращает URI.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getUri()
@@ -312,7 +284,6 @@ class Lib_Url
 	/**
 	 * Устанавливает URI.
 	 *
-	 * @access  public
 	 * @param   string  $uri
 	 */
 	function setUri($uri)
@@ -328,7 +299,6 @@ class Lib_Url
 	/**
 	 * Возвращает значение фрагмента URL.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getFragment()
@@ -339,7 +309,6 @@ class Lib_Url
 	/**
 	 * Устанавливает значение фрагмента URL.
 	 *
-	 * @access  public
 	 * @param   string  $fragment
 	 */
 	function setFragment($fragment)
@@ -350,7 +319,6 @@ class Lib_Url
 	/**
 	 * Возвращает имя файла.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getFileName()
@@ -361,7 +329,6 @@ class Lib_Url
 	/**
 	 * Применяет перенаправление.
 	 *
-	 * @access  private
 	 * @param   string	$string
 	 */
 	function applyRedirect($location)
@@ -395,7 +362,6 @@ class Lib_Url
 	/**
 	 * Анализирует строку, преобразовывает в свойства объекта URL.
 	 *
-	 * @access  private
 	 * @param   string	$string
 	 */
 	function fromString($string)
@@ -424,7 +390,6 @@ class Lib_Url
 	/**
 	 * Возвращает строковое представление объекта URL.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function toString()
@@ -480,7 +445,6 @@ class Lib_Url
 	/**
 	 * Применяет перенаправление по абсолютному URL.
 	 *
-	 * @access  private
 	 */
 	function _applyAbsoluteRedirect($uri)
 	{
@@ -499,7 +463,6 @@ class Lib_Url
 	 * Применяет перенаправление по относительному URL.
 	 * TODO: осмыслить, как это на самом деле происходит
 	 *
-	 * @access  private
 	 */
 	function _applyRelativeRedirect($uri)
 	{
@@ -548,7 +511,6 @@ class Lib_Url
 	/**
 	 * Кодирует путь в соответствии с RFC 1738.
 	 *
-	 * @access  private
 	 * @param   string	$path
 	 * @return  string
 	 */
@@ -569,7 +531,6 @@ class Lib_Url
 	/**
 	 * Кодирует строку запроса в соответствии с RFC 1738.
 	 *
-	 * @access  private
 	 * @param   string	$query
 	 * @return  string
 	 */
@@ -601,7 +562,6 @@ class Lib_Url
 	 * Разбивает путь URL'а на элементы (типа файлы/директории) и возвращает
 	 * в виде массива.
 	 *
-	 * @access  private
 	 * @param   string  $path
 	 * @return  array
 	 */
@@ -613,7 +573,6 @@ class Lib_Url
 	/**
 	 * Разбивает URI URL'а на путь и QUERY_STRING.
 	 *
-	 * @access  private
 	 * @param   string  $uri
 	 * @return  array
 	 */
@@ -631,7 +590,6 @@ class Lib_Url
 	 * разделители параметров, а как составляющие некоего значения, а,
 	 * следовательно, тоже должны быть закодированы. На такие случаи забьём.
 	 *
-	 * @access  private
 	 * @param   string  $string
 	 * @return  $string
 	 */

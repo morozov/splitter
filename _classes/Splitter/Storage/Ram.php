@@ -9,7 +9,6 @@
  * Класс объектов, сохраняющий скачанный файл в оперативной памяти. �?спользуется
  * для скачивания небольших страниц HTML c фалойвых сервисов.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage
  * @see		 Splitter_Storage_Abstract
@@ -19,7 +18,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	/**
 	 * Содержимое, записанное в хранилище.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_contents = '';
@@ -28,7 +26,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	 * Флажок, указывающий, открыто ли хранилище для записи. На самом деле
 	 * никакой пользы от него нет, разве что для отладки.
 	 *
-	 * @access  private
 	 * @var	 boolean
 	 */
 	var $_isOpened = false;
@@ -36,7 +33,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 */
 	function Splitter_Storage_Ram()
 	{
@@ -47,7 +43,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
-	 * @access  public
 	 * @return  integer
 	 */
 	function getResumePosition()
@@ -58,7 +53,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function open()
@@ -75,7 +69,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	/**
 	 * Пишет данные в файл.
 	 *
-	 * @access  public
 	 * @param   string   $data
 	 * @return  boolean		  Были ли данные успешно записаны
 	 */
@@ -95,7 +88,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	 * Обрезает файл до указанной длины. �?спользуется, если сервер не
 	 * поддерживает докачку.
 	 *
-	 * @access  public
 	 * @param   integer  $size
 	 * @return  boolean
 	 */
@@ -109,7 +101,6 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	/**
 	 * Возвращает содержимое хранилища.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getContents()

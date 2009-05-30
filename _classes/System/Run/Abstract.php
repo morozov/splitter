@@ -8,7 +8,6 @@
 /**
  * Базовый класс реализаций запуска процесса в фоне.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  System.run
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class System_Run_Abstract
 	/**
 	 * Путь к исполняемому файлу PHP.
 	 *
-	 * @access  protected
 	 * @var	 string
 	 */
 	var $EXECUTABLE_PATH;
@@ -28,7 +26,6 @@ abstract class System_Run_Abstract
 	 * Запускает фоновый процесс PHP с указанными аргументами. Возвращает
 	 * идентификатор процесса или FALSE в случае неудачи.
 	 *
-	 * @access  public
 	 * @param   string   $args
 	 * @return  integer
 	 */
@@ -44,7 +41,6 @@ abstract class System_Run_Abstract
 	 * Возвращает, подходит ли данная реализация для платформы, на которой
 	 * запущено приложение.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function suits()
@@ -55,7 +51,6 @@ abstract class System_Run_Abstract
 	/**
 	 * Возвращает команду процесса.
 	 *
-	 * @access  public
 	 * @param   string   $cmd
 	 * @return  integer
 	 */

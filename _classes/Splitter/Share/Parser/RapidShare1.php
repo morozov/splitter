@@ -8,7 +8,6 @@
 /**
  * Выполняет разбор содержимого указанного ресурса. Первый шаг.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Share_Parser_Rapidshare1 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Выполняет разбор содержимого страницы.
 	 *
-	 * @access  protected
 	 * @param   Lib_Url $url
 	 * @param   string $contents
 	 * @return  array

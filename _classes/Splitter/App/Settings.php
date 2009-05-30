@@ -8,7 +8,6 @@
 /**
  * Объект настроек системы.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  app
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_App_Settings
 	/**
 	 * Объект-массив параметров.
 	 *
-	 * @access  protected
 	 * @var	 ArrayObject
 	 */
 	var $_params;
@@ -26,7 +24,6 @@ class Splitter_App_Settings
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @return  Settings
 	 */
 	function Splitter_App_Settings()
@@ -38,7 +35,6 @@ class Splitter_App_Settings
 	/**
 	 * Возвращает значение указанного параметра.
 	 *
-	 * @access  public
 	 * @param   string   $name   Наименование параметра
 	 * @return  string
 	 */

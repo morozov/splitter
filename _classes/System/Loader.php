@@ -5,7 +5,6 @@ require_once 'Zend/Loader.php';
 /**
  * Системный загрузчик.
  *
- * @access	  public
  * @version	 $Id$
  * @package	 Splitter
  * @subpackage  System

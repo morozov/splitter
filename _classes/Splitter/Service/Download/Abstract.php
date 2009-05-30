@@ -11,7 +11,6 @@ define('SOCKET_READ_BUFFER', 8192);
 /**
  * Базовый класс реализаций сервиса скачивания файлов.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  service.download
  * @see		 Splitter_Service_Abstract
@@ -23,7 +22,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	 * �?нтервал времени, через который клиенту отдаются сообщения о прогрессе
 	 * при скачивании файла (в секундах).
 	 *
-	 * @access  private
 	 * @var	 integer
 	 */
 	var $PROGRESS_TRACE_INTERVAL = 3;
@@ -31,7 +29,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Объект соединения с сервером.
 	 *
-	 * @access  private
 	 * @var	 Splitter_Connection_Abstract
 	 */
 	var $_conn;
@@ -39,7 +36,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Объект сохраняющий скачанные данные.
 	 *
-	 * @access  private
 	 * @var	 Splitter_Storage_Abstract
 	 */
 	var $_storage;
@@ -47,7 +43,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @return  Splitter_Service_Download_Abstract
 	 */
 	function Splitter_Service_Download_Abstract()
@@ -60,7 +55,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Запускает скачивание файла.
 	 *
-	 * @access  public
 	 * @param   array   $params   Параметры запуска
 	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
@@ -84,7 +78,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает имя, под которым будет сохранен скачиваемый файл.
 	 *
-	 * @access  protected
 	 * @return  string
 	 */
 	function _getFileName()
@@ -113,7 +106,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Устанавливает имя, под которым будет сохранен скачиваемый файл.
 	 *
-	 * @access  protected
 	 */
 	function _setFileName()
 	{
@@ -131,7 +123,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Пишет данные из ответа серера в хранилище.
 	 *
-	 * @access  protected
 	 * @param   ArrayObject $result
 	 * @param   integer $position
 	 * @param   integer $size
@@ -217,7 +208,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает имя скачиваемого файла, определенное из URL, декодирует.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getFileNameFromUrl()
@@ -231,7 +221,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает URL скачиваемого файла в виде объекта.
 	 *
-	 * @access  protected
 	 * @return  Url
 	 */
 	function _getUrl()
@@ -245,7 +234,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает объект Storage.
 	 *
-	 * @access  protected
 	 * @return  splitter_storage_Abstract
 	 */
 	function _getStorage()
@@ -258,7 +246,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает нужно ли сохранять данные файла в хранилище.
 	 *
-	 * @access  protected
 	 * @return  boolean
 	 */
 	function _isDownloadNeeded()
@@ -269,7 +256,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает наименование класса используемого соединения.
 	 *
-	 * @access  protected
 	 * @return  string
 	 */
 	abstract function _getConnectionClassName();

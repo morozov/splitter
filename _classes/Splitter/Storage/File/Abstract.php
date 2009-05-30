@@ -8,7 +8,6 @@
 /**
  * Базовый класс реализация сохранения даннвх в файл.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage.file
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class Splitter_Storage_File_Abstract
 	/**
 	 * Режим открытия файлов для записи.
 	 *
-	 * @access  protected
 	 * @var	 string
 	 */
 	var $FOPEN_MODE = 'ab';
@@ -27,7 +25,6 @@ abstract class Splitter_Storage_File_Abstract
 	/**
 	 * Открывает файл по указанному пути для записи.
 	 *
-	 * @access  public
 	 * @param   string  $path
 	 * @return  mixed
 	 */
@@ -44,7 +41,6 @@ abstract class Splitter_Storage_File_Abstract
 	/**
 	 * Закрывает указанный ресурс.
 	 *
-	 * @access  public
 	 * @param   resource	$resource
 	 * @return  boolean
 	 */
@@ -56,7 +52,6 @@ abstract class Splitter_Storage_File_Abstract
 	/**
 	 * Преобразует путь в соответствии со спецификой конкретной реализации.
 	 *
-	 * @access  public
 	 * @param   string  $path
 	 * @return  string
 	 */

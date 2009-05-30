@@ -8,7 +8,6 @@
 /**
  * Базовый класс объектов, сохраняющий скачанный файл.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage
  * @see		 abstract_Object
@@ -19,15 +18,13 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Абстрактная цель сохранения данных. Конкретизируется в производных классах.
 	 *
-	 * @access  protected
 	 * @var	 string
 	 */
 	var $_target;
 
 	/**
-	 * �?мя файла, в котором будут сохранены данные.
+	 * Имя файла, в котором будут сохранены данные.
 	 *
-	 * @access  protected
 	 * @var	 string
 	 */
 	var $_fileName;
@@ -35,7 +32,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Размер данных, которые предполагается записать.
 	 *
-	 * @access  protected
 	 * @var	 integer
 	 */
 	var $_size;
@@ -43,7 +39,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @param   string   $target
 	 * @return  Splitter_Storage_Abstract
 	 */
@@ -76,7 +71,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Возвращает имя файла, в котором будут сохранены данные.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function getFileName()
@@ -87,7 +81,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	function setFileName($fileName)
@@ -111,7 +104,6 @@ abstract class Splitter_Storage_Abstract
 	 * Возвращает позицию, с которой нужно возобновить скачивание файла.
 	 * Реализуется в производных классах.
 	 *
-	 * @access  public
 	 * @return  integer
 	 */
 	function getResumePosition()
@@ -122,7 +114,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Возвращает, нужно ли сохранять данные в хранилище.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function isDownloadNeeded()
@@ -133,7 +124,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @access  public
 	 * @param   integer $size
 	 * @return  boolean
 	 */
@@ -147,7 +137,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Пишет данные в хранилище.
 	 *
-	 * @access  public
 	 * @param   string $data
 	 * @return  boolean
 	 */
@@ -156,7 +145,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Завершает сохранение данных. Закрывает файл.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function close()
@@ -175,7 +163,6 @@ abstract class Splitter_Storage_Abstract
 	/**
 	 * Возвращает содержимое хранилища.
 	 *
-	 * @access  public
 	 * @return  string
 	 */
 	abstract function getContents();

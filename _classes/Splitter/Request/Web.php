@@ -8,7 +8,6 @@
 /**
  * Объект запроса для веб-интерфейса.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  request
  * @see		 Splitter_abstract_Request
@@ -16,9 +15,8 @@
 class Splitter_Request_Web extends Splitter_Request_Abstract
 {
 	/**
-	 * �?нициализирует массив параметров запроса.
+	 * �?нициализирует массив параметров запроса.
 	 *
-	 * @access  protected
 	 */
 	function _initParams()
 	{

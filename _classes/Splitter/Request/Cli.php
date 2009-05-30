@@ -9,7 +9,6 @@
  * Объект запроса. Поднимает параметры из аргументов командной строки.
  * Формат параметров: -param1 value1 -param2 -param3 value3
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  request
  * @see		 Splitter_abstract_Request
@@ -17,9 +16,8 @@
 class Splitter_Request_Cli extends Splitter_Request_Abstract
 {
 	/**
-	 * �?нициализирует массив параметров запроса.
+	 * �?нициализирует массив параметров запроса.
 	 *
-	 * @access  protected
 	 */
 	function _initParams()
 	{
@@ -58,7 +56,6 @@ class Splitter_Request_Cli extends Splitter_Request_Abstract
 	/**
 	 * Возвращает, является ли указанный аргумент наименованием параметра.
 	 *
-	 * @access  private
 	 * @param   string   $arg
 	 * @return  boolean
 	 */

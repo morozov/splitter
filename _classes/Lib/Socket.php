@@ -8,7 +8,6 @@
 /**
  * Объектная обертка для сокетов PHP.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  Lib
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Lib_Socket
 	/**
 	 * Время, в течение которого скрипт пытается открыть сокет, сек.
 	 *
-	 * @access  private
 	 * @var	 float
 	 */
 	var $CONNECTION_TIMEOUT = 4.00;
@@ -26,7 +24,6 @@ class Lib_Socket
 	/**
 	 * Сокет-ресурс.
 	 *
-	 * @access  private
 	 * @var	 resource
 	 */
 	var $_socket;
@@ -34,7 +31,6 @@ class Lib_Socket
 	/**
 	 * Открывает сокет на указанный хост и порт.
 	 *
-	 * @access  protected
 	 * @param   string   $host
 	 * @param   integer  $port
 	 * @return  boolean
@@ -49,7 +45,6 @@ class Lib_Socket
 	/**
 	 * Читает до $length байт из сокета.
 	 *
-	 * @access  public
 	 * @param   integer  $length
 	 * @return  string  -  Подстрока ответа
 	 *		   FALSE  -  Если достигнут конец файла
@@ -62,7 +57,6 @@ class Lib_Socket
 	/**
 	 * Читает до $length байт или до символа перевода строки из сокета.
 	 *
-	 * @access  public
 	 * @return  string  -  Подстрока ответа
 	 *		   FALSE  -  Если достигнут конец файла
 	 */
@@ -74,7 +68,6 @@ class Lib_Socket
 	/**
 	 * Пишет строку в сокет.
 	 *
-	 * @access  private
 	 * @param   string   $string
 	 * @return  boolean
 	 */
@@ -86,7 +79,6 @@ class Lib_Socket
 	/**
 	 * Возвращает TRUE в случае, если сокет не открыт или достигнут конец файла.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function eof()
@@ -97,7 +89,6 @@ class Lib_Socket
 	/**
 	 * Возвращает, открыт ли сокет.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function isOpened()
@@ -108,7 +99,6 @@ class Lib_Socket
 	/**
 	 * Закрывает сокет.
 	 *
-	 * @access  public
 	 * @return  boolean
 	 */
 	function close()

@@ -8,7 +8,6 @@
 /**
  * Сервис скачивания файла по протоколу HTTP.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  service.download
  * @see		 Splitter_Service_Download_Abstract
@@ -19,7 +18,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Массив наименований заголовков ответа и директив, из которых можно
 	 * получить имя скачиваемого файла.
 	 *
-	 * @access  private
 	 * @var	 array
 	 */
 	var $FILENAME_SOURCE_HEADERS = array
@@ -32,7 +30,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Шаблон шаблона регулярного выражения для определения значения директивы
 	 * заголовка. Да, да. �?менно шаблон шаблона, см. реализацию.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_HEADER_DIRECTIVE = '/%s\s*=\s*(?(?=")"([^"]*)|([^;]*))/i';
@@ -41,7 +38,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Шаблон регулярного выражения для определения длины файла из заголовка
 	 * Content-Length
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_CONTENT_LENGTH = '|(\d+)|';
@@ -50,7 +46,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Шаблон регулярного выражения для определения диапазона данных и длины
 	 * файла из заголовка Content-Range
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $REGEXP_CONTENT_RANGE = '|bytes\s+(\d*)\-((\d*)(/(\d*))?)?$|';
@@ -59,7 +54,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * �?мя файла по умолчанию. �?спользуется, если не удалось определить ни
 	 * одним из доступных способов.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $DEFAULT_FILENAME = 'noname.html';
@@ -67,7 +61,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Запускает скачивание файла по протоколу HTTP.
 	 *
-	 * @access  public
 	 * @param   array   $params   Параметры запуска
 	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
@@ -112,7 +105,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает имя, под которым будет сохранен скачиваемый файл.
 	 *
-	 * @access  protected
 	 * @return  string
 	 */
 	function _getFileName()
@@ -130,7 +122,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает наименование класса используемого соединения.
 	 *
-	 * @access  protected
 	 * @return  string
 	 */
 	function _getConnectionClassName()
@@ -141,7 +132,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает метод запроса, полученный из параметров запуска приложения.
 	 *
-	 * @access  protected
 	 * @return  string
 	 */
 	function _getRequestMethod()
@@ -153,7 +143,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает размер скачиваемого файла.
 	 *
-	 * @access  protected
 	 * @return  integer
 	 */
 	function _getFileSize()
@@ -193,7 +182,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Проверяет статус ответа сервера на соответствие 2xx (Client request
 	 * successful).
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function _checkStatus()
@@ -204,7 +192,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает значение начала диапазона файла, который отдает сервер.
 	 *
-	 * @access  private
 	 * @return  integer
 	 */
 	function _getResponseStartPosition()
@@ -220,7 +207,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает заголовки запроса.
 	 *
-	 * @access  private
 	 */
 	function _setRequestHeaders()
 	{
@@ -249,7 +235,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает заголовок авторизации.
 	 *
-	 * @access  private
 	 */
 	function _setAuthHeader()
 	{
@@ -271,7 +256,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает заголовок cookie.
 	 *
-	 * @access  private
 	 */
 	function _setCookieHeader()
 	{
@@ -286,7 +270,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает заголовок реферера.
 	 *
-	 * @access  private
 	 */
 	function _setRefererHeader()
 	{
@@ -319,7 +302,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает заголовок диапазона.
 	 *
-	 * @access  private
 	 */
 	function _setRangeHeader()
 	{
@@ -336,7 +318,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает заголовок пользовательского агента.
 	 *
-	 * @access  private
 	 */
 	function _setUserAgentHeader()
 	{
@@ -351,7 +332,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Устанавливает пользовательские заголовки.
 	 *
-	 * @access  private
 	 */
 	function _setCustomHeaders()
 	{
@@ -367,7 +347,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Выполняет действия после того, как получен ответ сервера.
 	 *
-	 * @access  private
 	 * @param   ArrayObject  $result
 	 */
 	function _processResponse(&$result)
@@ -478,7 +457,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает имя скачиваемого файла, определенное из ответа сервера.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getFileNameFromResponse()
@@ -518,7 +496,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Возвращает значение директивы заголовка или NULL, если заголовок или
 	 * директива не существуют.
 	 *
-	 * @access  private
 	 * @return  string
 	 */
 	function _getHeaderDirective($headerName, $directiveName)
@@ -542,7 +519,6 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Обрабатывает заголовок Location. Возвращает TRUE в случае, если получено
 	 * перенаправление.
 	 *
-	 * @access  private
 	 * @return  Url
 	 */
 	function _getRedirectUrl()

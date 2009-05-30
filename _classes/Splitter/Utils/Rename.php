@@ -8,7 +8,6 @@
 /**
  * Утилита переименования файла по маске или регулярному выражению.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Utils_Rename
 	/**
 	 * Шаблон поиска
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_search;
@@ -26,7 +24,6 @@ class Splitter_Utils_Rename
 	/**
 	 * Строка для замены
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_replace;
@@ -34,7 +31,6 @@ class Splitter_Utils_Rename
 	/**
 	 * Флаг исспользования регулярных выражений
 	 *
-	 * @access  private
 	 * @var	 boolean
 	 */
 	var $_useRegExp = false;
@@ -42,7 +38,6 @@ class Splitter_Utils_Rename
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @param   string $search
 	 * @param   string $replace
 	 * @param   string $useRegExp
@@ -79,7 +74,6 @@ class Splitter_Utils_Rename
 	/**
 	 * Возвращает содержимое ресурса.
 	 *
-	 * @access  public
 	 * @param   array   $params   Параметры запуска
 	 * @return  string
 	 */
@@ -108,7 +102,6 @@ class Splitter_Utils_Rename
 	/**
 	 * Выполняет проверку шаблона регулярного выражения и возвращает ошибку.
 	 *
-	 * @access  private
 	 * @param   string $pattern
 	 * @return  mixed
 	 */

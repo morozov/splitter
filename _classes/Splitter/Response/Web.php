@@ -8,7 +8,6 @@
 /**
  * Класс ответа приложения для веб-интерфейса.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  response
  * @see		 Splitter_Response_Abstract

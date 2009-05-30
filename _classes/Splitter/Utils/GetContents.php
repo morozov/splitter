@@ -8,7 +8,6 @@
 /**
  * Утилита получения содержимого ресурса с указанными параметрами.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Utils_GetContents
 	/**
 	 * Возвращает содержимое ресурса.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $url
 	 * @param   array   $params   Параметры запуска
 	 * @return  string

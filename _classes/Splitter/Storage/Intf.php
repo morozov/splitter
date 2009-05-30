@@ -8,7 +8,6 @@
 /**
  * �?нтерфейс к хранилищам. Попутно реализует разбиение файлов на куски.
  *
- * @access		public
  * @package 	Splitter
  * @subpackage	storage
  * @see 		abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Номер текущий части, на которые разбивается файл.
 	 *
-	 * @access	private
 	 * @var 	integer
 	 */
 	var $_part = 0;
@@ -26,7 +24,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Размер данных записанных в текущую часть.
 	 *
-	 * @access	private
 	 * @var 	integer
 	 */
 	var $_written = 0;
@@ -34,7 +31,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Тип реализации для сохранения данных.
 	 *
-	 * @access	private
 	 * @var 	string
 	 */
 	var $_type;
@@ -42,7 +38,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Размер частей, на которые нужно разбивать данные.
 	 *
-	 * @access	private
 	 * @var 	integer
 	 */
 	var $_splitSize;
@@ -50,7 +45,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Объект хранилища для текущей части.
 	 *
-	 * @access	private
 	 * @var		Splitter_Storage_Abstract
 	 */
 	var $_storage;
@@ -58,7 +52,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Контекст хэша для вычисления контрольной суммы файла.
 	 *
-	 * @access	private
 	 * @var		resource
 	 */
 	var $hash;
@@ -66,7 +59,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Конструктор.
 	 *
-	 * @access	public
 	 * @param	string	$type
 	 * @param	string	$target
 	 * @param	integer $splitSize
@@ -81,7 +73,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * Возвращает позицию, с которой нужно возобновить скачивание файла.
 	 * Реализуется в производных классах.
 	 *
-	 * @access	public
 	 * @return	integer
 	 */
 	function getResumePosition() {
@@ -130,7 +121,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @access	public
 	 * @param	integer $size
 	 * @return	boolean
 	 */
@@ -150,7 +140,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Пишет данные в хранилище.
 	 *
-	 * @access	public
 	 * @param	string $data
 	 * @return	boolean
 	 */
@@ -190,7 +179,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Завершает сохранение данных. Закрывает хранилище для текущей части.
 	 *
-	 * @access	protected
 	 * @return	boolean
 	 */
 	function close() {
@@ -203,7 +191,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Завершает сохранение данных. Закрывает хранилище для текущей части.
 	 *
-	 * @access	protected
 	 * @return	boolean
 	 */
 	function _close() {
@@ -223,7 +210,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Создает реализацию хранилища.
 	 *
-	 * @access	protected
 	 * @param	string
 	 * @return	splitter_storage_Abstract
 	 */
@@ -235,7 +221,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Создает реализацию для сохранения следующей части файла.
 	 *
-	 * @access	private
 	 * @param	integer $position
 	 * @return	boolean
 	 */
@@ -277,7 +262,6 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Возвращает имя файла для текущей части.
 	 *
-	 * @access	private
 	 * @return	string
 	 */
 	function _getPartFileName($part) {

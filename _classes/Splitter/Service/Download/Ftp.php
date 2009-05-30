@@ -8,7 +8,6 @@
 /**
  * Сервис скачивания файла по протоколу FTP.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  service.download
  * @see		 Splitter_Service_Download_Abstract
@@ -21,7 +20,6 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 	 *  - fileName - �?мя, под которым файл должен быть сохранен
 	 *  - storage  - Хранилище для скачанных данных
 	 *
-	 * @access  public
 	 * @param   array   $params   Параметры запуска
 	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
@@ -98,7 +96,6 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает наименование класса используемого соединения.
 	 *
-	 * @access  protected
 	 * @return  string
 	 */
 	function _getConnectionClassName()

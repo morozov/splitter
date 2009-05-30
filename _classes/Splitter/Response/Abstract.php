@@ -8,7 +8,6 @@
 /**
  * Класс ответа приложения.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  app
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class Splitter_Response_Abstract
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
-	 * @access  public
 	 * @param   string   $method   Наименование метода
 	 */
 	abstract function call($method);
@@ -27,7 +25,6 @@ abstract class Splitter_Response_Abstract
 	/**
 	 * Выводит сообщение в журнал.
 	 *
-	 * @access  public
 	 * @param   string  $message
 	 * @param   string  $type
 	 */
@@ -36,7 +33,6 @@ abstract class Splitter_Response_Abstract
 	/**
 	 * Регистрирует ошибку вызвавшую завершение приложения.
 	 *
-	 * @access  public
 	 * @param   string  $message
 	 */
 	function error($message) { }

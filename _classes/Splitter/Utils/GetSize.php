@@ -8,7 +8,6 @@
 /**
  * Утилита получения размера файла.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Splitter_Utils_GetSize
 	/**
 	 * Возвращает размера файла.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $url
 	 * @return  integer
 	 */

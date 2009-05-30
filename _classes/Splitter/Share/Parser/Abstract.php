@@ -10,7 +10,6 @@ require_once 'html/htmlparser.inc.php';
 /**
  * Выполняет разбор содержимого указанного ресурса.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  share.parser
  * @see		 abstract_Object
@@ -20,7 +19,6 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Возвращает параметры страницы, соответствующей указанному ресурсу.
 	 *
-	 * @access  public
 	 * @param   array   $params   Параметры запуска
 	 * @return  string
 	 */
@@ -36,11 +34,11 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Возвращает значение атрибута указанного элемента.
 	 *
-	 * @access  protected
-	 * @access  string $contents
-	 * @access  string $tagName
-	 * @access  string $attribute
-	 * @access  array $attributes
+
+
+
+
+
 	 * @return  string
 	 */
 	function _getElementAttribute($contents, $tagName, $attribute, $callback = null)
@@ -70,7 +68,6 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Формирует полный адрес из ссылающегося и относительного.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $referer
 	 * @param   string $relative
 	 * @return  string
@@ -89,7 +86,6 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Возвращает параметры запроса по умолчанию.
 	 *
-	 * @access  protected
 	 * @return  array
 	 */
 	function _getRequestParams()
@@ -100,7 +96,6 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Выполняет разбор содержимого страницы.
 	 *
-	 * @access  protected
 	 * @param   Lib_Url $url
 	 * @param   string $contents
 	 * @return  array
@@ -110,7 +105,6 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Генерирует ошибку разбора.
 	 *
-	 * @access  protected
 	 * @param   string $error
 	 * @param   string $contents
 	 */
@@ -124,7 +118,6 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Записывает отладочную информацию в файл.
 	 *
-	 * @access  protected
 	 * @param   string $string
 	 */
 	function _debug($string)

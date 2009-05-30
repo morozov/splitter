@@ -8,7 +8,6 @@
 /**
  * Объект запроса для режима прокси.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  request
  * @see		 Splitter_abstract_Request
@@ -18,7 +17,6 @@ class Splitter_Request_Proxy extends Splitter_Request_Web
 	/**
 	 * �?нициализирует массив параметров запроса.
 	 *
-	 * @access  protected
 	 */
 	function _initParams()
 	{

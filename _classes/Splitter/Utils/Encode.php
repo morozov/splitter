@@ -9,7 +9,6 @@
  * Утилита преобразования строк (урлов и имен файлов) для обхода ограничений
  * прокси.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  utils
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ class Splitter_Utils_Encode
 	/**
 	 * Описания алгоритмов преобразования
 	 *
-	 * @access  private
 	 * @var	 array
 	 */
 	var $_methods = array
@@ -31,7 +29,6 @@ class Splitter_Utils_Encode
 	/**
 	 * Наименование текущего алгоритма.
 	 *
-	 * @access  private
 	 * @var	 string
 	 */
 	var $_method;
@@ -39,7 +36,6 @@ class Splitter_Utils_Encode
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @param   string $method
 	 * @return  Splitter_Utils_Encode
 	 */
@@ -56,7 +52,6 @@ class Splitter_Utils_Encode
 	/**
 	 * Выполняет прямое преобразование значения.
 	 *
-	 * @access  public
 	 * @param   string  $value
 	 * @return  string
 	 */
@@ -68,7 +63,6 @@ class Splitter_Utils_Encode
 	/**
 	 * Выполняет обратное преобразование значения.
 	 *
-	 * @access  public
 	 * @param   string  $value
 	 * @return  string
 	 */

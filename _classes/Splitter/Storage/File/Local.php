@@ -8,7 +8,6 @@
 /**
  * Реализация сохранения данных в локальной файловой системе.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  storage.file
  * @see		 abstract_Object
@@ -26,7 +25,6 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	/**
 	 * Открывает файл по указанному пути для записи.
 	 *
-	 * @access  public
 	 * @param   string  $path
 	 * @return  mixed
 	 */
@@ -65,7 +63,6 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	/**
 	 * Закрывает указанный ресурс.
 	 *
-	 * @access  public
 	 * @param   resource	$resource
 	 * @return  boolean
 	 */
@@ -77,7 +74,6 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	/**
 	 * Преобразует путь в соответствии со спецификой конкретной реализации.
 	 *
-	 * @access  public
 	 * @param   string  $path
 	 * @return  string
 	 */
@@ -99,7 +95,6 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	 * Проверяет, существует ли директория с указанным путем, и в случае, если нет,
 	 * пытается ее создать. Возвращает результат (существует или создана).
 	 *
-	 * @access  private
 	 * @return  boolean
 	 */
 	function _isDirectory($path)
@@ -133,7 +128,6 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	/**
 	 * Возвращает пути директорий, которые нужно создать.
 	 *
-	 * @access  private
 	 * @param   array   $sections
 	 * @return  array
 	 */
@@ -167,7 +161,6 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	/**
 	 * Возвращает путь поддиректории указанной длины, собранный из секций.
 	 *
-	 * @access  private
 	 * @param   array   $sections
 	 * @param   integer $length
 	 * @return  string

@@ -8,7 +8,6 @@
 /**
  * Базовый класс компонентов, скачивающих файлы с файловых хостингов.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  share
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Наименование поля формы, в которое пользователь вводит текст на картинке.
 	 *
-	 * @access  protected
 	 * @var	 string
 	 */
 	var $CAPTCHA_FIELD;
@@ -27,7 +25,6 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Массив парсеров, обрабатывающих закачку.
 	 *
-	 * @access  protected
 	 * @var	 array
 	 */
 	var $PARSERS = array();
@@ -36,7 +33,6 @@ abstract class Splitter_Share_Abstract
 	 * Возвращает, могут ли указанные URL и метод запроса быть обработаны
 	 * с помощью данного компонента.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $url
 	 * @param   string $method
 	 * @return  boolean
@@ -49,7 +45,6 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Обрабатывает указанный URL.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $url
 	 */
 	function process(&$url, $params = array())
@@ -63,7 +58,6 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Выводит результат разбора в форму.
 	 *
-	 * @access  public
 	 * @param   array $params
 	 */
 	abstract function _output($params);
@@ -71,7 +65,6 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Возвращает содержимое ресурса с указанными параметрами.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $url
 	 * @return  string
 	 */
@@ -86,7 +79,6 @@ abstract class Splitter_Share_Abstract
 	 * Возвращает персер содержимого страницы с указанным наименованием или
 	 * основной по умолчанию.
 	 *
-	 * @access  protected
 	 * @param   string $name
 	 * @return  Splitter_Share_Parser_Abstract
 	 */
@@ -100,7 +92,6 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Возвращает имя хоста URL без "www".
 	 *
-	 * @access  protected
 	 * @param   Lib_Url $url
 	 * @return  string
 	 */

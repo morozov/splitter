@@ -8,7 +8,6 @@
 /**
  * Объектная обертка для массивов.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  Lib
  * @see		 abstract_Object
@@ -18,7 +17,6 @@ class Lib_ArrayObject
 	/**
 	 * Массив элементов массива.
 	 *
-	 * @access  protected
 	 * @var	 array
 	 */
 	var $_array = array();
@@ -26,7 +24,6 @@ class Lib_ArrayObject
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @param   array   $array
 	 */
 	function Lib_ArrayObject($array = array())
@@ -37,7 +34,6 @@ class Lib_ArrayObject
 	/**
 	 * Добавляет элемент в массив по значению.
 	 *
-	 * @access  public
 	 * @param   mixed   $value
 	 */
 	function append($value)
@@ -48,7 +44,6 @@ class Lib_ArrayObject
 	/**
 	 * Возвращает количество элементов массива.
 	 *
-	 * @access  public
 	 * @return  integer
 	 */
 	function count()
@@ -59,7 +54,6 @@ class Lib_ArrayObject
 	/**
 	 * Возвращает существует ли в массиве элемент с указанным индексом.
 	 *
-	 * @access  public
 	 * @param   mixed	$index
 	 * @return  boolean
 	 */
@@ -72,7 +66,6 @@ class Lib_ArrayObject
 	 * Возвращает значение элемента массива с указанным индексом или FALSE,
 	 * если элемент не существует.
 	 *
-	 * @access  public
 	 * @param   mixed	$index
 	 * @return  mixed
 	 */
@@ -85,7 +78,6 @@ class Lib_ArrayObject
 	/**
 	 * Устанавливает значение элемента массива с указанным индексом.
 	 *
-	 * @access  public
 	 * @param   mixed	$index
 	 * @param   mixed	$value
 	 */
@@ -97,7 +89,6 @@ class Lib_ArrayObject
 	/**
 	 * Удаляет элемента массива с указанным индексом.
 	 *
-	 * @access  public
 	 * @param   mixed	$index
 	 */
 	function offsetUnset($index)

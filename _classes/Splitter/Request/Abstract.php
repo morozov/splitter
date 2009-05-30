@@ -8,7 +8,6 @@
 /**
  * Объект запроса.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  request
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Массив для хранения переменных запроса
 	 *
-	 * @access  protected
 	 * @var	 array
 	 */
 	var $_params = array();
@@ -27,7 +25,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @return  Splitter_abstract_Request
 	 */
 	function Splitter_Request_Abstract()
@@ -38,7 +35,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Возвращает значение заданного параметра.
 	 *
-	 * @access  public
 	 * @param   string   $name
 	 * @param   mixed	$default
 	 * @return  mixed
@@ -51,7 +47,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Устанавливает значение заданного параметра.
 	 *
-	 * @access  public
 	 * @param   string   $name
 	 * @param   mixed	$value
 	 */
@@ -63,7 +58,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Определяет наличие заданного параметра
 	 *
-	 * @access  public
 	 * @param   string  $name	   Наименование параметра
 	 * @param   boolean $allowEmpty Если true, то функция будет считать
 	 *							  пустые параметры существующими
@@ -78,7 +72,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Возвращает ассоциативный массив параметров.
 	 *
-	 * @access  public
 	 * @return  array
 	 */
 	function getParams()
@@ -89,7 +82,6 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Метод должен инициализировать массив параметров запроса.
 	 *
-	 * @access  protected
 	 */
 	function _initParams()
 	{

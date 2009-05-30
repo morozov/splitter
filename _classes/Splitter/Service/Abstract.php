@@ -8,7 +8,6 @@
 /**
  * Базовый класс сервисов.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  service
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class Splitter_Service_Abstract
 	/**
 	 * Массив параметров запуска сервиса. Устанавливается через self::run().
 	 *
-	 * @access  protected
 	 * @var	 string
 	 */
 	var $_params = array();
@@ -27,7 +25,6 @@ abstract class Splitter_Service_Abstract
 	/**
 	 * Запускает сервис.
 	 *
-	 * @access  public
 	 * @param   array   $params   Параметры запуска
 	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
@@ -50,7 +47,6 @@ abstract class Splitter_Service_Abstract
 	 * Генерирует событие - сообщение, которое последовательно обрабатывают
 	 * зарегистрированные обозреватели.
 	 *
-	 * @access  public
 	 */
 	function fireEvent()
 	{
@@ -64,7 +60,6 @@ abstract class Splitter_Service_Abstract
 	/**
 	 * Возвращает значение параметра сервиса.
 	 *
-	 * @access  protected
 	 * @param   string   $name	  Наименование параметра
 	 * @param   mixed	$default   Значение по умолчанию
 	 * @return  mixed
@@ -77,7 +72,6 @@ abstract class Splitter_Service_Abstract
 	/**
 	 * Устанавливает параметр сервиса в указанное.
 	 *
-	 * @access  protected
 	 * @param   string   $name   Наименование параметра
 	 * @param   mixed	$value  Значение параметра
 	 */
@@ -91,7 +85,6 @@ abstract class Splitter_Service_Abstract
 	 * запуска сервиса.
 	 * Проверка производится с преобразованием к строковому типу (кроме объектов).
 	 *
-	 * @access  protected
 	 * @param   string   $name
 	 * @return  boolean
 	 */

@@ -8,7 +8,6 @@
 /**
  * Базовый класс объектов, описывающих параметры доступа к скачиваемым данным.
  *
- * @access	  public
  * @package	 Splitter
  * @subpackage  resource
  * @see		 abstract_Object
@@ -19,7 +18,6 @@ abstract class Splitter_Resource_Abstract
 	/**
 	 * URL ресурса.
 	 *
-	 * @access  protected
 	 * @var	 Lib_Url
 	 */
 	var $_url;
@@ -27,7 +25,6 @@ abstract class Splitter_Resource_Abstract
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
 	 * @param   string   $target
 	 * @return  Splitter_Resource_Abstract
 	 */
@@ -39,7 +36,6 @@ abstract class Splitter_Resource_Abstract
 	/**
 	 * Возвращает URL ресурса.
 	 *
-	 * @access  public
 	 * @return  Lib_Url
 	 */
 	function getUrl()
@@ -50,7 +46,6 @@ abstract class Splitter_Resource_Abstract
 	/**
 	 * Возвращает ресурс для указаных URL и параметров.
 	 *
-	 * @access  public
 	 * @param   Lib_Url $url
 	 * @param   array $params
 	 * @return  Splitter_Resource_Abstract
@@ -72,9 +67,8 @@ abstract class Splitter_Resource_Abstract
 	}
 
 	/**
-	 * �?щет класс с указанным наименованием в указанном пэкидже.
+	 * �?щет класс с указанным наименованием в указанном пэкидже.
 	 *
-	 * @access  protected
 	 * @return  mixed
 	 */
 	function _findClassName($package, $className)
