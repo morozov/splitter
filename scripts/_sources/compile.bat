@@ -1,0 +1,1 @@
+cscript.exe ESC.wsf -l 3 -ow ../splitter.js prototype-ex.js splitter.js controller.js section.js indicator.js log.js settings.js counter.js ie.js

@@ -1,0 +1,11 @@
+Options +Indexes
+
+# запрещаем исполнение скриптов PHP
+<IfModule mod_mime.c>
+    AddType application/x-httpd-php-source .php
+</IfModule>
+
+# отключаем обрезание имен файлов
+<IfModule mod_autoindex.c>
+    IndexOptions NameWidth=*
+</IfModule>

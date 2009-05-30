@@ -1,0 +1,237 @@
+BODY {
+	background-color: buttonface;
+	color: buttontext;
+	font-family: Microsoft Sans Serif;
+	font-size: 8pt;
+}
+
+#overal {
+	width: 760px;
+	height: 100%;
+	margin: 10px auto;
+}
+
+#form-container TD {
+	padding: 2px 8px 2px 0px;
+}
+
+#select-storage {
+	margin-left: 120px;
+	padding-top: 4px;
+	padding-bottom:10px;
+}
+
+#select-storage LABEL {
+	margin-right: 10px;
+}
+.clear {
+	height: 2px;
+}
+
+OPTION, .text {
+	padding: 4px 2px;
+}
+
+.text {
+	border: 1px solid #A5ACB2;
+	display: inline;
+}
+
+.text, BUTTON, .button, SELECT {
+	font-family: Microsoft Sans Serif;
+	font-size: 8pt;
+}
+
+.text {
+	width: 600px;
+}
+
+TEXTAREA.text {
+	height: 28px;
+	padding: 0px 2px;
+}
+
+.text-disabled,
+.password-disabled  {
+	background-color: buttonface;
+}
+
+BUTTON, .button {
+	width: 120px;
+	height: 24px;
+}
+
+LABEL.main {
+	width: 120px;
+	float: left;
+	display: block;
+}
+
+#log-container {
+	border: 1px solid;
+	border-color: buttonshadow buttonhighlight buttonhighlight buttonshadow;
+	background-color: white;
+	height: 280px;
+	overflow: auto; //overflow: visible; //overflow-y: scroll;
+	overflow: -moz-scrollbars-vertical;
+}
+
+#log-container TABLE {
+	table-layout: fixed;
+	width: 100%;
+}
+
+#log-container TABLE, #log-container TD {
+	border: 1px solid buttonface;
+	border-collapse: collapse;
+	cursor: default;
+}
+
+#log-container TD {
+	padding: 1px 4px;
+	vertical-align: top;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#log-container TD.icon {
+	background-position: 4px 2px;
+	background-repeat: no-repeat;
+	text-align: right;
+	width: 32px;
+}
+
+#log-container TD.datetime {
+	width: 102px;
+}
+
+TR.info {
+	background: #EBF2FE;
+}
+
+TR.info .icon {
+	background-image: url(../images/info.gif);
+}
+
+TR.request {
+	background: #FFFAED;
+}
+
+TR.request .icon {
+	background-image: url(../images/request.gif);
+}
+
+TR.response {
+	background: #EAFFE5;
+}
+
+TR.response .icon {
+	background-image: url(../images/response.gif);
+}
+
+TR.error {
+	background: #FEEEE7;
+}
+
+TR.error .icon {
+	background-image: url(../images/error.gif);
+}
+
+TR.debug {
+	background: #FF8800;
+}
+
+TR.debug .icon {
+	background-image: url(../images/debug.gif);
+}
+
+#log-container A {
+	color: #000000;
+}
+
+#log-container PRE {
+	font-family: Microsoft Sans Serif;
+	font-size: 8pt;
+	margin: 0px;
+}
+
+#progress-container {
+	background-image:  url(../images/progress-bg.gif);
+	border: 1px solid;
+	border-color: #808080 #ffffff #ffffff #808080;
+	float: left;
+	height: 9px;
+	text-align: left;
+	width: 440px;
+}
+
+#progress-bar {
+	background: #688FB8 url(../images/progress-fg.gif);
+	border: none;
+	font-size: 8px;
+	height: 9px;
+	width: 0px;
+}
+
+#buttons-container {
+	clear:both;
+	padding:10px 0;
+}
+
+.text:focus,
+TEXTAREA:focus,
+SELECT:focus,
+.focus {
+	border-color : #00AA00 !important;
+	background-color: #FAFFFA !important;
+}
+
+#part-from, #part-to {
+	width: 18px;
+	text-align: right;
+	margin-left: 4px;
+	margin-right: 10px;
+}
+
+#options-link {
+	color: #0000FF;
+	float: right;
+}
+
+#options {
+	width: 760px;
+	float: left;
+}
+
+
+#options FIELDSET {
+	width: 264px;
+	height: 190px;
+	margin-bottom:15px;
+	float: left;
+}
+
+LEGEND {
+	padding: 0px 6px;
+}
+
+#options .text {
+	width: 160px;
+}
+
+#options LABEL.left {
+	width: 80px;
+	float: left;
+	display: block;
+	margin-left: 2px;
+}
+
+#captcha-text {
+	width: 40px;
+}
+
+#tmp {
+	position: absolute;
+	top: 0px;
+}
