@@ -351,7 +351,7 @@ class Zend_Feed
                         $uri->setFragment($fragment);
                     }
 
-                    $feed = self::
+                    $feed = self::import($uri);
                 } catch (Exception $e) {
                     continue;
                 }

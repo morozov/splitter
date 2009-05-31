@@ -39,7 +39,7 @@ function get_enclosures($url) {
 	$result = array();
 
 	try {
-		$feed = Zend_Feed::
+		$feed = Zend_Feed::import($url);
 	} catch (Zend_Feed_Exception $e) {
 		echo $e->getMessage();
 		return array();
