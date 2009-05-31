@@ -191,15 +191,16 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @return	boolean
 	 */
 	function close() {
-		$crc = hash_final($this->hash);
-		$crc = sprintf('%08x', 0x100000000 + hexdec($crc));
-		$corrected = '';
-		for ($i = strlen($crc) - 2; $i >= 0; $i -= 2) {
-			$corrected .= substr($crc, $i, 2);
-		}
-		Application::getResponse()->debug($corrected);
-		Application::getResponse()->debug($this->_written_total);
-		return parent::close();
+		$closed = parent::close();
+		$crc32 = hash_final($this->hash);
+		$storage = $this->_createStorage();
+		$storage->setFileName($this->_getPartFileName('crc'));
+		$storage->open(null);
+		$storage->write(
+			$this->getCrcFileContents($this->_fileName, $this->_written_total, $crc32)
+		);
+		$storage->close();
+		return $closed;
 	}
 
 	/**
@@ -285,9 +286,10 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Возвращает имя файла для текущей части.
 	 *
+	 * @param mixed $postfix
 	 * @return	string
 	 */
-	function _getPartFileName($part) {
+	function _getPartFileName($postfix) {
 
 		// приделываем номер части в том случае, если включено разбивание на
 		// части, и при этом либо размер файла больше размера части (т.е. частей
@@ -299,9 +301,31 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 		if (true/* && (is_null($this->_size) || $this->_size > $this->_splitSize)*/) {
 			// постфикс в стиле Total Commander
-			$fileName .= '.' . sprintf('%03d', $part);
+			$fileName .= '.' . (is_numeric($postfix) ? sprintf('%03d', $postfix) : $postfix);
 		}
 
 		return $fileName;
+	}
+
+	/**
+	 * Возвращает содержимое файла контрольной суммы.
+	 *
+	 * @param string $filename
+	 * @param integer $size
+	 * @param integer $crc32
+	 * @return string
+	 */
+	function getCrcFileContents($filename, $size, $crc32) {
+		$format = <<<EOF
+filename=%s
+size=%d
+crc32=%s
+EOF;
+		/* $crc32 = sprintf('%08x', 0x100000000 + hexdec($crc32));
+		$corrected = '';
+		for ($i = strlen($crc32) - 2; $i >= 0; $i -= 2) {
+			$corrected .= substr($crc32, $i, 2);
+		} */
+		return sprintf($format, $filename, $size, strtoupper($crc32));
 	}
 }
