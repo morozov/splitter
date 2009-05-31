@@ -17,7 +17,7 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 	/**
 	 * Запускает скачивание файла. Принимает параметры:
 	 *  - url	  - URL скачиваемого файла (объект)
-	 *  - fileName - �?мя, под которым файл должен быть сохранен
+	 *  - fileName - имя, под которым файл должен быть сохранен
 	 *  - storage  - Хранилище для скачанных данных
 	 *
 	 * @param   array   $params   Параметры запуска

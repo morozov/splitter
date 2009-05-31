@@ -16,7 +16,7 @@
 class Splitter_Request_Cli extends Splitter_Request_Abstract
 {
 	/**
-	 * �?нициализирует массив параметров запроса.
+	 * Инициализирует массив параметров запроса.
 	 *
 	 */
 	function _initParams()

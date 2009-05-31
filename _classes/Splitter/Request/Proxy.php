@@ -15,7 +15,7 @@
 class Splitter_Request_Proxy extends Splitter_Request_Web
 {
 	/**
-	 * �?нициализирует массив параметров запроса.
+	 * Инициализирует массив параметров запроса.
 	 *
 	 */
 	function _initParams()

@@ -28,7 +28,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 
 	/**
 	 * Шаблон шаблона регулярного выражения для определения значения директивы
-	 * заголовка. Да, да. �?менно шаблон шаблона, см. реализацию.
+	 * заголовка. Да, да. именно шаблон шаблона, см. реализацию.
 	 *
 	 * @var	 string
 	 */
@@ -51,7 +51,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	var $REGEXP_CONTENT_RANGE = '|bytes\s+(\d*)\-((\d*)(/(\d*))?)?$|';
 
 	/**
-	 * �?мя файла по умолчанию. �?спользуется, если не удалось определить ни
+	 * Имя файла по умолчанию. используется, если не удалось определить ни
 	 * одним из доступных способов.
 	 *
 	 * @var	 string

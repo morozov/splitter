@@ -82,7 +82,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	}
 
 	/**
-	 * Обрезает файл до указанной длины. �?спользуется, если сервер не
+	 * Обрезает файл до указанной длины. Используется, если сервер не
 	 * поддерживает докачку.
 	 *
 	 * @param   integer  $size

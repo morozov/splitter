@@ -19,7 +19,7 @@ define('SOCKET_READ_BUFFER', 8192);
 abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstract
 {
 	/**
-	 * �?нтервал времени, через который клиенту отдаются сообщения о прогрессе
+	 * Интервал времени, через который клиенту отдаются сообщения о прогрессе
 	 * при скачивании файла (в секундах).
 	 *
 	 * @var	 integer

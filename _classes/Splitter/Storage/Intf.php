@@ -6,55 +6,62 @@
  * @version 	$Id$
  */
 /**
- * �?нтерфейс к хранилищам. Попутно реализует разбиение файлов на куски.
+ * Интерфейс к хранилищам. Попутно реализует разбиение файлов на куски.
  *
  * @package 	Splitter
  * @subpackage	storage
  * @see 		abstract_Object
  */
-class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
+final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 	/**
 	 * Номер текущий части, на которые разбивается файл.
 	 *
 	 * @var 	integer
 	 */
-	var $_part = 0;
+	private $_part = 0;
 
 	/**
 	 * Размер данных записанных в текущую часть.
 	 *
 	 * @var 	integer
 	 */
-	var $_written = 0;
+	private $_written_part = 0;
+
+	/**
+	 * Общий размер записанных данных.
+	 *
+	 * @var 	integer
+	 */
+	private $_written_total = 0;
 
 	/**
 	 * Тип реализации для сохранения данных.
 	 *
 	 * @var 	string
 	 */
-	var $_type;
+	private $_type;
 
 	/**
 	 * Размер частей, на которые нужно разбивать данные.
 	 *
 	 * @var 	integer
 	 */
-	var $_splitSize;
+	private $_splitSize;
 
 	/**
 	 * Объект хранилища для текущей части.
 	 *
 	 * @var		Splitter_Storage_Abstract
 	 */
-	var $_storage;
+	private $_storage;
 
 	/**
 	 * Контекст хэша для вычисления контрольной суммы файла.
 	 *
 	 * @var		resource
 	 */
-	var $hash;
+	private $hash;
 
 	/**
 	 * Конструктор.
@@ -149,7 +156,7 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 		do {
 			// сколько места осталось в текущей части
-			$space = $this->_splitSize - $this->_written;
+			$space = $this->_splitSize - $this->_written_part;
 
 			// если в текущей части закончилось место, пытаемся открыть следующую
 			if ($space <= 0 && !$this->_next())
@@ -167,7 +174,9 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			}
 
 			// собираем суммарный размер данных, записанных в текущую часть
-			$this->_written += strlen($portion);
+			$written = strlen($portion);
+			$this->_written_part += $written;
+			$this->_written_total+= $written;
 
 			// а этот кусок данных нужно дописать в следующую часть
 			$data = substr($data, $space);
@@ -184,7 +193,12 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	function close() {
 		$crc = hash_final($this->hash);
 		$crc = sprintf('%08x', 0x100000000 + hexdec($crc));
-		Application::getResponse()->debug(substr($crc, 6, 2) . substr($crc, 4, 2) . substr($crc, 2, 2) . substr($crc, 0, 2));
+		$corrected = '';
+		for ($i = strlen($crc) - 2; $i >= 0; $i -= 2) {
+			$corrected .= substr($crc, $i, 2);
+		}
+		Application::getResponse()->debug($corrected);
+		Application::getResponse()->debug($this->_written_total);
 		return parent::close();
 	}
 
@@ -205,6 +219,15 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 		$this->_storage = null;
 
 		return $result;
+	}
+
+	/**
+	 * Возвращает содержимое хранилища.
+	 *
+	 * @return  string
+	 */
+	function getContents() {
+		throw new Exception('Not applicable');
 	}
 
 	/**
@@ -239,7 +262,7 @@ class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 		$this->_storage->setFileName($this->_getPartFileName($this->_part));
 
-		$this->_written = $position;
+		$this->_written_part = $position;
 
 		// предполагаемый размер следующей части
 		$size = !is_null($this->_size)

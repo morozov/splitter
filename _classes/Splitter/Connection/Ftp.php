@@ -47,7 +47,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	var $REGEXP_PASV = '^.+ \\(?([0-9]{1,3},[0-9]{1,3},[0-9]{1,3},[0-9]{1,3},[0-9]+,[0-9]+)\\)?.*';
 
 	/**
-	 * �?мя пользователя по умолчанию.
+	 * Имя пользователя по умолчанию.
 	 *
 	 * @var	 string
 	 */
