@@ -12,24 +12,17 @@ require_once 'mail/RFC822.php';
 /**
  * Класс отправки скачанного файла по электронной почте.
  *
+ * @access	  public
  * @package	 Splitter
  * @subpackage  storage
  * @see		 Splitter_Storage_File
  */
-class Splitter_Storage_Email extends Splitter_Storage_Ram
-{
-	/**
-	 * Mime-type файла-вложения. Поскольку файлы скачиваются не только по HTTP,
-	 * то не всегда можно определить тип первоисточника. Да и не особенно вроде
-	 * надо. Поэтому оставим пока в общем случае.
-	 *
-	 * @var	 string
-	 */
-	var $ATTACHMENT_TYPE = 'application/octet-stream';
+class Splitter_Storage_Email extends Splitter_Storage_Ram {
 
 	/**
 	 * Адрес, на который нужно отправить сообщение.
 	 *
+	 * @access  private
 	 * @var	 string
 	 */
 	var $_to;
@@ -37,16 +30,18 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Имя вложения, которым будут отправлены данные.
 	 *
+	 * @access  private
 	 * @var	 string
 	 */
 	var $_attachmentName;
 
 	/**
 	 * Означает, что при закрытии была выполнена попытка отправить файл.
-	 * Используется как мера безопасности для избежания двойной отправки
+	 * �?спользуется как мера безопасности для избежания двойной отправки
 	 * сообщения в случае, если клиент выполнит close() более одного раза для
 	 * одного файла.
 	 *
+	 * @access  private
 	 * @var	 boolean
 	 */
 	var $_sent = false;
@@ -54,6 +49,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Конструктор.
 	 *
+	 * @access  public
 	 * @return  Splitter_Storage_Email
 	 */
 	function Splitter_Storage_Email($target)
@@ -67,6 +63,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает имя файла, в котором будут сохранены данные.
 	 *
+	 * @access  public
 	 * @return  string
 	 */
 	function getFileName()
@@ -77,6 +74,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
+	 * @access  public
 	 * @return  string
 	 */
 	function setFileName($fileName)
@@ -87,6 +85,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Открывает хранилище.
 	 *
+	 * @access  public
 	 * @param   integer $size
 	 * @return  boolean
 	 */
@@ -99,8 +98,9 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	}
 
 	/**
-	 * Завершает сохранение данных. Инициирует отправку почтового сообщения.
+	 * Завершает сохранение данных. �?нициирует отправку почтового сообщения.
 	 *
+	 * @access  protected
 	 * @return  boolean
 	 */
 	function _close()
@@ -127,6 +127,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает сообщение об успешном сохранении данных.
 	 *
+	 * @access  protected
 	 * @return  mixed
 	 */
 	function _getSucessMessage()
@@ -138,6 +139,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Проверяет правильность адреса для отправки файла.
 	 *
+	 * @access  private
 	 * @return  boolean
 	 */
 	function _validateEmail()
@@ -165,6 +167,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Отправляет скачанные данные по e-mail.
 	 *
+	 * @access  private
 	 * @return  boolean
 	 */
 	function _send()
@@ -182,36 +185,20 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 		ini_set('memory_limit', -1);
 
 		// создаем почтовое сообщение
-		$mail =& new htmlMimeMail();
-
-		$mail->setHeadCharset('utf-8');
-		$mail->setTextCharset('utf-8');
-
-		// добавляем текстовую часть
-		$mail->setSubject($this->_getSubject());
-
-		// добавляем текстовую часть
-		$mail->setText($this->_getText());
-
-		// присоединяем файл
-		$mail->addAttachment($this->getContents(), $this->_attachmentName, $this->ATTACHMENT_TYPE);
-
-		// подписываемся
-		$mail->setFrom($this->_getFrom());
-
-		// класс htmlMimeMail напрямую использует имя сервера, поэтому при
-		// запуске в режиме командной строки приходится ему "подыгрывать"
-		if (!isset($_SERVER['SERVER_NAME'])) {
-			$_SERVER['SERVER_NAME'] = 'splitter';
-		}
-
-		// отправляем письмо по указанному адресу
-		return $mail->send(array($this->_to));
+		$mail = new Zend_Mail('utf-8');
+		$mail->setFrom($this->_getFrom())
+			->addTo($this->_to)
+			->setSubject($this->_getSubject())
+			->setBodyText($this->_getText());
+		$at = $mail->createAttachment($this->getContents());
+		$at->filename = $this->_attachmentName;
+		return $mail->send();
 	}
 
 	/**
 	 * Возвращает тему сообщения.
 	 *
+	 * @access  private
 	 * @return  string
 	 */
 	function _getSubject()
@@ -222,6 +209,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает e-mail отправителя сообщения.
 	 *
+	 * @access  private
 	 * @return  string
 	 */
 	function _getFrom()
@@ -232,6 +220,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram
 	/**
 	 * Возвращает текст сообщения.
 	 *
+	 * @access  private
 	 * @return  string
 	 */
 	function _getText()
