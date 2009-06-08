@@ -25,13 +25,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	var $DEFAULT_PORT = 80;
 
 	/**
-	 * Регулярное выражение для разбора статуса ответа.
-	 *
-	 * @var	 string
-	 */
-	var $REGEXP_STATUS = '/^HTTP\/1\.[0|1]\s+(\d{3})\s*(.*)/';
-
-	/**
 	 * Протокол запроса.
 	 * Пока используем версию 1.0, т.к. я пока не знаю, почему при запросе
 	 * с использованием 1.1 сервер приписывает в ответ строчку из 3-х байтов
@@ -259,7 +252,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 		$messageArr[] = $statusLine;
 
 		// пытаемся разобрать статус
-		if (preg_match($this->REGEXP_STATUS, $statusLine, $matches))
+		if (preg_match('/^HTTP\/1\.[0|1]\s+(\d{3})\s*(.*)/', $statusLine, $matches))
 		{
 			$this->_status = (int)$matches[1];
 			$this->_statusText = $matches[2];
@@ -320,7 +313,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 			$header = rtrim($this->_controlSocket->gets(), "\r\n");
 
 			// если пришла пустая строка, значит заголовки закончились
-			if (0 == strlen($header))
+			if ('' == $header)
 			{
 				// отправляем заголовки в разбор
 				$this->_parseHeaders($headers);
