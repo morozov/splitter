@@ -1,9 +1,5 @@
 <?php
 
-require_once 'mail/htmlMimeMail.php';
-
-require_once 'mail/RFC822.php';
-
 /**
  * @package	 Splitter
  * @subpackage  storage
@@ -37,7 +33,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 
 	/**
 	 * Означает, что при закрытии была выполнена попытка отправить файл.
-	 * �?спользуется как мера безопасности для избежания двойной отправки
+	 * Используется как мера безопасности для избежания двойной отправки
 	 * сообщения в случае, если клиент выполнит close() более одного раза для
 	 * одного файла.
 	 *
