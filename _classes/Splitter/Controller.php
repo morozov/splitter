@@ -121,10 +121,10 @@ class Splitter_Controller
 
 				foreach ($links as $link)
 				{
-					$message[] = '<a href="' . $link . '" target="_blank">' . $link . '</a>';
+					$messages[] = '<a href="' . $link . '" target="_blank">' . $link . '</a>';
 				}
 
-				$response->write(implode(PHP_EOL, $message));
+				$response->write(implode(PHP_EOL, $messages));
 			}
 		}
 		else
