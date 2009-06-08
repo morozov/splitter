@@ -151,4 +151,13 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 			header($_SERVER['SERVER_PROTOCOL'] . ' ' . '404 Not Found');
 		}
 	}
+
+	/**
+	 * Возвращает содержимое хранилища.
+	 *
+	 * @return  string
+	 */
+	function getContents() {
+		return false;
+	}
 }
