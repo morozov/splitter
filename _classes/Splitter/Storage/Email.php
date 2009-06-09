@@ -142,19 +142,15 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	{
 		$result = false;
 
-		switch (true)
-		{
-			case empty($this->_to):
-				trigger_error('Не указан адрес email для отправки', E_USER_WARNING);
-				break;
-
-			case false === Mail_RFC822::isValidInetAddress($this->_to):
+		if (empty($this->_to)) {
+			trigger_error('Не указан адрес email для отправки', E_USER_WARNING);
+		} else {
+			$validator = new Zend_Validate_EmailAddress();
+			if (!$validator->isValid($this->_to)) {
 				trigger_error('Неверный адрес email', E_USER_WARNING);
-				break;
-
-			default:
+			} else {
 				$result = true;
-				break;
+			}
 		}
 
 		return $result;
