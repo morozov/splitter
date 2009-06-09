@@ -85,6 +85,7 @@ abstract class Splitter_Storage_Abstract
 	 */
 	function setFileName($fileName)
 	{
+		// нужно убедиться, что установлена верная локаль
 		$fileName = basename($fileName);
 
 		if (isset($GLOBALS['rename']))

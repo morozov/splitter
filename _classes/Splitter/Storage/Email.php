@@ -24,14 +24,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	var $_to;
 
 	/**
-	 * Имя вложения, которым будут отправлены данные.
-	 *
-	 * @access  private
-	 * @var	 string
-	 */
-	var $_attachmentName;
-
-	/**
 	 * Означает, что при закрытии была выполнена попытка отправить файл.
 	 * Используется как мера безопасности для избежания двойной отправки
 	 * сообщения в случае, если клиент выполнит close() более одного раза для
@@ -54,28 +46,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 		$this->_to = $target;
 
 		parent::Splitter_Storage_Ram($target);
-	}
-
-	/**
-	 * Возвращает имя файла, в котором будут сохранены данные.
-	 *
-	 * @access  public
-	 * @return  string
-	 */
-	function getFileName()
-	{
-		return $this->_attachmentName;
-	}
-
-	/**
-	 * Устанавливает имя файла, в котором будут сохранены данные.
-	 *
-	 * @access  public
-	 * @return  string
-	 */
-	function setFileName($fileName)
-	{
-		$this->_attachmentName = $fileName;
 	}
 
 	/**
@@ -128,7 +98,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 */
 	function _getSucessMessage()
 	{
-		return 'Файл "' . $this->_attachmentName . '" успешно отправлен на <a href="mailto:'
+		return 'Файл "' . $this->_fileName . '" успешно отправлен на <a href="mailto:'
 			. $this->_to . '" target="_blank">' . $this->_to . '</a>';
 	}
 
@@ -183,7 +153,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 			->setSubject($this->_getSubject())
 			->setBodyText($this->_getText());
 		$at = $mail->createAttachment($this->getContents());
-		$at->filename = $this->_attachmentName;
+		$at->filename = $this->_fileName;
 		return $mail->send();
 	}
 
@@ -195,7 +165,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 */
 	function _getSubject()
 	{
-		return sprintf('Файл "%s"', $this->_attachmentName);
+		return sprintf('Файл "%s"', $this->_fileName);
 	}
 
 	/**
