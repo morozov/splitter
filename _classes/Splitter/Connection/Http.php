@@ -259,7 +259,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 		}
 		else
 		{
-			trigger_error('Неверный ответ сервера: невозможно определить статус ответа');
+			trigger_error('Неверный ответ сервера: невозможно определить статус ответа', E_USER_ERROR);
 		}
 
 		// проходим по оставшимся строкам
