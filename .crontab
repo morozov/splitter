@@ -1,0 +1,1 @@
+0 * * * * php -f /path/to/splitter/feed.php > /dev/null
