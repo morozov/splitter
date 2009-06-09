@@ -310,7 +310,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 		while (!$this->_controlSocket->eof())
 		{
 			// читаем строку из ответа
-			$header = rtrim($this->_controlSocket->gets(), "\r\n");
+			$header = rtrim($this->_controlSocket->gets(), self::CRLF);
 
 			// если пришла пустая строка, значит заголовки закончились
 			if ('' == $header)

@@ -329,7 +329,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 
 				// определяем текстовое сообщение (обрезаем слева пробел
 				// и справа перевод строки)
-				$this->_statusText = rtrim(ltrim($matches[2], ' '), PHP_EOL);
+				$this->_statusText = rtrim(ltrim($matches[2], ' '), self::CRLF);
 
 				// выдаем сообщение в лог
 				$this->_trace(rtrim($message, PHP_EOL), 'response');

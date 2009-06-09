@@ -13,8 +13,13 @@
  * @see		 abstract_Object
  * @abstract
  */
-abstract class Splitter_Connection_Abstract
-{
+abstract class Splitter_Connection_Abstract {
+
+	/**
+	 * Перевод строки для соединений — один и тот же, независимо от платформы.
+	 */
+	const CRLF = "\r\n";
+
 	/**
 	 * Порт соединения по умолчанию.
 	 *
@@ -250,6 +255,6 @@ abstract class Splitter_Connection_Abstract
 	 */
 	function _writeln($string)
 	{
-		return $this->_write($string . PHP_EOL);
+		return $this->_write($string . self::CRLF);
 	}
 }
