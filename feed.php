@@ -36,16 +36,26 @@ function start() {
  * @return array
  */
 function get_enclosures($url) {
-	$result = array();
+	$tries = 3;
+	$try = 0;
 
-	try {
-		$feed = Zend_Feed::import($url);
-	} catch (Zend_Feed_Exception $e) {
-		echo $e->getMessage();
-		return array();
-	}
+	do {
+		try {
+			$feed = Zend_Feed::import($url);
+		} catch (Zend_Feed_Exception $e) {
+			echo $e->getMessage();
+			return array();
+		} catch (Zend_Http_Client_Exception $e) {
+			if (++$try < $tries) {
+				sleep(10);
+			} else {
+				return array();
+			}
+		}
+	} while (!isset($feed));
 
 	$i = 0;
+	$result = array();
 
 	foreach ($feed as $item) {
 		foreach ($item->getDOM()->getElementsByTagName('enclosure') as $enclosure) {
