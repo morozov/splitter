@@ -98,7 +98,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 */
 	function _getSucessMessage()
 	{
-		return 'Файл "' . $this->_fileName . '" успешно отправлен на <a href="mailto:'
+		return 'Файл "' . $this->filename . '" успешно отправлен на <a href="mailto:'
 			. $this->_to . '" target="_blank">' . $this->_to . '</a>';
 	}
 
@@ -153,7 +153,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 			->setSubject($this->_getSubject())
 			->setBodyText($this->_getText());
 		$at = $mail->createAttachment($this->getContents());
-		$at->filename = $this->_fileName;
+		$at->filename = $this->filename;
 		return $mail->send();
 	}
 
@@ -165,7 +165,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 */
 	function _getSubject()
 	{
-		return sprintf('Файл "%s"', $this->_fileName);
+		return sprintf('Файл "%s"', $this->filename);
 	}
 
 	/**

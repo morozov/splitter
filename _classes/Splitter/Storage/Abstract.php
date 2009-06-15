@@ -20,21 +20,21 @@ abstract class Splitter_Storage_Abstract
 	 *
 	 * @var	 string
 	 */
-	var $_target;
+	protected $target;
 
 	/**
 	 * Имя файла, в котором будут сохранены данные.
 	 *
 	 * @var	 string
 	 */
-	var $_fileName;
+	protected $filename;
 
 	/**
 	 * Размер данных, которые предполагается записать.
 	 *
 	 * @var	 integer
 	 */
-	var $_size;
+	protected $size;
 
 	/**
 	 * Конструктор.
@@ -68,7 +68,7 @@ abstract class Splitter_Storage_Abstract
 	 */
 	function getFileName()
 	{
-		return $this->_fileName;
+		return $this->filename;
 	}
 
 	/**
@@ -91,7 +91,7 @@ abstract class Splitter_Storage_Abstract
 			trigger_error('Указанное имя файла "' . $fileName . '" запрещено', E_USER_WARNING);
 		}
 
-		$this->_fileName = $fileName;
+		$this->filename = $fileName;
 	}
 
 	/**
@@ -123,7 +123,7 @@ abstract class Splitter_Storage_Abstract
 	 */
 	function open($size)
 	{
-		$this->_size = $size;
+		$this->size = $size;
 
 		return true;
 	}
@@ -194,7 +194,7 @@ abstract class Splitter_Storage_Abstract
 	 * @param   string  $fileName
 	 * @return  boolean
 	 */
-	function _isFilenameAllowed($fileName)
+	function _isFilenameAllowed($filename)
 	{
 		return true;
 	}
@@ -231,6 +231,6 @@ abstract class Splitter_Storage_Abstract
 	 */
 	function _setTarget($target)
 	{
-		$this->_target = $target;
+		$this->target = $target;
 	}
 }

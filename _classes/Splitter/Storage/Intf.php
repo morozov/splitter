@@ -86,7 +86,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 		// если не указано, под каким именем сохранять файл, о докачке говорить
 		// еще рано
-		if (is_null($this->_fileName)) {
+		if (is_null($this->filename)) {
 			return 0;
 		}
 
@@ -197,7 +197,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 		$storage->setFileName($this->_getPartFileName('crc'));
 		$storage->open(null);
 		$storage->write(
-			$this->getCrcFileContents($this->_fileName, $this->written_total, $crc32)
+			$this->getCrcFileContents($this->filename, $this->written_total, $crc32)
 		);
 		$storage->close();
 		return $closed;
@@ -238,7 +238,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @return	splitter_storage_Abstract
 	 */
 	function _createStorage() {
-		$storage =& Splitter_Storage_Abstract::factory($this->type, $this->_target);
+		$storage =& Splitter_Storage_Abstract::factory($this->type, $this->target);
 		return $storage;
 	}
 
@@ -266,13 +266,13 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 		$this->written_part = $position;
 
 		// предполагаемый размер следующей части
-		$size = !is_null($this->_size)
+		$size = !is_null($this->size)
 
 			// если это последняя часть
-			? ($this->part == ($parts = $this->split_size ? ceil($this->_size / $this->split_size) : 1)
+			? ($this->part == ($parts = $this->split_size ? ceil($this->size / $this->split_size) : 1)
 
 				// определяем размер последней части
-				? $this->_size - ($parts - 1) * $this->split_size
+				? $this->size - ($parts - 1) * $this->split_size
 
 				// иначе размер должен быть равен размеру разбиения
 				: $this->split_size)
@@ -297,9 +297,9 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 		//
 		// :NOTE: morozov 16092007: временно отключено по причине принципиального
 		// конфликта c докачкой как таковой
-		$fileName = $this->_fileName;
+		$fileName = $this->filename;
 
-		if (true/* && (is_null($this->_size) || $this->_size > $this->split_size)*/) {
+		if (true/* && (is_null($this->size) || $this->size > $this->split_size)*/) {
 			// постфикс в стиле Total Commander
 			$fileName .= '.' . (is_numeric($postfix) ? sprintf('%03d', $postfix) : $postfix);
 		}

@@ -157,7 +157,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	 */
 	function _getSavePath()
 	{
-		return $this->_target . $this->_fileName;
+		return $this->target . $this->filename;
 	}
 
 	/**
@@ -190,7 +190,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	 */
 	function _getImplementation($path = null)
 	{
-		preg_match('|^([a-z0-9]+)://|i', is_null($path) ? $this->_target : $path, $scheme);
+		preg_match('|^([a-z0-9]+)://|i', is_null($path) ? $this->target : $path, $scheme);
 
 		switch (isset($scheme[1]) ? $scheme[1] : null)
 		{

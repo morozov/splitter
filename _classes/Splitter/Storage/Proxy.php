@@ -130,20 +130,20 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 
 			// отправляем два заголовка с именем файла, чтобы удовлетворить всех
 			// польвательских агентов
-			header('Content-Type: text/plain; name="' . $this->_fileName . '"');
-			header('Content-Disposition: inline; filename="' . $this->_fileName . '"');
+			header('Content-Type: text/plain; name="' . $this->filename . '"');
+			header('Content-Disposition: inline; filename="' . $this->filename . '"');
 
 			// показываем агенту, что мы поддерживаем докачку
 			header('Accept-Ranges: bytes');
 
 			if ($this->_resume > 0)
 			{
-				header('Content-Range: bytes ' . $this->_resume . '-' . ($this->_size - 1) . '/' . $this->_size);
+				header('Content-Range: bytes ' . $this->_resume . '-' . ($this->size - 1) . '/' . $this->size);
 			}
 
-			if (!is_null($this->_size))
+			if (!is_null($this->size))
 			{
-				header('Content-Length: ' . ($this->_size - $this->_resume));
+				header('Content-Length: ' . ($this->size - $this->_resume));
 			}
 		}
 		else
