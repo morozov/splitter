@@ -56,16 +56,9 @@ abstract class Splitter_Storage_Abstract
 	 * @param   integer	 $splitSize
 	 * @return  Splitter_Storage_Abstract
 	 */
-	function factory($type, $target, $splitSize = 0) {
-		if ($splitSize > 0) {
-			$storage = new Splitter_Storage_Intf(
-				$type, $target, $splitSize
-			);
-		} else {
-			$class = 'Splitter_Storage_' . ucfirst($type);
-			$storage = new $class($target);
-		}
-		return $storage;
+	function factory($type, $target) {
+		$class = 'Splitter_Storage_' . ucfirst($type);
+		return new $class($target);
 	}
 
 	/**

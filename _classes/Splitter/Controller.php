@@ -140,12 +140,14 @@ class Splitter_Controller
 	 * Возвращает хранилище указанного типа.
 	 *
 	 * @param   string $type
+	 * @param   string $target
+	 * @param   integer $splitSize
 	 * @return  Splitter_Storage_Abstract
 	 */
-	function _getStorage($type, $target, $splitSize)
-	{
-		$storage =& Splitter_Storage_Abstract::factory($type, $target, $splitSize);
-		return $storage;
+	function _getStorage($type, $target, $splitSize) {
+		return $splitSize > 0
+			? new Splitter_Storage_Intf($type, $target, $splitSize)
+			: Splitter_Storage_Abstract::factory($type, $target);
 	}
 
 	/**
