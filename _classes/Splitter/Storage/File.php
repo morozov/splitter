@@ -147,7 +147,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 
 		return 'Файл успешно сохранен в <a href="'
 			. str_replace (DIRECTORY_SEPARATOR, '/',  $path)
-			. '" target="_blank">' . realpath($path) . '</a>';
+			. '" target="_blank">' . $path . '</a>';
 	}
 
 	/**

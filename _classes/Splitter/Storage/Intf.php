@@ -331,16 +331,6 @@ EOF;
 			}
 			$crc32 = $corrected;
 		}
-
-		$encoding_from = 'utf-8';
-		$encoding_to = 'windows-1251';
-
-		if (extension_loaded('iconv')) {
-			$filename = iconv($encoding_from, $encoding_to, $filename);
-		} elseif (extension_loaded('mbstring')) {
-			mb_convert_encoding($filename, $encoding_to, $encoding_from);
-		}
-
-		return sprintf($format, $filename, $size, strtoupper($crc32));
+		return sprintf($format, self::utf2win($filename), $size, strtoupper($crc32));
 	}
 }

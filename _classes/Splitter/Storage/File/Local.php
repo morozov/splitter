@@ -42,7 +42,10 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 				break;
 
 			// пытаемся открыть файл на запись
-			case $file = parent::open($path);
+			case $file = parent::open(
+				Application::isWindows()
+					? Splitter_Storage_Abstract::utf2win($path)
+					: $path);
 				break;
 
 			// пытаемся установить блокировку. не ждем, если файл заблокирован,

@@ -233,4 +233,24 @@ abstract class Splitter_Storage_Abstract
 	{
 		$this->target = $target;
 	}
+
+	/**
+	 * Преобразует строку из UTF-8 в Windows-1251, если есть такая возможность.
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function utf2win($string) {
+
+		$encoding_from = 'utf-8';
+		$encoding_to = 'windows-1251';
+
+		if (extension_loaded('iconv')) {
+			$string = iconv($encoding_from, $encoding_to, $string);
+		} elseif (extension_loaded('mbstring')) {
+			$string = mb_convert_encoding($string, $encoding_to, $encoding_from);
+		}
+
+		return $string;
+	}
 }
