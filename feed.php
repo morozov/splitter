@@ -109,12 +109,7 @@ function get_log() {
  * @return boolean
  */
 function is_media($type) {
-	foreach (array('audio', 'video') as $prefix) {
-		if (0 === strpos($type, $prefix)) {
-			return true;
-		}
-	}
-	return false;
+	return preg_match('/^(audio|video)/', $type);
 }
 
 /**
