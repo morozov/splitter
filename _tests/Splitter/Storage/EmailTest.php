@@ -9,15 +9,10 @@ class Splitter_Storage_EmailTest extends PHPUnit_Framework_TestCase {
 			$this->fail($e->getMessage());
 		}
 		$this->assertTrue(!empty($storage));
-		$this->assertType('Splitter_Storage_Email', $storage);
 	}
 
 	public function testCreationUsingInvalidEmail() {
-		try {
-			$storage = new Splitter_Storage_Email('an-invalid-email-address');
-			$this->fail('Accepted an invalid e-mail address');
-		} catch (Splitter_Storage_Exception $e) {
-			// Good, it threw an exception
-		}
+		$this->setExpectedException('Splitter_Storage_Exception');
+		$storage = new Splitter_Storage_Email('an-invalid-email-address');
 	}
 }

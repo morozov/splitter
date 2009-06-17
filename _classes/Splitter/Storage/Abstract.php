@@ -76,21 +76,27 @@ abstract class Splitter_Storage_Abstract
 	 *
 	 * @return  string
 	 */
-	function setFileName($fileName)
-	{
-		// нужно убедиться, что установлена верная локаль
-		$fileName = basename($fileName);
+	public function setFileName($fileName) {
 
-		if (isset($GLOBALS['rename']))
-		{
+		if (isset($GLOBALS['rename'])) {
 			$fileName = $GLOBALS['rename']->rename($fileName);
 		}
 
-		if (!$this->_isFilenameAllowed($fileName))
-		{
-			trigger_error('Указанное имя файла "' . $fileName . '" запрещено', E_USER_WARNING);
+		// здесь нужно убедиться, что установлена верная локаль
+		if ($fileName != basename($fileName)) {
+			throw new Splitter_Storage_Exception(sprintf('No path allowed in filename, "%s" is given', $fileName));
 		}
 
+		$this->_setFileName($fileName);
+	}
+
+	/**
+	 * Непосредственно, без преобразований, устанавливает имя файла.
+	 *
+	 * @param string $fileName
+	 * @throws Splitter_Storage_Exception
+	 */
+	protected function _setFileName($fileName) {
 		$this->filename = $fileName;
 	}
 
@@ -184,19 +190,6 @@ abstract class Splitter_Storage_Abstract
 	function getFreeSpace()
 	{
 		return null;
-	}
-
-	/**
-	 * Определяет, разрешеено ли указанное имя файла при сохранении в данный тип
-	 * хранилища.
-	 *
-	 * @access  protected
-	 * @param   string  $fileName
-	 * @return  boolean
-	 */
-	function _isFilenameAllowed($filename)
-	{
-		return true;
 	}
 
 	/**

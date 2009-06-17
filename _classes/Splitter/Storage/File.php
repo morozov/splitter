@@ -94,18 +94,16 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract
 	}
 
 	/**
-	 * Определяет, разрешеено ли указанное имя файла при сохранении в данный тип
-	 * хранилища.
+	 * Непосредственно, без преобразований, устанавливает имя файла.
 	 *
-	 * @param   string  $fileName
-	 * @return  boolean
+	 * @param string $fileName
+	 * @throws Splitter_Storage_Exception
 	 */
-	function _isFilenameAllowed($fileName)
-	{
-		return parent::_isFilenameAllowed($fileName)
-
-			// запрещаем закачивать на сервер файлы .htaccess и т.п.
-			&& 0 !== strpos($fileName, '.ht');
+	protected function _setFileName($fileName) {
+		if (0 === strpos($fileName, '.ht')) {
+			throw new Splitter_Storage_Exception(sprintf('Given filename "%s" is not acceptable', $fileName));
+		}
+		parent::_setFileName($fileName);
 	}
 
 	/**
