@@ -17,4 +17,4 @@ function __autoload($class) {
 }
 
 $controller = new Splitter_Controller();
-exit($controller->process() ? 0 : 1);
+exit($controller->main() ? 0 : 1);

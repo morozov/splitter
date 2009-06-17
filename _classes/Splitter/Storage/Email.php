@@ -40,12 +40,22 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 * @access  public
 	 * @return  Splitter_Storage_Email
 	 */
-	function Splitter_Storage_Email($target)
-	{
+	public function __construct($target) {
+
+		if (empty($target)) {
+			throw new Splitter_Storage_Exception('Не указан адрес email для отправки');
+		}
+
+		$validator = new Zend_Validate_EmailAddress();
+		if (!$validator->isValid($target)) {
+			$messages = $validator->getMessages();
+			throw new Splitter_Storage_Exception(current($messages));
+		}
+
 		// интерпретируем цель как адрес, на который нужно отправить письмо
 		$this->_to = $target;
 
-		parent::Splitter_Storage_Ram($target);
+		parent::__construct();
 	}
 
 	/**
@@ -60,7 +70,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 		// сбрасываем флаг попытки отправки сообщения
 		$this->_sent = false;
 
-		return parent::open($size) && $this->_validateEmail();
+		return parent::open($size);
 	}
 
 	/**
@@ -100,30 +110,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	{
 		return 'Файл "' . $this->filename . '" успешно отправлен на <a href="mailto:'
 			. $this->_to . '" target="_blank">' . $this->_to . '</a>';
-	}
-
-	/**
-	 * Проверяет правильность адреса для отправки файла.
-	 *
-	 * @access  private
-	 * @return  boolean
-	 */
-	function _validateEmail()
-	{
-		$result = false;
-
-		if (empty($this->_to)) {
-			trigger_error('Не указан адрес email для отправки', E_USER_WARNING);
-		} else {
-			$validator = new Zend_Validate_EmailAddress();
-			if (!$validator->isValid($this->_to)) {
-				trigger_error('Неверный адрес email', E_USER_WARNING);
-			} else {
-				$result = true;
-			}
-		}
-
-		return $result;
 	}
 
 	/**

@@ -17,14 +17,22 @@ define('DOWNLOAD_STATUS_INCOMPLETE', 3);
  * @subpackage
  * @see		 abstract_Object
  */
-class Splitter_Controller
-{
+final class Splitter_Controller {
+
+	public function main() {
+		try {
+			$this->process();
+		} catch (Exception $e) {
+			Application::getResponse()->write($e->getMessage(), 'error');
+		}
+	}
+
 	/**
 	 * Выполняет обработку данных пользовательского запроса.
 	 *
 	 * @return  boolean
 	 */
-	function process()
+	protected function process()
 	{
 		$request =& Application::getRequest();
 
