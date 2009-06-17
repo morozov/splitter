@@ -316,12 +316,6 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @return string
 	 */
 	function getCrcFileContents($filename, $size, $crc32) {
-		$format = <<<EOF
-filename=%s
-size=%d
-crc32=%s
-EOF;
-
 		// :KLUDGE: morozov 15062009: похоже, это зависит от ОС, но не факт
 		if (!Application::isWindows()) {
 			$crc32 = sprintf('%08x', 0x100000000 + hexdec($crc32));
@@ -331,6 +325,10 @@ EOF;
 			}
 			$crc32 = $corrected;
 		}
-		return sprintf($format, self::utf2win($filename), $size, strtoupper($crc32));
+		return sprintf(implode(PHP_EOL, array(
+			'filename=%s',
+			'size=%d',
+			'crc32=%s',
+		)), self::utf2win($filename), $size, strtoupper($crc32));
 	}
 }
