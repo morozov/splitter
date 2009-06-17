@@ -1,7 +1,11 @@
 <?php
 
-$url = 'http://pipes.yahoo.com/pipes/pipe.run?_id=vBQP5PX83RGPa7Vx_w6H4A&_render=rss';
-$email = 'log67@tut.by';
+if ($_SERVER['argc'] != 3) {
+	die("Usage: {$_SERVER['argv'][0]} [uri] [email]");
+}
+
+list(, $url, $email) = $_SERVER['argv'];
+
 $split_size = 4194304; //4M
 $count = 10;
 
