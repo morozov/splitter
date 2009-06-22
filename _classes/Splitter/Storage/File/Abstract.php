@@ -20,6 +20,9 @@ abstract class Splitter_Storage_File_Abstract {
 	 * @return mixed
 	 */
 	public function open($path) {
+		if (file_exists($path) && !is_file($path)) {
+			throw new Splitter_Storage_Exception('"' . $path . '" already exists and it’s not a file');
+		}
 		if (!$resource = fopen($path, $this->fopen_mode)) {
 			throw new Splitter_Storage_Exception('Couldn’t open file "' . $path . '" for writing');
 		}

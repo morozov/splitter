@@ -54,9 +54,20 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	public function testMkdirFileExists() {
 		$this->setExpectedException('Splitter_Storage_Exception');
 		$dir = $this->dir . '/dummy';
+		@rmdir($dir);
 		@unlink($dir);
 		touch($dir);
 		$storage = $this->_createStorage($dir, $this->filename);
+		$storage->write($this->contents);
+	}
+
+	public function testSaveToDirectory() {
+		$this->setExpectedException('Splitter_Storage_Exception');
+		$dir = $this->dir . '/dummy';
+		@rmdir($dir);
+		@unlink($dir);
+		mkdir($dir);
+		$storage = $this->_createStorage($this->dir, 'dummy');
 		$storage->write($this->contents);
 	}
 
