@@ -1,62 +1,50 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  storage
- * @version	 $Id$
- */
-/**
  * Базовый класс реализация сохранения даннвх в файл.
  *
- * @package	 Splitter
- * @subpackage  storage.file
- * @see		 abstract_Object
- * @abstract
  */
-abstract class Splitter_Storage_File_Abstract
-{
+abstract class Splitter_Storage_File_Abstract {
+
 	/**
 	 * Режим открытия файлов для записи.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
-	var $FOPEN_MODE = 'ab';
+	protected $fopen_mode = 'ab';
 
 	/**
 	 * Открывает файл по указанному пути для записи.
 	 *
-	 * @param   string  $path
-	 * @return  mixed
+	 * @param string $path
+	 * @return mixed
 	 */
-	function open($path)
-	{
-		if (false === ($file = fopen($path, $this->FOPEN_MODE)))
-		{
-			trigger_error('Невозможно открыть файл "' . $path . '" для записи', E_USER_WARNING);
+	public function open($path) {
+		if (!$resource = fopen($path, $this->fopen_mode)) {
+			throw new Splitter_Storage_Exception('Couldn’t open file "' . $path . '" for writing');
 		}
-
-		return $file;
+		return $resource;
 	}
 
 	/**
 	 * Закрывает указанный ресурс.
 	 *
-	 * @param   resource	$resource
-	 * @return  boolean
+	 * @param resource $resource
+	 * @return boolean
 	 */
-	function close($resource)
-	{
-		return fclose($resource);
+	public function close($resource) {
+		if (!fclose($resource)) {
+			throw new Splitter_Storage_Exception('Couldn’t close file');
+		}
 	}
 
 	/**
 	 * Преобразует путь в соответствии со спецификой конкретной реализации.
 	 *
-	 * @param   string  $path
-	 * @return  string
+	 * @param string $path
+	 * @return string
 	 */
-	function transformPath($path)
-	{
+	public function transformPath($path) {
 		return $path;
 	}
 }
