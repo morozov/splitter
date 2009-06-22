@@ -114,6 +114,11 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 		if ($this->_isDownloadNeeded())
 		{
 			$storage =& $this->_getStorage();
+
+			if (isset($GLOBALS['rename'])) {
+				$fileName = $GLOBALS['rename']->rename($fileName);
+			}
+
 			$storage->setFileName($fileName);
 		}
 

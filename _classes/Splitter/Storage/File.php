@@ -58,13 +58,16 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 		if (is_resource($this->resource)) {
 			throw new Splitter_Storage_Exception('Unable to change filename. Data has been already written');
 		}
+		if (0 === strpos($fileName, '.ht')) {
+			throw new Splitter_Storage_Exception(sprintf('Given filename "%s" is not acceptable', $fileName));
+		}
 		parent::setFileName($fileName);
 	}
-	
+
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	public function getResumePosition() {
 		clearstatcache();
@@ -101,22 +104,9 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	}
 
 	/**
-	 * Непосредственно, без преобразований, устанавливает имя файла.
-	 *
-	 * @param string $fileName
-	 * @throws Splitter_Storage_Exception
-	 */
-	protected function _setFileName($fileName) {
-		if (0 === strpos($fileName, '.ht')) {
-			throw new Splitter_Storage_Exception(sprintf('Given filename "%s" is not acceptable', $fileName));
-		}
-		parent::_setFileName($fileName);
-	}
-
-	/**
 	 * Возвращает полный путь файла, в который будут сохраняться данные.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	protected function getSavePath() {
 		return $this->dir . $this->filename;

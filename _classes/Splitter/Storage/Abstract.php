@@ -44,25 +44,11 @@ abstract class Splitter_Storage_Abstract {
 	 */
 	public function setFileName($fileName) {
 
-		if (isset($GLOBALS['rename'])) {
-			$fileName = $GLOBALS['rename']->rename($fileName);
-		}
-
 		// здесь нужно убедиться, что установлена верная локаль
 		if ($fileName != basename($fileName)) {
 			throw new Splitter_Storage_Exception(sprintf('No path allowed in filename, "%s" is given', $fileName));
 		}
 
-		$this->_setFileName($fileName);
-	}
-
-	/**
-	 * Непосредственно, без преобразований, устанавливает имя файла.
-	 *
-	 * @param string $fileName
-	 * @throws Splitter_Storage_Exception
-	 */
-	protected function _setFileName($fileName) {
 		$this->filename = $fileName;
 	}
 
