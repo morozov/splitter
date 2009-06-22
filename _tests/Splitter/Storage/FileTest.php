@@ -36,7 +36,7 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 			$this->fail('Unable to unlink an existing file');
 		}
 
-		$storage = $this->_createStorage();;
+		$storage = $this->_createStorage($this->dir, $this->filename);
 		$storage->write($this->contents);
 		// unset is important to close the storage
 		unset($storage);
@@ -46,14 +46,23 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 
 	public function testSetFilenameAfterWritten() {
 		$this->setExpectedException('Splitter_Storage_Exception');
-		$storage = $this->_createStorage();
+		$storage = $this->_createStorage($this->dir, $this->filename);
 		$storage->write($this->contents);
 		$storage->setFileName('dummy');
 	}
 
-	protected function _createStorage() {
-		$storage = new Splitter_Storage_File($this->dir);
-		$storage->setFilename($this->filename);
+	public function testMkdirFileExists() {
+		$this->setExpectedException('Splitter_Storage_Exception');
+		$dir = $this->dir . '/dummy';
+		@unlink($dir);
+		touch($dir);
+		$storage = $this->_createStorage($dir, $this->filename);
+		$storage->write($this->contents);
+	}
+
+	protected function _createStorage($dir, $filename) {
+		$storage = new Splitter_Storage_File($dir);
+		$storage->setFilename($filename);
 		return $storage;
 	}
 
