@@ -13,23 +13,15 @@
  * @see		 abstract_Object
  * @abstract
  */
-class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
-{
-	/**
-	 * Права на создаваемые директории.
-	 *
-	 * @var	 integer
-	 */
-	var $DIRECTORY_PERMISSION = 0707;
+class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 
 	/**
 	 * Открывает файл по указанному пути для записи.
 	 *
-	 * @param   string  $path
-	 * @return  mixed
+	 * @param string  $path
+	 * @return mixed
 	 */
-	function open($path)
-	{
+	public function open($path) {
 		$resource = false;
 
 		$dir = dirname($path);
@@ -37,7 +29,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 		switch (false)
 		{
 			// проверяем существование целевой директории
-			case $this->_isDirectory($dir):
+			case is_dir($dir) || $this->mkdir($dir):
 				trigger_error('Невозможно создать целевую директорию "' . $dir . '"', E_USER_WARNING);
 				break;
 
@@ -100,7 +92,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 	 *
 	 * @return  boolean
 	 */
-	function _isDirectory($path)
+	function mkdir($path)
 	{
 		// убираем закрывающий слэш, иначе после разбиении строки на секции
 		// последним элементом массива будет пустая строка, а следовательно,
@@ -116,7 +108,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract
 			foreach ($paths as $path)
 			{
 				// пытаемся создать поддиректорию
-				if (!@mkdir($path, $this->DIRECTORY_PERMISSION))
+				if (!@mkdir($path))
 				{
 					return false;
 				}

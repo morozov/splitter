@@ -89,8 +89,7 @@ class Application
 	 * @return  boolean
 	 * @static
 	 */
-	function isWindows()
-	{
+	public static function isWindows() {
 		return 'WIN' == substr(PHP_OS, 0, 3);
 	}
 

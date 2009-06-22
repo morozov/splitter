@@ -1,20 +1,11 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  storage
- * @version	 $Id$
- */
-/**
- * Класс объектов, сохраняющий скачанный файл в оперативной памяти. Используется
- * для скачивания небольших страниц HTML c фалойвых сервисов.
+ * Класс объектов, сохраняющий скачанный файл в оперативной памяти.
  *
- * @package	 Splitter
- * @subpackage  storage
- * @see		 Splitter_Storage_Abstract
  */
-class Splitter_Storage_Ram extends Splitter_Storage_Abstract
-{
+class Splitter_Storage_Ram extends Splitter_Storage_Abstract {
+
 	/**
 	 * Содержимое, записанное в хранилище.
 	 *
@@ -23,88 +14,38 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract
 	var $_contents = '';
 
 	/**
-	 * Флажок, указывающий, открыто ли хранилище для записи. На самом деле
-	 * никакой пользы от него нет, разве что для отладки.
-	 *
-	 * @var	 boolean
-	 */
-	var $_isOpened = false;
-
-	/**
-	 * Конструктор.
-	 *
-	 */
-	function Splitter_Storage_Ram()
-	{
-		// этот тип хранилища не поддерживает цель сохранения
-		parent::Splitter_Storage_Abstract(null);
-	}
-
-	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
 	 * @return  integer
 	 */
-	function getResumePosition()
-	{
+	public function getResumePosition() {
 		return strlen($this->_contents);
-	}
-
-	/**
-	 * Открывает хранилище.
-	 *
-	 * @return  boolean
-	 */
-	function open()
-	{
-		// очищаем содержимое
-		$this->_contents = '';
-
-		// выставляем флажок "файл открыт"
-		$this->_isOpened = true;
-
-		return true;
 	}
 
 	/**
 	 * Пишет данные в файл.
 	 *
-	 * @param   string   $data
-	 * @return  boolean		  Были ли данные успешно записаны
+	 * @param string $data
 	 */
-	function write($data)
-	{
-		if ($this->_isOpened)
-		{
-			$this->_contents .= $data;
-
-			return true;
-		}
-
-		return false;
+	public function write($data) {
+		$this->_contents .= $data;
 	}
 
 	/**
-	 * Обрезает файл до указанной длины. Используется, если сервер не
-	 * поддерживает докачку.
+	 * Обрезает файл до указанной длины.
 	 *
-	 * @param   integer  $size
-	 * @return  boolean
+	 * @param integer $size
 	 */
-	function truncate($size)
-	{
+	public function truncate($size) {
 		$this->_contents = substr($this->_contents, 0, $size);
-
-		return true;
 	}
 
 	/**
 	 * Возвращает содержимое хранилища.
 	 *
-	 * @return  string
+	 * @return string
 	 */
-	function getContents()
-	{
+	public function getContents() {
 		return $this->_contents;
 	}
 }

@@ -250,7 +250,8 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	 */
 	function _isDownloadNeeded()
 	{
-		return is_object($storage =& $this->_getStorage()) && $storage->isDownloadNeeded();
+		return is_object($storage =& $this->_getStorage())
+			&& (!method_exists($storage, 'isDownloadNeeded') || $storage->isDownloadNeeded());
 	}
 
 	/**

@@ -1,19 +1,18 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  storage
- * @version	 $Id$
- */
-/**
- * Хранилище-прокси (как сделаю - опишу).
+ * Хранилище-прокси — выводит сохраняемые данные в браузер.
  *
- * @package	 Splitter
- * @subpackage  storage
- * @see		 Splitter_Storage_Abstract
  */
-class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
-{
+class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
+
+	/**
+	 * Размер сохраняемых данных.
+	 *
+	 * @var integer
+	 */
+	protected $size;
+
 	/**
 	 * Флаг, указывающий, были ли отправлены заголовки HTTP при выдаче ответа.
 	 *
@@ -38,16 +37,21 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 	/**
 	 * Конструктор. Отключает вывод лога в браузер (временно).
 	 *
-	 * @param   string   $target
-	 * @return  Splitter_Storage_Proxy
 	 */
-	function Splitter_Storage_Proxy($target = null)
-	{
-		parent::Splitter_Storage_Abstract($target);
-
+	public function __construct() {
+		$matches = null;
 		$this->_resume = (isset($_SERVER['HTTP_RANGE'])
 			&& preg_match('/bytes=(\d*)\-/', $_SERVER['HTTP_RANGE'], $matches))
 			? (int)$matches[1] : parent::getResumePosition();
+	}
+
+	/**
+	 * Устанавливает размер сохраняемых данных.
+	 * 
+	 * @param integer $size
+	 */
+	public function setSize($size) {
+		$this->size = $size;
 	}
 
 	/**
@@ -150,14 +154,5 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract
 		{
 			header($_SERVER['SERVER_PROTOCOL'] . ' ' . '404 Not Found');
 		}
-	}
-
-	/**
-	 * Возвращает содержимое хранилища.
-	 *
-	 * @return  string
-	 */
-	function getContents() {
-		return false;
 	}
 }

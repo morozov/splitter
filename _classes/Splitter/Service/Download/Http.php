@@ -428,11 +428,12 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 				$this->fireEvent('onProgressChange', $storage->getResumePosition());
 
 				// открываем хранилище
-				if ($storage->open($size))
-				{
-					// сохраняем скачанные данные
-					$this->_store($result, $responseStartPosition, $size);
+				if (method_exists($storage, 'setSize')) {
+					$storage->setSize($size);
 				}
+
+				// сохраняем скачанные данные
+				$this->_store($result, $responseStartPosition, $size);
 			}
 			else
 			{

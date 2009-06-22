@@ -6,20 +6,20 @@
  * @version	 $Id$
  */
 /**
- * Р РµР°Р»РёР·Р°С†РёСЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РґР°РЅРЅС‹С… РЅР° FTP (СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј wrappers).
+ * Реализация сохранения данных на FTP (с использованием wrappers).
  *
  * @package	 Splitter
  * @subpackage  storage.file
  * @see		 abstract_Object
  * @abstract
  */
-class Splitter_Storage_File_Ftp extends Splitter_Storage_File_Abstract
-{
+class Splitter_Storage_File_Ftp extends Splitter_Storage_File_Abstract {
+
 	/**
-	 * Р РµР¶РёРј РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»РѕРІ РґР»СЏ Р·Р°РїРёСЃРё. РџРѕРєР° РїРёС€РµРј РІ С„Р°Р№Р» СЃ СЃР°РјРѕРіРѕ РЅР°С‡Р°Р»Р°, С‚.Рє.
-	 * РѕР±РµСЂС‚РєР°, СЂРµР°Р»РёР·РѕРІР°РЅРЅР°СЏ РІ PHP РЅРµ СЂРµР°Р»РёР·СѓРµС‚ СЂРµР¶РёРјР° "a".
+	 * Режим открытия файлов для записи. Пока пишем в файл с самого начала, т.к.
+	 * обертка, реализованная в PHP не реализует режима "a".
 	 *
-	 * @var	 string
+	 * @var string
 	 */
-	var $FOPEN_MODE = 'wb';
+	protected $fopen_mode = 'wb';
 }

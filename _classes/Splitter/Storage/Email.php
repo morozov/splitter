@@ -1,27 +1,17 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  storage
- * @version	 $Id$
- */
-/**
  * Класс отправки скачанного файла по электронной почте.
  *
- * @access	  public
- * @package	 Splitter
- * @subpackage  storage
- * @see		 Splitter_Storage_File
  */
 class Splitter_Storage_Email extends Splitter_Storage_Ram {
 
 	/**
 	 * Адрес, на который нужно отправить сообщение.
 	 *
-	 * @access  private
-	 * @var	 string
+	 * @var string
 	 */
-	var $_to;
+	protected $to;
 
 	/**
 	 * Означает, что при закрытии была выполнена попытка отправить файл.
@@ -37,25 +27,15 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
-	 * @return  Splitter_Storage_Email
+	 * @param string $to
 	 */
-	public function __construct($target) {
-
-		if (empty($target)) {
-			throw new Splitter_Storage_Exception('Не указан адрес email для отправки');
-		}
-
+	public function __construct($to) {
 		$validator = new Zend_Validate_EmailAddress();
-		if (!$validator->isValid($target)) {
+		if (!$validator->isValid($to)) {
 			$messages = $validator->getMessages();
 			throw new Splitter_Storage_Exception(current($messages));
 		}
-
-		// интерпретируем цель как адрес, на который нужно отправить письмо
-		$this->_to = $target;
-
-		parent::__construct();
+		$this->to = $to;
 	}
 
 	/**
@@ -109,7 +89,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	function _getSucessMessage()
 	{
 		return 'Файл "' . $this->filename . '" успешно отправлен на <a href="mailto:'
-			. $this->_to . '" target="_blank">' . $this->_to . '</a>';
+			. $this->to . '" target="_blank">' . $this->to . '</a>';
 	}
 
 	/**
@@ -135,7 +115,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 		// создаем почтовое сообщение
 		$mail = new Zend_Mail('utf-8');
 		$mail->setFrom($this->_getFrom())
-			->addTo($this->_to)
+			->addTo($this->to)
 			->setSubject($this->_getSubject())
 			->setBodyText($this->_getText());
 		$at = $mail->createAttachment($this->getContents());
