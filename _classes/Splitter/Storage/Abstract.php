@@ -63,10 +63,9 @@ abstract class Splitter_Storage_Abstract {
 		$encoding_from = 'utf-8';
 		$encoding_to = 'windows-1251';
 
-		if (extension_loaded('iconv')) {
-			$string = iconv($encoding_from, $encoding_to, $string);
-		} elseif (extension_loaded('mbstring')) {
-			$string = mb_convert_encoding($string, $encoding_to, $encoding_from);
+		if (extension_loaded('mbstring')
+			&& mb_check_encoding($string, $encoding_from)) {
+				$string = mb_convert_encoding($string, $encoding_to, $encoding_from);
 		}
 
 		return $string;
