@@ -148,7 +148,7 @@ class Splitter_App_ErrorHandler
 
 		// смещение, с которого нужно выводить пути относительно корня
 		// веб-сервера вместо корня файловой системы
-		$offset = strlen(realpath($_SERVER['DOCUMENT_ROOT'])) + 1;
+		$offset = strlen(realpath(dirname($_SERVER['SCRIPT_FILENAME']))) + 1;
 
 		$messages = array();
 
