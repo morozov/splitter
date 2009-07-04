@@ -3,6 +3,7 @@
 /**
  * Класс отправки скачанного файла по электронной почте.
  *
+ * @version $Id$
  */
 class Splitter_Storage_Email extends Splitter_Storage_Ram {
 
@@ -19,8 +20,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 * сообщения в случае, если клиент выполнит close() более одного раза для
 	 * одного файла.
 	 *
-	 * @access  private
-	 * @var	 boolean
+	 * @access private
+	 * @var boolean
 	 */
 	var $_sent = false;
 
@@ -41,9 +42,9 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @access  public
-	 * @param   integer $size
-	 * @return  boolean
+	 * @access public
+	 * @param integer $size
+	 * @return boolean
 	 */
 	function open($size)
 	{
@@ -56,8 +57,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Завершает сохранение данных. �?нициирует отправку почтового сообщения.
 	 *
-	 * @access  protected
-	 * @return  boolean
+	 * @access protected
+	 * @return boolean
 	 */
 	function _close()
 	{
@@ -83,8 +84,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Возвращает сообщение об успешном сохранении данных.
 	 *
-	 * @access  protected
-	 * @return  mixed
+	 * @access protected
+	 * @return mixed
 	 */
 	function _getSucessMessage()
 	{
@@ -95,8 +96,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Отправляет скачанные данные по e-mail.
 	 *
-	 * @access  private
-	 * @return  boolean
+	 * @access private
+	 * @return boolean
 	 */
 	function _send()
 	{
@@ -126,8 +127,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Возвращает тему сообщения.
 	 *
-	 * @access  private
-	 * @return  string
+	 * @access private
+	 * @return string
 	 */
 	function _getSubject()
 	{
@@ -137,8 +138,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Возвращает e-mail отправителя сообщения.
 	 *
-	 * @access  private
-	 * @return  string
+	 * @access private
+	 * @return string
 	 */
 	function _getFrom()
 	{
@@ -148,8 +149,8 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	/**
 	 * Возвращает текст сообщения.
 	 *
-	 * @access  private
-	 * @return  string
+	 * @access private
+	 * @return string
 	 */
 	function _getText()
 	{

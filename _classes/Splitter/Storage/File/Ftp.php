@@ -1,23 +1,15 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  storage
- * @version	 $Id$
- */
-/**
- * Ðåàëèçàöèÿ ñîõðàíåíèÿ äàííûõ íà FTP (ñ èñïîëüçîâàíèåì wrappers).
+ * Ð ÐµÐ°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð½Ð° FTP (Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸ÐµÐ¼ wrappers).
  *
- * @package	 Splitter
- * @subpackage  storage.file
- * @see		 abstract_Object
- * @abstract
+ * @version $Id$
  */
-class Splitter_Storage_File_Ftp extends Splitter_Storage_File_Abstract {
+abstract class Splitter_Storage_File_Ftp extends Splitter_Storage_File_Abstract {
 
 	/**
-	 * Ðåæèì îòêðûòèÿ ôàéëîâ äëÿ çàïèñè. Ïîêà ïèøåì â ôàéë ñ ñàìîãî íà÷àëà, ò.ê.
-	 * îáåðòêà, ðåàëèçîâàííàÿ â PHP íå ðåàëèçóåò ðåæèìà "a".
+	 * Ð ÐµÐ¶Ð¸Ð¼ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð´Ð»Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸. ÐŸÐ¾ÐºÐ° Ð¿Ð¸ÑˆÐµÐ¼ Ð² Ñ„Ð°Ð¹Ð» Ñ ÑÐ°Ð¼Ð¾Ð³Ð¾ Ð½Ð°Ñ‡Ð°Ð»Ð°, Ñ‚.Ðº.
+	 * Ð¾Ð±ÐµÑ€Ñ‚ÐºÐ°, Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð½Ð°Ñ Ð² PHP Ð½Ðµ Ñ€ÐµÐ°Ð»Ð¸Ð·ÑƒÐµÑ‚ Ñ€ÐµÐ¶Ð¸Ð¼Ð° "a".
 	 *
 	 * @var string
 	 */

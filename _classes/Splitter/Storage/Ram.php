@@ -3,20 +3,21 @@
 /**
  * Класс объектов, сохраняющий скачанный файл в оперативной памяти.
  *
+ * @version $Id$
  */
 class Splitter_Storage_Ram extends Splitter_Storage_Abstract {
 
 	/**
 	 * Содержимое, записанное в хранилище.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_contents = '';
 
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	public function getResumePosition() {
 		return strlen($this->_contents);

@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  response
- * @version	 $Id$
- */
-/**
  * Класс ответа приложения для режима прокси. Заглушка.
  *
- * @package	 Splitter
- * @subpackage  response
- * @see		 Splitter_Response_Abstract
+ * @version $Id$
  */
 class Splitter_Response_Proxy extends Splitter_Response_Abstract
 {
@@ -29,7 +22,7 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
-	 * @param   string   $method   Наименование метода
+	 * @param string   $method   Наименование метода
 	 */
 	function call($method)
 	{
@@ -38,8 +31,8 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	/**
 	 * Выводит сообщение в журнал.
 	 *
-	 * @param   string  $message
-	 * @param   string  $type
+	 * @param string  $message
+	 * @param string  $type
 	 */
 	function write($message, $type = 'info')
 	{
@@ -51,7 +44,7 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	/**
 	 * Регистрирует ошибку вызвавшую завершение приложения.
 	 *
-	 * @param   string  $message
+	 * @param string  $message
 	 */
 	function error($message)
 	{
@@ -61,8 +54,8 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	/**
 	 * Обрезает строку до первого перевода строки.
 	 *
-	 * @param   string  string
-	 * @return  string
+	 * @param string  string
+	 * @return string
 	 */
 	function _truncate($string)
 	{

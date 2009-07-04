@@ -1,26 +1,19 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  connection
- * @version	 $Id$
- */
-/**
  * Класс HTTP-запроса.
  * Интерфейс - аналогичен XMLHttpRequest или Microsoft.XMLHTTP за той разницей,
  * что вместо синхронного/aсинхронного запроса используется получение ответа
  * сервера целиком (после завершения соединения) или чтение данных из потока.
  *
- * @package	 Splitter
- * @subpackage  connection
- * @see		 Splitter_Connection_Abstract
+ * @version $Id$
  */
 class Splitter_Connection_Http extends Splitter_Connection_Abstract
 {
 	/**
 	 * Порт соединения по умолчанию.
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $DEFAULT_PORT = 80;
 
@@ -32,43 +25,43 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 *
 	 *:TODO: morozov 19012006: Разобраться с HTTP 1.1, читать про chunks.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REQUEST_PROTOCOL = 'HTTP/1.0';
 
 	/**
 	 * Метод запроса (HEAD, GET, POST, etc.).
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_method;
 
 	/**
 	 * Ассоциативный массив заголовков запроса.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_requestHeaders = array();
 
 	/**
 	 * Ассоциативный массив заголовков ответа.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_responseHeaders = array();
 
 	/**
 	 * Текст ответа.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_responseText;
 
 	/**
 	 * Открывает соединение с сервером.
 	 *
-	 * @param   string   $method
-	 * @param   string   $url
+	 * @param string   $method
+	 * @param string   $url
 	 */
 	function open($method, $url)
 	{
@@ -83,7 +76,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос серверу.
 	 *
-	 * @param   string   $body  - Тело запроса
+	 * @param string   $body  - Тело запроса
 	 */
 	function send($body = null)
 	{
@@ -118,10 +111,10 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Возвращает указанный заголовок ответа сервера в полной или краткой форме.
 	 *
-	 * @access  public
-	 * @param   string   $param
-	 * @param   boolean  $complete
-	 * @return  string
+	 * @access public
+	 * @param string   $param
+	 * @param boolean  $complete
+	 * @return string
 	 */
 	function getResponseHeader($param, $complete = true)
 	{
@@ -135,8 +128,8 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Возвращает все заголовки ответа сервера.
 	 *
-	 * @access  public
-	 * @return  array
+	 * @access public
+	 * @return array
 	 */
 	function getAllResponseHeaders()
 	{
@@ -146,9 +139,9 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Устанавливает заголовок запроса к серверу.
 	 *
-	 * @access  public
-	 * @param   string   $param
-	 * @param   string   $value
+	 * @access public
+	 * @param string   $param
+	 * @param string   $value
 	 */
 	function setRequestHeader($param, $value)
 	{
@@ -159,8 +152,8 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Перекрывает метод предка и возвращает управляющий сокет, т.к. в HTTP
 	 * управление и передача данных осуществляются вместе.
 	 *
-	 * @access  public
-	 * @return  Socket
+	 * @access public
+	 * @return Socket
 	 */
 	function getDataSocket()
 	{
@@ -170,7 +163,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Устанавливает заголовки запроса в значения по умолчанию.
 	 *
-	 * @access  protected
+	 * @access protected
 	 */
 	function _onAfterConnect()
 	{
@@ -188,10 +181,10 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Возвращает значение элемента массива с указанным ключом.
 	 * Нечувствителен к регистру.
 	 *
-	 * @access  private
-	 * @param   array	$searchArray
-	 * @param   string   $searchKey
-	 * @return  string
+	 * @access private
+	 * @param array	$searchArray
+	 * @param string   $searchKey
+	 * @return string
 	 */
 	function _getArrayElement($searchArray, $searchKey)
 	{
@@ -212,11 +205,11 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Устанавливает значение элемента массива с указанным ключом.
 	 * Нечувствителен к регистру.
 	 *
-	 * @access  private
-	 * @param   array	$searchArray
-	 * @param   string   $searchKey
-	 * @param   string   $value
-	 * @return  string
+	 * @access private
+	 * @param array	$searchArray
+	 * @param string   $searchKey
+	 * @param string   $value
+	 * @return string
 	 */
 	function _setArrayElement(&$searchArray, $searchKey, $value)
 	{
@@ -238,7 +231,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Разбирает текст заголовков ответа сервера.
 	 *
-	 * @access  private
+	 * @access private
 	 */
 	function _parseHeaders($headers)
 	{
@@ -300,7 +293,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Читает заголовки ответа сервера.
 	 *
-	 * @access  private
+	 * @access private
 	 */
 	function _readHeaders()
 	{
@@ -332,7 +325,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет заголовки запроса.
 	 *
-	 * @access  private
+	 * @access private
 	 */
 	function _sendHeaders()
 	{

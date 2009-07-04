@@ -3,24 +3,17 @@
 require_once 'html/htmlparser.inc.php';
 
 /**
- * @package	 Splitter
- * @subpackage  share.parser
- * @version	 $Id$
- */
-/**
  * Выполняет разбор содержимого указанного ресурса.
  *
- * @package	 Splitter
- * @subpackage  share.parser
- * @see		 abstract_Object
+ * @version $Id$
  */
 abstract class Splitter_Share_Parser_Abstract
 {
 	/**
 	 * Возвращает параметры страницы, соответствующей указанному ресурсу.
 	 *
-	 * @param   array   $params   Параметры запуска
-	 * @return  string
+	 * @param array   $params   Параметры запуска
+	 * @return string
 	 */
 	function parse(&$url, $params = array())
 	{
@@ -39,7 +32,7 @@ abstract class Splitter_Share_Parser_Abstract
 
 
 
-	 * @return  string
+	 * @return string
 	 */
 	function _getElementAttribute($contents, $tagName, $attribute, $callback = null)
 	{
@@ -68,9 +61,9 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Формирует полный адрес из ссылающегося и относительного.
 	 *
-	 * @param   Lib_Url $referer
-	 * @param   string $relative
-	 * @return  string
+	 * @param Lib_Url $referer
+	 * @param string $relative
+	 * @return string
 	 */
 	function _getFullUrl(&$referer, $relative)
 	{
@@ -86,7 +79,7 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Возвращает параметры запроса по умолчанию.
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function _getRequestParams()
 	{
@@ -96,17 +89,17 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Выполняет разбор содержимого страницы.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   string $contents
-	 * @return  array
+	 * @param Lib_Url $url
+	 * @param string $contents
+	 * @return array
 	 */
 	abstract function _parse(&$url, $contents);
 
 	/**
 	 * Генерирует ошибку разбора.
 	 *
-	 * @param   string $error
-	 * @param   string $contents
+	 * @param string $error
+	 * @param string $contents
 	 */
 	function _throw($error, $contents)
 	{
@@ -118,7 +111,7 @@ abstract class Splitter_Share_Parser_Abstract
 	/**
 	 * Записывает отладочную информацию в файл.
 	 *
-	 * @param   string $string
+	 * @param string $string
 	 */
 	function _debug($string)
 	{

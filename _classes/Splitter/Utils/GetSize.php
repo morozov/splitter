@@ -1,24 +1,17 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Утилита получения размера файла.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Utils_GetSize
 {
 	/**
 	 * Возвращает размера файла.
 	 *
-	 * @param   Lib_Url $url
-	 * @return  integer
+	 * @param Lib_Url $url
+	 * @return integer
 	 */
 	function getSize(&$url)
 	{

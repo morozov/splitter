@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  response
- * @version	 $Id$
- */
-/**
  * Класс ответа приложения для веб-интерфейса.
  *
- * @package	 Splitter
- * @subpackage  response
- * @see		 Splitter_Response_Abstract
+ * @version $Id$
  */
 class Splitter_Response_Web extends Splitter_Response_Abstract {
 
@@ -42,7 +35,7 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
-	 * @param   string   $method   Наименование метода
+	 * @param string   $method   Наименование метода
 	 */
 	function call($method) {
 		$args = array();
@@ -60,8 +53,8 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	/**
 	 * Выводит сообщение в журнал.
 	 *
-	 * @param   string  $message
-	 * @param   string  $type
+	 * @param string  $message
+	 * @param string  $type
 	 */
 	function write($message, $type = 'info') {
 		// разбиваем сообщение на строки
@@ -71,7 +64,7 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	/**
 	 * Выводит строку.
 	 *
-	 * @param   string $string
+	 * @param string $string
 	 */
 	function _write($string) {
 		echo $string;

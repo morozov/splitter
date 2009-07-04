@@ -1,49 +1,43 @@
 <?php
 
-// размер буфера чтения из сокета
-define('SOCKET_READ_BUFFER', 8192);
-
-/**
- * @package	 Splitter
- * @subpackage  service.download
- * @version	 $Id$
- */
 /**
  * Базовый класс реализаций сервиса скачивания файлов.
  *
- * @package	 Splitter
- * @subpackage  service.download
- * @see		 Splitter_Service_Abstract
- * @abstract
+ * @version $Id$
  */
 abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstract
 {
 	/**
+	 * Размер буфера чтения из сокета.
+	 */
+	const BUFFER_SIZE = 8192;
+
+	/**
 	 * Интервал времени, через который клиенту отдаются сообщения о прогрессе
 	 * при скачивании файла (в секундах).
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $PROGRESS_TRACE_INTERVAL = 3;
 
 	/**
 	 * Объект соединения с сервером.
 	 *
-	 * @var	 Splitter_Connection_Abstract
+	 * @var Splitter_Connection_Abstract
 	 */
 	var $_conn;
 
 	/**
 	 * Объект сохраняющий скачанные данные.
 	 *
-	 * @var	 Splitter_Storage_Abstract
+	 * @var Splitter_Storage_Abstract
 	 */
 	var $_storage;
 
 	/**
 	 * Конструктор.
 	 *
-	 * @return  Splitter_Service_Download_Abstract
+	 * @return Splitter_Service_Download_Abstract
 	 */
 	function Splitter_Service_Download_Abstract()
 	{
@@ -55,11 +49,11 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Запускает скачивание файла.
 	 *
-	 * @param   array   $params   Параметры запуска
-	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
+	 * @param array   $params   Параметры запуска
+	 * @param array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
 	 *							при внутреннем перезапуске сервиса)
-	 * @return  ArrayObject
+	 * @return ArrayObject
 	 */
 	function run($params, $reset = true)
 	{
@@ -78,7 +72,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает имя, под которым будет сохранен скачиваемый файл.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getFileName()
 	{
@@ -128,9 +122,9 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Пишет данные из ответа серера в хранилище.
 	 *
-	 * @param   ArrayObject $result
-	 * @param   integer $position
-	 * @param   integer $size
+	 * @param ArrayObject $result
+	 * @param integer $position
+	 * @param integer $size
 	 */
 	function _store(&$result, $position, $size)
 	{
@@ -159,7 +153,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 		while (!$socket->eof())
 		{
 			// читаем данные из сокета
-			$data = $socket->read(SOCKET_READ_BUFFER);
+			$data = $socket->read(self::BUFFER_SIZE);
 
 			// пытаемся записать данные в хранилище
 			if ($storage->write($data))
@@ -213,7 +207,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает имя скачиваемого файла, определенное из URL, декодирует.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getFileNameFromUrl()
 	{
@@ -226,7 +220,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает URL скачиваемого файла в виде объекта.
 	 *
-	 * @return  Url
+	 * @return Url
 	 */
 	function _getUrl()
 	{
@@ -239,7 +233,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает объект Storage.
 	 *
-	 * @return  splitter_storage_Abstract
+	 * @return splitter_storage_Abstract
 	 */
 	function _getStorage()
 	{
@@ -251,7 +245,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает нужно ли сохранять данные файла в хранилище.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _isDownloadNeeded()
 	{
@@ -262,7 +256,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	/**
 	 * Возвращает наименование класса используемого соединения.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	abstract function _getConnectionClassName();
 }

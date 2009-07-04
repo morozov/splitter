@@ -1,37 +1,30 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  app
- * @version	 $Id$
- */
-/**
  * Контекст приложения. Контейнер объектов-синглтонов.
  *
- * @package	 Splitter
- * @subpackage  app
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_App_Context
 {
 	/**
 	 * Массив наименований классов объектов контекста приложения.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_classes = array();
 
 	/**
 	 * Массив именованных объектов контекста приложения.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_objects = array();
 
 	/**
 	 * Конструктор. Cоздает объекты запроса, ответа и сессии.
 	 *
-	 * @return  Splitter_App_Context
+	 * @return Splitter_App_Context
 	 */
 	function Splitter_App_Context($classes)
 	{
@@ -41,7 +34,7 @@ class Splitter_App_Context
 	/**
 	 * Возвращает именованный объект контекста приложения.
 	 *
-	 * @return  abstract_Object
+	 * @return abstract_Object
 	 */
 	function getObject($name)
 	{
@@ -56,7 +49,7 @@ class Splitter_App_Context
 	/**
 	 * Создает именованный объект.
 	 *
-	 * @return  BaseObject
+	 * @return BaseObject
 	 */
 	function _createObject($name)
 	{

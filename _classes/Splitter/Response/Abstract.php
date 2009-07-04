@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  response
- * @version	 $Id$
- */
-/**
  * Класс ответа приложения.
  *
- * @package	 Splitter
- * @subpackage  app
- * @see		 abstract_Object
+ * @version $Id$
  */
 abstract class Splitter_Response_Abstract
 {
@@ -18,22 +11,22 @@ abstract class Splitter_Response_Abstract
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
-	 * @param   string   $method   Наименование метода
+	 * @param string   $method   Наименование метода
 	 */
 	abstract function call($method);
 
 	/**
 	 * Выводит сообщение в журнал.
 	 *
-	 * @param   string  $message
-	 * @param   string  $type
+	 * @param string  $message
+	 * @param string  $type
 	 */
 	abstract function write($message, $type = 'info');
 
 	/**
 	 * Регистрирует ошибку вызвавшую завершение приложения.
 	 *
-	 * @param   string  $message
+	 * @param string  $message
 	 */
 	function error($message) { }
 

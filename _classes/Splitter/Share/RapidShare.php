@@ -1,30 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  share
- * @version	 $Id$
- */
-/**
  * Обработчик закачек с файловых серверов www.rapidshare.com и www.rapidshare.de
  *
- * @package	 Splitter
- * @subpackage  share
- * @see		 Splitter_Share_Abstract
+ * @version $Id$
  */
 class Splitter_Share_RapidShare extends Splitter_Share_Abstract
 {
 	/**
 	 * Наименование поля формы, в которое пользователь вводит текст на картинке.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $CAPTCHA_FIELD = 'captcha';
 
 	/**
 	 * Массив парсеров, обрабатывающих закачку.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $PARSERS = array
 	(
@@ -36,9 +29,9 @@ class Splitter_Share_RapidShare extends Splitter_Share_Abstract
 	 * Возвращает, могут ли указанные URL и метод запроса быть обработаны
 	 * с помощью данного компонента.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   string $method
-	 * @return  boolean
+	 * @param Lib_Url $url
+	 * @param string $method
+	 * @return boolean
 	 */
 	function canProcess(&$url, $method)
 	{
@@ -54,7 +47,7 @@ class Splitter_Share_RapidShare extends Splitter_Share_Abstract
 	/**
 	 * Обрабатывает указанный URL.
 	 *
-	 * @param   Lib_Url $url
+	 * @param Lib_Url $url
 	 */
 	function process(&$url, $params = array())
 	{
@@ -88,7 +81,7 @@ class Splitter_Share_RapidShare extends Splitter_Share_Abstract
 	/**
 	 * Выводит результат разбора в форму.
 	 *
-	 * @param   array $params
+	 * @param array $params
 	 */
 	function _output($params)
 	{

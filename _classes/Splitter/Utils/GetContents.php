@@ -1,25 +1,18 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Утилита получения содержимого ресурса с указанными параметрами.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Utils_GetContents
 {
 	/**
 	 * Возвращает содержимое ресурса.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   array   $params   Параметры запуска
-	 * @return  string
+	 * @param Lib_Url $url
+	 * @param array   $params   Параметры запуска
+	 * @return string
 	 */
 	function getContents(&$url, $params = array())
 	{

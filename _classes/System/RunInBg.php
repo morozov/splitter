@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  System
- * @version	 $Id$
- */
-/**
  * Перезапускает процесс с текущими параметрами в фоне.
  *
- * @package	 Splitter
- * @subpackage  System
- * @see		 abstract_Object
+ * @version $Id$
  */
 class System_RunInBg
 {
@@ -18,7 +11,7 @@ class System_RunInBg
 	 * Массив параметров запроса, которые не должны быть переданы в фоновый
 	 * процесс.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $PARAMETERS_TO_EXCLUDE = array('in-background');
 
@@ -26,7 +19,7 @@ class System_RunInBg
 	 * Перезапускает процесс в фоне. Возвращает идентификатор процесса или
 	 * FALSE в случае неудачи.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	function run()
 	{
@@ -37,7 +30,7 @@ class System_RunInBg
 	/**
 	 * Возвращает строку аргументов для запуска скрипта.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getArgs()
 	{
@@ -65,7 +58,7 @@ class System_RunInBg
 	/**
 	 * Возвращает объект-реализацию запуска фонового процесса.
 	 *
-	 * @return  System_Run_Abstract
+	 * @return System_Run_Abstract
 	 */
 	function _getImplementation()
 	{

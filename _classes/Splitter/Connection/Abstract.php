@@ -1,17 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  connection
- * @version	 $Id$
- */
-/**
  * Базовый класс соединений.
  *
- * @package	 Splitter
- * @subpackage  connection
- * @see		 abstract_Object
- * @abstract
+ * @version $Id$
  */
 abstract class Splitter_Connection_Abstract {
 
@@ -23,49 +15,49 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Порт соединения по умолчанию.
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $DEFAULT_PORT = null;
 
 	/**
 	 * Числовое представление статуса ответа.
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $_status;
 
 	/**
 	 * Строковое представление статуса ответа.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_statusText;
 
 	/**
 	 * Сокет управления соединением.
 	 *
-	 * @var	 Socket
+	 * @var Socket
 	 */
 	var $_controlSocket;
 
 	/**
 	 * Сокет передачи данных.
 	 *
-	 * @var	 Socket
+	 * @var Socket
 	 */
 	var $_dataSocket;
 
 	/**
 	 * Объект URL.
 	 *
-	 * @var	 Url
+	 * @var Url
 	 */
 	var $_url;
 
 	/**
 	 * Возвращает управляющий сокет.
 	 *
-	 * @return  Socket
+	 * @return Socket
 	 */
 	function getControlSocket()
 	{
@@ -75,7 +67,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Возвращает сокет данных.
 	 *
-	 * @return  Socket
+	 * @return Socket
 	 */
 	function getDataSocket()
 	{
@@ -85,7 +77,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Возвращает числовое представление статуса ответа сервера.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	function getStatus()
 	{
@@ -95,7 +87,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Возвращает строковое представление статуса ответа сервера.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getStatusText()
 	{
@@ -132,7 +124,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Пытается открыть соединение с сервером, возвращает результат попытки.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _connect($url)
 	{
@@ -162,7 +154,7 @@ abstract class Splitter_Connection_Abstract {
 	 * Выполняет некоторые действия сразу после установки соединения.
 	 * Возвращает, успешно были ли выполнены действия.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _onAfterConnect()
 	{
@@ -172,9 +164,9 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Открывает сокет на указанный хост и порт.
 	 *
-	 * @param   string   $host
-	 * @param   integer  $port
-	 * @return  Socket
+	 * @param string   $host
+	 * @param integer  $port
+	 * @return Socket
 	 */
 	function _createSocket($host, $port)
 	{
@@ -201,7 +193,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Возвращает, установлено ли соединение с сервером.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _isConnected()
 	{
@@ -239,8 +231,8 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Пишет строку в сокет соединения.
 	 *
-	 * @param   string   $string
-	 * @return  boolean
+	 * @param string   $string
+	 * @return boolean
 	 */
 	function _write($string)
 	{
@@ -250,8 +242,8 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Пишет строку в сокет соединения. Добавляет символ перевода строки.
 	 *
-	 * @param   string   $string
-	 * @return  boolean
+	 * @param string   $string
+	 * @return boolean
 	 */
 	function _writeln($string)
 	{

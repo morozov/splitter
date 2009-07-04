@@ -1,30 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Выполняет разбор содержимого указанного ресурса. Второй шаг.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 {
 	/**
 	 * Шаблон регулярного выражения поиска закодированного текста HTML.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_ESCAPED_HTML = "/var tt = '([^']+)'/i";
 
 	/**
 	 * Возвращает дополнительные параметры ресурса
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function _getRequestParams()
 	{
@@ -38,9 +31,9 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Выполняет разбор содержимого страницы.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   string $contents
-	 * @return  array
+	 * @param Lib_Url $url
+	 * @param string $contents
+	 * @return array
 	 */
 	function _parse(&$url, $contents)
 	{
@@ -93,8 +86,8 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	 * Пытается определить закодированный кусок HTML, который появляется после
 	 * того, как отработает таймер.
 	 *
-	 * @param   string $text
-	 * @return  string
+	 * @param string $text
+	 * @return string
 	 */
 	function _getResponseHtml($contents)
 	{
@@ -105,8 +98,8 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Пытается определить время, на которое запущен javascript-счетчик на странице.
 	 *
-	 * @param   string $contents
-	 * @return  integer
+	 * @param string $contents
+	 * @return integer
 	 */
 	function _getCounterTime($contents)
 	{
@@ -117,8 +110,8 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	/**
 	 * Пытается прочитать сообщение о том, что файл удвлен с сервера.
 	 *
-	 * @param   string $contents
-	 * @return  boolean
+	 * @param string $contents
+	 * @return boolean
 	 */
 	function _isFileDeleted($contents)
 	{
@@ -129,8 +122,8 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	 * Пытается прочитать сообщение о том, что файл скачивают слишком много
 	 * пользователей.
 	 *
-	 * @param   string $contents
-	 * @return  boolean
+	 * @param string $contents
+	 * @return boolean
 	 */
 	function _isTooManyUsers($contents)
 	{

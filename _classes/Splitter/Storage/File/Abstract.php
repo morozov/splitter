@@ -3,6 +3,7 @@
 /**
  * Базовый класс реализация сохранения даннвх в файл.
  *
+ * @version $Id$
  */
 abstract class Splitter_Storage_File_Abstract {
 

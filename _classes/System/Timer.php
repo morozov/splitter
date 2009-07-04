@@ -1,24 +1,16 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  System
- * @version	 $Id$
- */
-/**
  * Системный таймер.
  *
- * @version	 $Id$
- * @package	 Splitter
- * @subpackage  System
- * @see		 abstract_Object
+ * @version $Id$
  */
 class System_Timer
 {
 	/**
 	 * Временная метка начала работы таймера.
 	 *
-	 * @var	 float
+	 * @var float
 
 	 */
 	var $_startTime = 0;
@@ -26,7 +18,7 @@ class System_Timer
 	/**
 	 * Временная метка окончания работы таймера.
 	 *
-	 * @var	 float
+	 * @var float
 
 	 */
 	var $_endTime = 0;
@@ -34,7 +26,7 @@ class System_Timer
 	/**
 	 * Конструктор. Автоматически инициализирует запуск.
 	 *
-	 * @param   boolean  $autoStart
+	 * @param boolean  $autoStart
 	 */
 	function System_Timer($autoStart = true)
 	{
@@ -68,7 +60,7 @@ class System_Timer
 	 * меткой или остановкой в зависимости от того, запущен в данный момент
 	 * таймер или нет соответственно.
 	 *
-	 * @return  float
+	 * @return float
 	 */
 	function getTime()
 	{
@@ -79,7 +71,7 @@ class System_Timer
 	/**
 	 * Возвращет текущую временную метку в микросекундах.
 	 *
-	 * @return  float
+	 * @return float
 	 */
 	function _getMicroTime()
 	{

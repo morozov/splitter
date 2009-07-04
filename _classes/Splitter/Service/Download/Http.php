@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  service.download
- * @version	 $Id$
- */
-/**
  * Сервис скачивания файла по протоколу HTTP.
  *
- * @package	 Splitter
- * @subpackage  service.download
- * @see		 Splitter_Service_Download_Abstract
+ * @version $Id$
  */
 class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 {
@@ -18,7 +11,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Массив наименований заголовков ответа и директив, из которых можно
 	 * получить имя скачиваемого файла.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $FILENAME_SOURCE_HEADERS = array
 	(
@@ -30,7 +23,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Шаблон шаблона регулярного выражения для определения значения директивы
 	 * заголовка. Да, да. именно шаблон шаблона, см. реализацию.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_HEADER_DIRECTIVE = '/%s\s*=\s*(?(?=")"([^"]*)|([^;]*))/i';
 
@@ -38,7 +31,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Шаблон регулярного выражения для определения длины файла из заголовка
 	 * Content-Length
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_CONTENT_LENGTH = '|(\d+)|';
 
@@ -46,7 +39,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Шаблон регулярного выражения для определения диапазона данных и длины
 	 * файла из заголовка Content-Range
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_CONTENT_RANGE = '|bytes\s+(\d*)\-((\d*)(/(\d*))?)?$|';
 
@@ -54,19 +47,19 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Имя файла по умолчанию. используется, если не удалось определить ни
 	 * одним из доступных способов.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $DEFAULT_FILENAME = 'noname.html';
 
 	/**
 	 * Запускает скачивание файла по протоколу HTTP.
 	 *
-	 * @param   array   $params   Параметры запуска
-	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
+	 * @param array   $params   Параметры запуска
+	 * @param array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
 	 *							при внутреннем перезапуске сервиса)
-	 * @return  Lib_ArrayObject
-	 * @see	 Splitter_Service_Download_Abstract::run
+	 * @return Lib_ArrayObject
+	 * @see Splitter_Service_Download_Abstract::run
 	 */
 	function run($params, $reset = true)
 	{
@@ -105,7 +98,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает имя, под которым будет сохранен скачиваемый файл.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getFileName()
 	{
@@ -122,7 +115,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает наименование класса используемого соединения.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getConnectionClassName()
 	{
@@ -132,7 +125,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает метод запроса, полученный из параметров запуска приложения.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getRequestMethod()
 	{
@@ -143,7 +136,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает размер скачиваемого файла.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	function _getFileSize()
 	{
@@ -182,7 +175,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Проверяет статус ответа сервера на соответствие 2xx (Client request
 	 * successful).
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _checkStatus()
 	{
@@ -192,7 +185,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает значение начала диапазона файла, который отдает сервер.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	function _getResponseStartPosition()
 	{
@@ -347,7 +340,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Выполняет действия после того, как получен ответ сервера.
 	 *
-	 * @param   ArrayObject  $result
+	 * @param ArrayObject  $result
 	 */
 	function _processResponse(&$result)
 	{
@@ -458,7 +451,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает имя скачиваемого файла, определенное из ответа сервера.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getFileNameFromResponse()
 	{
@@ -497,7 +490,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Возвращает значение директивы заголовка или NULL, если заголовок или
 	 * директива не существуют.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getHeaderDirective($headerName, $directiveName)
 	{
@@ -520,7 +513,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 * Обрабатывает заголовок Location. Возвращает TRUE в случае, если получено
 	 * перенаправление.
 	 *
-	 * @return  Url
+	 * @return Url
 	 */
 	function _getRedirectUrl()
 	{
@@ -544,7 +537,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает, являются ли данные в ответе сервера текстом HTML.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _isHtml()
 	{

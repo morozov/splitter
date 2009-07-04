@@ -1,17 +1,10 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  request
- * @version	 $Id$
- */
-/**
  * Объект запроса. Поднимает параметры из аргументов командной строки.
  * Формат параметров: -param1 value1 -param2 -param3 value3
  *
- * @package	 Splitter
- * @subpackage  request
- * @see		 Splitter_abstract_Request
+ * @version $Id$
  */
 class Splitter_Request_Cli extends Splitter_Request_Abstract
 {
@@ -56,8 +49,8 @@ class Splitter_Request_Cli extends Splitter_Request_Abstract
 	/**
 	 * Возвращает, является ли указанный аргумент наименованием параметра.
 	 *
-	 * @param   string   $arg
-	 * @return  boolean
+	 * @param string   $arg
+	 * @return boolean
 	 */
 	function _isParamName($arg)
 	{

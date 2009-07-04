@@ -49,7 +49,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 	 * Преобразует путь в соответствии со спецификой конкретной реализации.
 	 *
 	 * @param string  $path
-	 * @return  string
+	 * @return string
 	 */
 	public function transformPath($path) {
 
@@ -69,7 +69,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 	 * Проверяет, существует ли директория с указанным путем, и в случае, если нет,
 	 * пытается ее создать. Возвращает результат (существует или создана).
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	private function mkdir($path) {
 
@@ -91,7 +91,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 	 * Возвращает пути директорий, которые нужно создать.
 	 *
 	 * @param array $sections
-	 * @return  array
+	 * @return array
 	 */
 	private function getPathsToCreate($sections) {
 		$result = array();

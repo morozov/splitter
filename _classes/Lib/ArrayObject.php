@@ -1,30 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  Lib
- * @version	 $Id$
- */
-/**
  * Объектная обертка для массивов.
  *
- * @package	 Splitter
- * @subpackage  Lib
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Lib_ArrayObject
 {
 	/**
 	 * Массив элементов массива.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_array = array();
 
 	/**
 	 * Конструктор.
 	 *
-	 * @param   array   $array
+	 * @param array   $array
 	 */
 	function Lib_ArrayObject($array = array())
 	{
@@ -34,7 +27,7 @@ class Lib_ArrayObject
 	/**
 	 * Добавляет элемент в массив по значению.
 	 *
-	 * @param   mixed   $value
+	 * @param mixed   $value
 	 */
 	function append($value)
 	{
@@ -44,7 +37,7 @@ class Lib_ArrayObject
 	/**
 	 * Возвращает количество элементов массива.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	function count()
 	{
@@ -54,8 +47,8 @@ class Lib_ArrayObject
 	/**
 	 * Возвращает существует ли в массиве элемент с указанным индексом.
 	 *
-	 * @param   mixed	$index
-	 * @return  boolean
+	 * @param mixed	$index
+	 * @return boolean
 	 */
 	function offsetExists($index)
 	{
@@ -66,8 +59,8 @@ class Lib_ArrayObject
 	 * Возвращает значение элемента массива с указанным индексом или FALSE,
 	 * если элемент не существует.
 	 *
-	 * @param   mixed	$index
-	 * @return  mixed
+	 * @param mixed	$index
+	 * @return mixed
 	 */
 	function offsetGet($index)
 	{
@@ -78,8 +71,8 @@ class Lib_ArrayObject
 	/**
 	 * Устанавливает значение элемента массива с указанным индексом.
 	 *
-	 * @param   mixed	$index
-	 * @param   mixed	$value
+	 * @param mixed	$index
+	 * @param mixed	$value
 	 */
 	function offsetSet($index, $value)
 	{
@@ -89,7 +82,7 @@ class Lib_ArrayObject
 	/**
 	 * Удаляет элемента массива с указанным индексом.
 	 *
-	 * @param   mixed	$index
+	 * @param mixed	$index
 	 */
 	function offsetUnset($index)
 	{

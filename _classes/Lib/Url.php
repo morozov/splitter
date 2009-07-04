@@ -1,23 +1,16 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  Lib
- * @version	 $Id$
- */
-/**
  * Объектная обертка для parse_url.
  *
- * @package	 Splitter
- * @subpackage  Lib
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Lib_Url
 {
 	/**
 	 * Шаблон регулярного выражения для разбора строки в объект.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	//							 /	2	\	  /  4  \   / 6\	 /	7	\   /  9  \   /   11   \   / 13 \	 /15\
 	var $REGEXP_PARSE_STRING = '|^(([a-z0-9]+)://)?(([^:]*)(\:(.*))?@)?([\w\-\.]+)(\:([^/]*))?((/[^\?#]*)(\?([^#]*))?(#(.*))?)?$|i';
@@ -25,70 +18,70 @@ class Lib_Url
 	/**
 	 * Шаблон регулярного выражения определения полного URL.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_URL_FULL = '|^[a-z0-9]+://|i';
 
 	/**
 	 * Шаблон регулярного выражения определения абсолютного URL.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_URL_ABSOLUTE = '|^/|i';
 
 	/**
 	 * Схема.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_scheme;
 
 	/**
 	 * Хост.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_host;
 
 	/**
 	 * Порт.
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $_port;
 
 	/**
 	 * Имя пользователя.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_userName;
 
 	/**
 	 * Пароль.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_password;
 
 	/**
 	 * Путь.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_path;
 
 	/**
 	 * Строка запроса.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_query;
 
 	/**
 	 * Фрагмент (якорь).
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_fragment;
 
@@ -96,8 +89,8 @@ class Lib_Url
 	 * Конструктор. инициализирует разбор строки, переданной в качестве
 	 * аргумента.
 	 *
-	 * @param   string $string
-	 * @return  Url
+	 * @param string $string
+	 * @return Url
 	 */
 	function Lib_Url($string = '')
 	{
@@ -108,8 +101,8 @@ class Lib_Url
 	 * Возвращает схему. В случае, если URL не содержит схемы, возвращает
 	 * указанное значение по умолчанию.
 	 *
-	 * @param   string $default
-	 * @return  string
+	 * @param string $default
+	 * @return string
 	 */
 	function getScheme($default = null)
 	{
@@ -119,7 +112,7 @@ class Lib_Url
 	/**
 	 * Устанавливает схему.
 	 *
-	 * @param   string   $scheme
+	 * @param string   $scheme
 	 */
 	function setScheme($scheme)
 	{
@@ -129,7 +122,7 @@ class Lib_Url
 	/**
 	 * Возвращает имя пользователя.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getUserName()
 	{
@@ -139,7 +132,7 @@ class Lib_Url
 	/**
 	 * Устанавливает имя пользователя.
 	 *
-	 * @param   string   $userName
+	 * @param string   $userName
 	 */
 	function setUserName($userName)
 	{
@@ -149,7 +142,7 @@ class Lib_Url
 	/**
 	 * Возвращает пароль.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getPassword()
 	{
@@ -159,7 +152,7 @@ class Lib_Url
 	/**
 	 * Устанавливает пароль.
 	 *
-	 * @param   string   $password
+	 * @param string   $password
 	 */
 	function setPassword($password)
 	{
@@ -169,7 +162,7 @@ class Lib_Url
 	/**
 	 * Возвращает хост.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getHost()
 	{
@@ -179,7 +172,7 @@ class Lib_Url
 	/**
 	 * Устанавливает хост.
 	 *
-	 * @param   string   $host
+	 * @param string   $host
 	 */
 	function setHost($host)
 	{
@@ -190,8 +183,8 @@ class Lib_Url
 	 * Возвращает порт. В случае, если URL не содержит порта, возвращает
 	 * указанное значение по умолчанию.
 	 *
-	 * @param   integer  $default
-	 * @return  string
+	 * @param integer  $default
+	 * @return string
 	 */
 	function getPort($default = null)
 	{
@@ -201,7 +194,7 @@ class Lib_Url
 	/**
 	 * Устанавливает порт.
 	 *
-	 * @param   integer  $port
+	 * @param integer  $port
 	 */
 	function setPort($port)
 	{
@@ -211,7 +204,7 @@ class Lib_Url
 	/**
 	 * Возвращает путь.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getPath()
 	{
@@ -221,7 +214,7 @@ class Lib_Url
 	/**
 	 * Устанавливает путь.
 	 *
-	 * @param   string  $path
+	 * @param string  $path
 	 */
 	function setPath($path)
 	{
@@ -231,7 +224,7 @@ class Lib_Url
 	/**
 	 * Возвращает строку запроса.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getQuery()
 	{
@@ -241,7 +234,7 @@ class Lib_Url
 	/**
 	 * Устанавливает путь.
 	 *
-	 * @param   string  $query
+	 * @param string  $query
 	 */
 	function setQuery($query)
 	{
@@ -264,7 +257,7 @@ class Lib_Url
 	/**
 	 * Возвращает URI.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getUri()
 	{
@@ -284,7 +277,7 @@ class Lib_Url
 	/**
 	 * Устанавливает URI.
 	 *
-	 * @param   string  $uri
+	 * @param string  $uri
 	 */
 	function setUri($uri)
 	{
@@ -299,7 +292,7 @@ class Lib_Url
 	/**
 	 * Возвращает значение фрагмента URL.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getFragment()
 	{
@@ -309,7 +302,7 @@ class Lib_Url
 	/**
 	 * Устанавливает значение фрагмента URL.
 	 *
-	 * @param   string  $fragment
+	 * @param string  $fragment
 	 */
 	function setFragment($fragment)
 	{
@@ -319,7 +312,7 @@ class Lib_Url
 	/**
 	 * Возвращает имя файла.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getFileName()
 	{
@@ -329,7 +322,7 @@ class Lib_Url
 	/**
 	 * Применяет перенаправление.
 	 *
-	 * @param   string	$string
+	 * @param string	$string
 	 */
 	function applyRedirect($location)
 	{
@@ -362,7 +355,7 @@ class Lib_Url
 	/**
 	 * Анализирует строку, преобразовывает в свойства объекта URL.
 	 *
-	 * @param   string	$string
+	 * @param string	$string
 	 */
 	function fromString($string)
 	{
@@ -390,7 +383,7 @@ class Lib_Url
 	/**
 	 * Возвращает строковое представление объекта URL.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function toString()
 	{
@@ -511,8 +504,8 @@ class Lib_Url
 	/**
 	 * Кодирует путь в соответствии с RFC 1738.
 	 *
-	 * @param   string	$path
-	 * @return  string
+	 * @param string	$path
+	 * @return string
 	 */
 	function _encodePath($path)
 	{
@@ -531,8 +524,8 @@ class Lib_Url
 	/**
 	 * Кодирует строку запроса в соответствии с RFC 1738.
 	 *
-	 * @param   string	$query
-	 * @return  string
+	 * @param string	$query
+	 * @return string
 	 */
 	function _encodeQuery($query)
 	{
@@ -562,8 +555,8 @@ class Lib_Url
 	 * Разбивает путь URL'а на элементы (типа файлы/директории) и возвращает
 	 * в виде массива.
 	 *
-	 * @param   string  $path
-	 * @return  array
+	 * @param string  $path
+	 * @return array
 	 */
 	function _splitPath($path)
 	{
@@ -573,8 +566,8 @@ class Lib_Url
 	/**
 	 * Разбивает URI URL'а на путь и QUERY_STRING.
 	 *
-	 * @param   string  $uri
-	 * @return  array
+	 * @param string  $uri
+	 * @return array
 	 */
 	function _splitUri($uri)
 	{
@@ -590,8 +583,8 @@ class Lib_Url
 	 * разделители параметров, а как составляющие некоего значения, а,
 	 * следовательно, тоже должны быть закодированы. На такие случаи забьём.
 	 *
-	 * @param   string  $string
-	 * @return  $string
+	 * @param string  $string
+	 * @return $string
 	 */
 	function _encode($string)
 	{

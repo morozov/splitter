@@ -5,17 +5,15 @@ require_once 'Zend/Loader.php';
 /**
  * Системный загрузчик.
  *
- * @version	 $Id$
- * @package	 Splitter
- * @subpackage  System
+ * @version $Id$
  */
 class System_Loader extends Zend_Loader {
 
 	/**
 	 * Возвращает массив наименований классов пакета за исключением 'Abstract'.
 	 *
-	 * @param   string $package
-	 * @return  array
+	 * @param string $package
+	 * @return array
 	 */
 	public function getPackageClasses($package) {
 		$result = false;

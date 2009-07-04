@@ -1,30 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  app
- * @version	 $Id$
- */
-/**
  * Объект настроек системы.
  *
- * @package	 Splitter
- * @subpackage  app
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_App_Settings
 {
 	/**
 	 * Объект-массив параметров.
 	 *
-	 * @var	 ArrayObject
+	 * @var ArrayObject
 	 */
 	var $_params;
 
 	/**
 	 * Конструктор.
 	 *
-	 * @return  Settings
+	 * @return Settings
 	 */
 	function Splitter_App_Settings()
 	{
@@ -35,8 +28,8 @@ class Splitter_App_Settings
 	/**
 	 * Возвращает значение указанного параметра.
 	 *
-	 * @param   string   $name   Наименование параметра
-	 * @return  string
+	 * @param string   $name   Наименование параметра
+	 * @return string
 	 */
 	function getParam($name)
 	{

@@ -3,26 +3,19 @@
 define('DOWNLOAD_STATUS_REDIRECT', 3);
 
 /**
- * @package	 Splitter
- * @subpackage  service.download
- * @version	 $Id$
- */
-/**
  * Абстракция сервиса закачки файла. В зависимости от протокола URL'a делегирует
  * обязанность одной из доступных реализаций - потомку Splitter_Service_Download_Abstract.
  * Введена ввиду необходимости иметь возможность менять реализацию сервиса во
  * время выполнения (редирект с HTTP на другой протокол).
  *
- * @package	 Splitter
- * @subpackage  service.download
- * @see		 Splitter_Service_Abstract
+ * @version $Id$
  */
 class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 {
 	/**
 	 * Протокол по умолчанию.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $DEFAULT_PROTOCOL = 'http';
 
@@ -30,15 +23,15 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 	 * Максимальное количество перенаправлений, которое должен обработать клиент
 	 * (пока не реализовано).
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $MAX_REDIRECTS_COUNT = 10;
 
 	/**
 	 * Добавляет загрузку файла.
 	 *
-	 * @param   string   $url
-	 * @return  ArrayObject
+	 * @param string   $url
+	 * @return ArrayObject
 	 */
 	function run($params, $reset = true)
 	{
@@ -82,8 +75,8 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 	/**
 	 * Создает и возвращает объект сервиса скачивания файла.
 	 *
-	 * @param   Url
-	 * @return  Splitter_Service_Download_Abstract
+	 * @param Url
+	 * @return Splitter_Service_Download_Abstract
 	 */
 	function _createDownloadService(&$url)
 	{
@@ -105,9 +98,9 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 	/**
 	 * Запускает сервис-реализацию и обрабатывает результат его работы.
 	 *
-	 * @param   Splitter_Service_Download_Abstract $service
-	 * @param   array $params
-	 * @return  Lib_ArrayObject
+	 * @param Splitter_Service_Download_Abstract $service
+	 * @param array $params
+	 * @return Lib_ArrayObject
 	 */
 	function _runService(&$service, $params)
 	{

@@ -1,40 +1,33 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  app
- * @version	 $Id$
- */
-/**
  * Объект обработчика ошибок.
  *
- * @package	 Splitter
- * @subpackage  app
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_App_ErrorHandler
 {
 	/**
 	 * Смещение, начиная с которого нужно выводить отладочные сообщения.
 	 *
-	 * @var	 int
+	 * @var int
 	 */
 	var $BACKTRACE_OFFSET = 2;
 
 	/**
 	 * Длина, до которой нужно обрезать значения строковых аргументов.
 	 *
-	 * @var	 int
+	 * @var int
 	 */
 	var $BACKTRACE_MAX_STRLEN = 32;
 
 	/**
 	 * Выполняет обработку ошибок.
 	 *
-	 * @param   integer  $errno
-	 * @param   integer  $errstr
-	 * @param   string   $errfile
-	 * @param   string   $errline
+	 * @param integer  $errno
+	 * @param integer  $errstr
+	 * @param string   $errfile
+	 * @param string   $errline
 	 */
 	function handle($errno, $errstr, $errfile, $errline)
 	{
@@ -76,8 +69,8 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Возвращает текстовый префикс ошибки.
 	 *
-	 * @param   integer  $errno
-	 * @return  string
+	 * @param integer  $errno
+	 * @return string
 	 */
 	function _getPrefix($errno)
 	{
@@ -107,8 +100,8 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Определяет, является ли ошибка фатальной.
 	 *
-	 * @param   integer  $errno
-	 * @return  boolean
+	 * @param integer  $errno
+	 * @return boolean
 	 */
 	function _isFatal($errno)
 	{
@@ -118,8 +111,8 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Определяет, является ли ошибка причиной невозможности скачивания файла.
 	 *
-	 * @param   integer  $errno
-	 * @return  boolean
+	 * @param integer  $errno
+	 * @return boolean
 	 */
 	function _isReasonable($errno)
 	{
@@ -129,8 +122,8 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Определяет, является ли ошибка пользовательской.
 	 *
-	 * @param   integer  $errno
-	 * @return  boolean
+	 * @param integer  $errno
+	 * @return boolean
 	 */
 	function _isUserDefined($errno)
 	{
@@ -140,7 +133,7 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Возвращает стек вызовов до момента ошибки.
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function _getBacktrace()
 	{
@@ -209,8 +202,8 @@ class Splitter_App_ErrorHandler
 	/**
 	 * Форматирует величину в соттветствии с ее типом.
 	 *
-	 * @param   mixed   $value
-	 * @return  string
+	 * @param mixed   $value
+	 * @return string
 	 */
 	function _format($value)
 	{

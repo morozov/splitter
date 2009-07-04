@@ -1,25 +1,18 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Выполняет разбор содержимого указанного ресурса.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Share_Parser_Ifolder extends Splitter_Share_Parser_Abstract
 {
 	/**
 	 * Выполняет разбор содержимого страницы.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   string $contents
-	 * @return  array
+	 * @param Lib_Url $url
+	 * @param string $contents
+	 * @return array
 	 */
 	function _parse(&$url, $contents)
 	{

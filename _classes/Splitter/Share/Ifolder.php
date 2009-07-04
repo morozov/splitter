@@ -1,30 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  share
- * @version	 $Id$
- */
-/**
  * Обработчик закачек с файлового сервера www.ifolder.ru
  *
- * @package	 Splitter
- * @subpackage  share
- * @see		 Splitter_Share_Abstract
+ * @version $Id$
  */
 class Splitter_Share_Ifolder extends Splitter_Share_Abstract
 {
 	/**
 	 * Наименование поля формы, в которое пользователь вводит текст на картинке.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $CAPTCHA_FIELD = 'confirmed_number';
 
 	/**
 	 * Массив парсеров, обрабатывающих закачку.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $PARSERS = array
 	(
@@ -35,9 +28,9 @@ class Splitter_Share_Ifolder extends Splitter_Share_Abstract
 	 * Возвращает, могут ли указанные URL и метод запроса быть обработаны
 	 * с помощью данного компонента.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   string $method
-	 * @return  boolean
+	 * @param Lib_Url $url
+	 * @param string $method
+	 * @return boolean
 	 */
 	function canProcess(&$url, $method)
 	{
@@ -53,7 +46,7 @@ class Splitter_Share_Ifolder extends Splitter_Share_Abstract
 	/**
 	 * Выводит результат разбора в форму.
 	 *
-	 * @param   array $params
+	 * @param array $params
 	 */
 	function _output($params)
 	{

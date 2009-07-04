@@ -1,31 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  share
- * @version	 $Id$
- */
-/**
  * Базовый класс компонентов, скачивающих файлы с файловых хостингов.
  *
- * @package	 Splitter
- * @subpackage  share
- * @see		 abstract_Object
- * @abstract
+ * @version $Id$
  */
 abstract class Splitter_Share_Abstract
 {
 	/**
 	 * Наименование поля формы, в которое пользователь вводит текст на картинке.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $CAPTCHA_FIELD;
 
 	/**
 	 * Массив парсеров, обрабатывающих закачку.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $PARSERS = array();
 
@@ -33,9 +25,9 @@ abstract class Splitter_Share_Abstract
 	 * Возвращает, могут ли указанные URL и метод запроса быть обработаны
 	 * с помощью данного компонента.
 	 *
-	 * @param   Lib_Url $url
-	 * @param   string $method
-	 * @return  boolean
+	 * @param Lib_Url $url
+	 * @param string $method
+	 * @return boolean
 	 */
 	function canProcess(&$url, $method)
 	{
@@ -45,7 +37,7 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Обрабатывает указанный URL.
 	 *
-	 * @param   Lib_Url $url
+	 * @param Lib_Url $url
 	 */
 	function process(&$url, $params = array())
 	{
@@ -58,15 +50,15 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Выводит результат разбора в форму.
 	 *
-	 * @param   array $params
+	 * @param array $params
 	 */
 	abstract function _output($params);
 
 	/**
 	 * Возвращает содержимое ресурса с указанными параметрами.
 	 *
-	 * @param   Lib_Url $url
-	 * @return  string
+	 * @param Lib_Url $url
+	 * @return string
 	 */
 	function _getParams(&$url, $params = array(), $name = null)
 	{
@@ -79,8 +71,8 @@ abstract class Splitter_Share_Abstract
 	 * Возвращает персер содержимого страницы с указанным наименованием или
 	 * основной по умолчанию.
 	 *
-	 * @param   string $name
-	 * @return  Splitter_Share_Parser_Abstract
+	 * @param string $name
+	 * @return Splitter_Share_Parser_Abstract
 	 */
 	function _getParser($name = null)
 	{
@@ -92,8 +84,8 @@ abstract class Splitter_Share_Abstract
 	/**
 	 * Возвращает имя хоста URL без "www".
 	 *
-	 * @param   Lib_Url $url
-	 * @return  string
+	 * @param Lib_Url $url
+	 * @return string
 	 */
 	function _getHostName($url)
 	{

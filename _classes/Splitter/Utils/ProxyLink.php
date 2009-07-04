@@ -1,23 +1,16 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Утилита создания ссылки для скачивания через прокси.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Utils_ProxyLink
 {
 	/**
 	 * Создает ссылку.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function generate($url, $splitSize, $encoding)
 	{

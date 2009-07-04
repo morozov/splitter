@@ -3,6 +3,7 @@
 /**
  * Интерфейс хранилища.
  *
+ * @version $Id$
  */
 interface Splitter_Storage_Interface {
 

@@ -1,39 +1,32 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  Lib
- * @version	 $Id$
- */
-/**
  * Объектная обертка для сокетов PHP.
  *
- * @package	 Splitter
- * @subpackage  Lib
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Lib_Socket
 {
 	/**
 	 * Время, в течение которого скрипт пытается открыть сокет, сек.
 	 *
-	 * @var	 float
+	 * @var float
 	 */
 	var $CONNECTION_TIMEOUT = 4.00;
 
 	/**
 	 * Сокет-ресурс.
 	 *
-	 * @var	 resource
+	 * @var resource
 	 */
 	var $_socket;
 
 	/**
 	 * Открывает сокет на указанный хост и порт.
 	 *
-	 * @param   string   $host
-	 * @param   integer  $port
-	 * @return  boolean
+	 * @param string   $host
+	 * @param integer  $port
+	 * @return boolean
 	 */
 	function open($host, $port)
 	{
@@ -45,8 +38,8 @@ class Lib_Socket
 	/**
 	 * Читает до $length байт из сокета.
 	 *
-	 * @param   integer  $length
-	 * @return  string  -  Подстрока ответа
+	 * @param integer  $length
+	 * @return string  -  Подстрока ответа
 	 *		   FALSE  -  Если достигнут конец файла
 	 */
 	function read($length)
@@ -57,7 +50,7 @@ class Lib_Socket
 	/**
 	 * Читает до $length байт или до символа перевода строки из сокета.
 	 *
-	 * @return  string  -  Подстрока ответа
+	 * @return string  -  Подстрока ответа
 	 *		   FALSE  -  Если достигнут конец файла
 	 */
 	function gets()
@@ -68,8 +61,8 @@ class Lib_Socket
 	/**
 	 * Пишет строку в сокет.
 	 *
-	 * @param   string   $string
-	 * @return  boolean
+	 * @param string   $string
+	 * @return boolean
 	 */
 	function write($string)
 	{
@@ -79,7 +72,7 @@ class Lib_Socket
 	/**
 	 * Возвращает TRUE в случае, если сокет не открыт или достигнут конец файла.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function eof()
 	{
@@ -89,7 +82,7 @@ class Lib_Socket
 	/**
 	 * Возвращает, открыт ли сокет.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function isOpened()
 	{
@@ -99,7 +92,7 @@ class Lib_Socket
 	/**
 	 * Закрывает сокет.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function close()
 	{

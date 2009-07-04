@@ -6,16 +6,9 @@ define('DOWNLOAD_STATUS_FATAL', 2);
 define('DOWNLOAD_STATUS_INCOMPLETE', 3);
 
 /**
- * @package	 Splitter
- * @subpackage
- * @version	 $Id$
- */
-/**
  * Контроллер. Обрабатывает данные пользовательского запроса.
  *
- * @package	 Splitter
- * @subpackage
- * @see		 abstract_Object
+ * @version $Id$
  */
 final class Splitter_Controller {
 
@@ -33,7 +26,7 @@ final class Splitter_Controller {
 	/**
 	 * Выполняет обработку данных пользовательского запроса.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	private function process() {
 
@@ -161,8 +154,8 @@ final class Splitter_Controller {
 	/**
 	 * Возвращает цель для хранилища указанного типа.
 	 *
-	 * @param   string $type
-	 * @return  string
+	 * @param string $type
+	 * @return string
 	 */
 	private function getTarget($type) {
 		return Application::getRequest()->getParam('target-' . $type);
@@ -171,8 +164,8 @@ final class Splitter_Controller {
 	/**
 	 * Возвращает обработчик файлового сервера для указанного URL.
 	 *
-	 * @param   Lib_Url $url
-	 * @return  Splitter_Share_Abstract
+	 * @param Lib_Url $url
+	 * @return Splitter_Share_Abstract
 	 */
 	private function getShareHandler($url, $method) {
 		foreach (System_Loader::getPackageClasses('Splitter_Share') as $class) {
@@ -187,7 +180,7 @@ final class Splitter_Controller {
 	/**
 	 * Возвращает, нужно ли скачивать файл.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	private function isDownloadNeeded() {
 		// проверяем, не была ли нажата кнопка "получить размер", т.к. если

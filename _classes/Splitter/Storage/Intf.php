@@ -1,58 +1,51 @@
 <?php
 
 /**
- * @package 	Splitter
- * @subpackage	storage
- * @version 	$Id$
- */
-/**
  * Интерфейс к хранилищам. Попутно реализует разбиение файлов на куски.
  *
- * @package 	Splitter
- * @subpackage	storage
- * @see 		abstract_Object
+ * @version $Id$
  */
 final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 	/**
 	 * Номер текущий части, на которые разбивается файл.
 	 *
-	 * @var 	integer
+	 * @var integer
 	 */
 	private $part = 0;
 
 	/**
 	 * Размер данных записанных в текущую часть.
 	 *
-	 * @var 	integer
+	 * @var integer
 	 */
 	private $written_part = 0;
 
 	/**
 	 * Общий размер записанных данных.
 	 *
-	 * @var 	integer
+	 * @var integer
 	 */
 	private $written_total = 0;
 
 	/**
 	 * Тип реализации для сохранения данных.
 	 *
-	 * @var 	string
+	 * @var string
 	 */
 	private $type;
 
 	/**
 	 * Размер частей, на которые нужно разбивать данные.
 	 *
-	 * @var 	integer
+	 * @var integer
 	 */
 	private $split_size;
 
 	/**
 	 * Объект хранилища для текущей части.
 	 *
-	 * @var		Splitter_Storage_Abstract
+	 * @var Splitter_Storage_Abstract
 	 */
 	private $storage;
 
@@ -68,8 +61,8 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Конструктор.
 	 *
-	 * @param	string	$type
-	 * @param	integer $splitSize
+	 * @param string	$type
+	 * @param integer $splitSize
 	 */
 	function __construct($type, $split_size) {
 		$this->type = $type;
@@ -83,7 +76,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * Возвращает позицию, с которой нужно возобновить скачивание файла.
 	 * Реализуется в производных классах.
 	 *
-	 * @return	integer
+	 * @return integer
 	 */
 	function getResumePosition() {
 
@@ -131,8 +124,8 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Пишет данные в хранилище.
 	 *
-	 * @param	string $data
-	 * @return	boolean
+	 * @param string $data
+	 * @return boolean
 	 */
 	function write($data) {
 
@@ -172,10 +165,9 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Завершает сохранение данных. Закрывает хранилище для текущей части.
 	 *
-	 * @return	boolean
+	 * @return boolean
 	 */
 	public function __destruct() {
-		Application::getResponse()->debug('__destruct');
 		$crc32 = hash_final($this->hash);
 		$this->_createStorage()
 			->setFileName($this->_getPartFileName('crc'))
@@ -188,8 +180,8 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Создает реализацию хранилища.
 	 *
-	 * @param	string
-	 * @return	splitter_storage_Abstract
+	 * @param string
+	 * @return splitter_storage_Abstract
 	 */
 	function _createStorage() {
 		return call_user_func_array(array('Splitter_Storage_Abstract', 'factory'), array_merge(array($this->type), $this->constructor_arguments));
@@ -198,8 +190,8 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Создает реализацию для сохранения следующей части файла.
 	 *
-	 * @param	integer $position
-	 * @return	boolean
+	 * @param integer $position
+	 * @return boolean
 	 */
 	function _next($position = 0) {
 
@@ -218,7 +210,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * Возвращает имя файла для текущей части.
 	 *
 	 * @param mixed $postfix
-	 * @return	string
+	 * @return string
 	 */
 	function _getPartFileName($postfix) {
 

@@ -1,38 +1,26 @@
 <?php
 
-// префикс для переменных, в которые передаются значения параметров сервера
-// при запуске приложения через CLI
-define('SERVER_VAR_PREFIX', 'SERVER_');
-
-/**
- * @package	 Splitter
- * @subpackage  app
- * @version	 $Id$
- */
 /**
  * Вообще-то это всего лишь автоматически настраивающийся реестр
  * объектов-синглтонов, плюс пространство имён кое-каких функций.
  * Стоит подумать о расформировании.
  *
- * @package	 Splitter
- * @subpackage  app
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Application
 {
 	/**
 	 * Контекст приложения.
 	 *
-	 * @var	 AppContext
+	 * @var AppContext
 	 */
 	var $_context;
 
 	/**
 	 * Возвращает объект пользовательского запроса.
 	 *
-	 * @return  Splitter_Request_Abstract
-	 * @static
-	 */
+	 * @return Splitter_Request_Abstract
+	 * @static */
 	function getRequest()
 	{
 		$context =& Application::_getContext();
@@ -43,9 +31,8 @@ class Application
 	/**
 	 * Возвращает объект ответа пользователю.
 	 *
-	 * @return  Splitter_Response_Abstract
-	 * @static
-	 */
+	 * @return Splitter_Response_Abstract
+	 * @static */
 	function getResponse()
 	{
 		$context =& Application::_getContext();
@@ -56,9 +43,8 @@ class Application
 	/**
 	 * Возвращает объект настроек.
 	 *
-	 * @return  Settings
-	 * @static
-	 */
+	 * @return Settings
+	 * @static */
 	function getSettings()
 	{
 		$context =& Application::_getContext();
@@ -69,8 +55,7 @@ class Application
 	/**
 	 * Перезапускает приложение в режимн командной строки.
 	 *
-	 * @static
-	 */
+	 * @static */
 	function runAsCli()
 	{
 		if (!Application::_isCli())
@@ -86,9 +71,8 @@ class Application
 	/**
 	 * Возвращает, запущено ли приложение под Windows®.
 	 *
-	 * @return  boolean
-	 * @static
-	 */
+	 * @return boolean
+	 * @static */
 	public static function isWindows() {
 		return 'WIN' == substr(PHP_OS, 0, 3);
 	}
@@ -96,7 +80,7 @@ class Application
 	/**
 	 * Возвращает путь временной директории для сохранения файла.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function getTmpDir()
 	{
@@ -127,7 +111,7 @@ class Application
 	/**
 	 * Конструктор. Создает контекст приложения.
 	 *
-	 * @return  Application
+	 * @return Application
 	 */
 	function Application()
 	{
@@ -137,9 +121,8 @@ class Application
 	/**
 	 * Возвращает, запущено ли приложение из интерфейса командной строки.
 	 *
-	 * @return  boolean
-	 * @static
-	 */
+	 * @return boolean
+	 * @static */
 	function _isCli()
 	{
 		return !isset($_SERVER['SERVER_PROTOCOL']);
@@ -148,7 +131,7 @@ class Application
 	/**
 	 * Возвращает контекст приложения.
 	 *
-	 * @return  Context Контекст приложения
+	 * @return Context Контекст приложения
 	 */
 	function _getContext()
 	{
@@ -192,7 +175,7 @@ class Application
 	/**
 	 * Возвращает наименование интерфейса, через который запущено приложение.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getInterfaceName()
 	{

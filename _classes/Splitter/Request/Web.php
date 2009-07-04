@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  request
- * @version	 $Id$
- */
-/**
  * Объект запроса для веб-интерфейса.
  *
- * @package	 Splitter
- * @subpackage  request
- * @see		 Splitter_abstract_Request
+ * @version $Id$
  */
 class Splitter_Request_Web extends Splitter_Request_Abstract
 {
@@ -35,7 +28,7 @@ class Splitter_Request_Web extends Splitter_Request_Abstract
 	/**
 	 * Возвращает параметры в исходном виде.
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function _getRawParams()
 	{

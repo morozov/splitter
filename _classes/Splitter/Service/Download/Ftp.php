@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  service.download
- * @version	 $Id$
- */
-/**
  * Сервис скачивания файла по протоколу FTP.
  *
- * @package	 Splitter
- * @subpackage  service.download
- * @see		 Splitter_Service_Download_Abstract
+ * @version $Id$
  */
 class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 {
@@ -20,12 +13,12 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 	 *  - fileName - имя, под которым файл должен быть сохранен
 	 *  - storage  - Хранилище для скачанных данных
 	 *
-	 * @param   array   $params   Параметры запуска
-	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
+	 * @param array   $params   Параметры запуска
+	 * @param array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
 	 *							при внутреннем перезапуске сервиса)
-	 * @return  Lib_ArrayObject
-	 * @see	 Splitter_Service_Download_Abstract::run
+	 * @return Lib_ArrayObject
+	 * @see Splitter_Service_Download_Abstract::run
 	 */
 	function run($params, $reset = true)
 	{
@@ -96,7 +89,7 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 	/**
 	 * Возвращает наименование класса используемого соединения.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function _getConnectionClassName()
 	{

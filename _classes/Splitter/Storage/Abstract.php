@@ -3,6 +3,7 @@
 /**
  * Базовый класс объектов, сохраняющий скачанный файл.
  *
+ * @version $Id$
  */
 abstract class Splitter_Storage_Abstract {
 

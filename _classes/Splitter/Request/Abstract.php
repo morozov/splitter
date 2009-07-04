@@ -1,31 +1,23 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  request
- * @version	 $Id$
- */
-/**
  * Объект запроса.
  *
- * @package	 Splitter
- * @subpackage  request
- * @see		 abstract_Object
- * @abstract
+ * @version $Id$
  */
 abstract class Splitter_Request_Abstract
 {
 	/**
 	 * Массив для хранения переменных запроса
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_params = array();
 
 	/**
 	 * Конструктор.
 	 *
-	 * @return  Splitter_abstract_Request
+	 * @return Splitter_abstract_Request
 	 */
 	function Splitter_Request_Abstract()
 	{
@@ -35,9 +27,9 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Возвращает значение заданного параметра.
 	 *
-	 * @param   string   $name
-	 * @param   mixed	$default
-	 * @return  mixed
+	 * @param string   $name
+	 * @param mixed	$default
+	 * @return mixed
 	 */
 	function getParam($name, $default = null)
 	{
@@ -47,8 +39,8 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Устанавливает значение заданного параметра.
 	 *
-	 * @param   string   $name
-	 * @param   mixed	$value
+	 * @param string   $name
+	 * @param mixed	$value
 	 */
 	function setParam($name, $value)
 	{
@@ -58,10 +50,10 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Определяет наличие заданного параметра
 	 *
-	 * @param   string  $name	   Наименование параметра
-	 * @param   boolean $allowEmpty Если true, то функция будет считать
+	 * @param string  $name	   Наименование параметра
+	 * @param boolean $allowEmpty Если true, то функция будет считать
 	 *							  пустые параметры существующими
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function hasParam($name, $allowEmpty = false)
 	{
@@ -72,7 +64,7 @@ abstract class Splitter_Request_Abstract
 	/**
 	 * Возвращает ассоциативный массив параметров.
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function getParams()
 	{

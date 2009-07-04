@@ -1,35 +1,27 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  service
- * @version	 $Id$
- */
-/**
  * Базовый класс сервисов.
  *
- * @package	 Splitter
- * @subpackage  service
- * @see		 abstract_Object
- * @abstract
+ * @version $Id$
  */
 abstract class Splitter_Service_Abstract
 {
 	/**
 	 * Массив параметров запуска сервиса. Устанавливается через self::run().
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_params = array();
 
 	/**
 	 * Запускает сервис.
 	 *
-	 * @param   array   $params   Параметры запуска
-	 * @param   array   $reset	Указывает, нужно ли сбрасывать значения
+	 * @param array   $params   Параметры запуска
+	 * @param array   $reset	Указывает, нужно ли сбрасывать значения
 	 *							параметров с предыдущего запуска (используется
 	 *							при внутреннем перезапуске сервиса)
-	 * @return  ArrayObject
+	 * @return ArrayObject
 	 */
 	function run($params, $reset = true)
 	{
@@ -60,9 +52,9 @@ abstract class Splitter_Service_Abstract
 	/**
 	 * Возвращает значение параметра сервиса.
 	 *
-	 * @param   string   $name	  Наименование параметра
-	 * @param   mixed	$default   Значение по умолчанию
-	 * @return  mixed
+	 * @param string   $name	  Наименование параметра
+	 * @param mixed	$default   Значение по умолчанию
+	 * @return mixed
 	 */
 	function _getParam($name, $default = null)
 	{
@@ -72,8 +64,8 @@ abstract class Splitter_Service_Abstract
 	/**
 	 * Устанавливает параметр сервиса в указанное.
 	 *
-	 * @param   string   $name   Наименование параметра
-	 * @param   mixed	$value  Значение параметра
+	 * @param string   $name   Наименование параметра
+	 * @param mixed	$value  Значение параметра
 	 */
 	function _setParam($name, $value)
 	{
@@ -85,8 +77,8 @@ abstract class Splitter_Service_Abstract
 	 * запуска сервиса.
 	 * Проверка производится с преобразованием к строковому типу (кроме объектов).
 	 *
-	 * @param   string   $name
-	 * @return  boolean
+	 * @param string   $name
+	 * @return boolean
 	 */
 	function _hasParam($name)
 	{

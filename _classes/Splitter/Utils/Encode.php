@@ -1,24 +1,17 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Утилита преобразования строк (урлов и имен файлов) для обхода ограничений
  * прокси.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Utils_Encode
 {
 	/**
 	 * Описания алгоритмов преобразования
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $_methods = array
 	(
@@ -29,15 +22,15 @@ class Splitter_Utils_Encode
 	/**
 	 * Наименование текущего алгоритма.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_method;
 
 	/**
 	 * Конструктор.
 	 *
-	 * @param   string $method
-	 * @return  Splitter_Utils_Encode
+	 * @param string $method
+	 * @return Splitter_Utils_Encode
 	 */
 	function Splitter_Utils_Encode($method)
 	{
@@ -52,8 +45,8 @@ class Splitter_Utils_Encode
 	/**
 	 * Выполняет прямое преобразование значения.
 	 *
-	 * @param   string  $value
-	 * @return  string
+	 * @param string  $value
+	 * @return string
 	 */
 	function encode($value)
 	{
@@ -63,8 +56,8 @@ class Splitter_Utils_Encode
 	/**
 	 * Выполняет обратное преобразование значения.
 	 *
-	 * @param   string  $value
-	 * @return  string
+	 * @param string  $value
+	 * @return string
 	 */
 	function decode($value)
 	{

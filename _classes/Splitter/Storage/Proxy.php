@@ -3,6 +3,7 @@
 /**
  * Хранилище-прокси — выводит сохраняемые данные в браузер.
  *
+ * @version $Id$
  */
 class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 
@@ -47,7 +48,7 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 
 	/**
 	 * Устанавливает размер сохраняемых данных.
-	 * 
+	 *
 	 * @param integer $size
 	 */
 	public function setSize($size) {
@@ -57,7 +58,7 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.
 	 *
-	 * @return  integer
+	 * @return integer
 	 */
 	function getResumePosition()
 	{
@@ -67,7 +68,7 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	/**
 	 * Возвращает, нужно ли сохранять данные в хранилище.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function isDownloadNeeded()
 	{
@@ -77,8 +78,8 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	/**
 	 * Открывает хранилище.
 	 *
-	 * @param   integer $size
-	 * @return  boolean
+	 * @param integer $size
+	 * @return boolean
 	 */
 	function open($size)
 	{
@@ -90,8 +91,8 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	/**
 	 * Пишет данные в файл.
 	 *
-	 * @param   string   $data   Данные для записи
-	 * @return  boolean		  Были ли данные успешно записаны
+	 * @param string   $data   Данные для записи
+	 * @return boolean		  Были ли данные успешно записаны
 	 */
 	function write($data)
 	{
@@ -111,8 +112,8 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 * Обрезает файл до указанной длины. Используется, если сервер не
 	 * поддерживает докачку.
 	 *
-	 * @param   integer  $size
-	 * @return  boolean
+	 * @param integer  $size
+	 * @return boolean
 	 */
 	function truncate($size)
 	{

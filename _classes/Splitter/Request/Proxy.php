@@ -1,16 +1,9 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  request
- * @version	 $Id$
- */
-/**
  * Объект запроса для режима прокси.
  *
- * @package	 Splitter
- * @subpackage  request
- * @see		 Splitter_abstract_Request
+ * @version $Id$
  */
 class Splitter_Request_Proxy extends Splitter_Request_Web
 {
@@ -39,7 +32,7 @@ class Splitter_Request_Proxy extends Splitter_Request_Web
 	/**
 	 * Возвращает параметры в исходном виде.
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function _getRawParams()
 	{

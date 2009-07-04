@@ -1,47 +1,40 @@
 <?php
 
 /**
- * @package	 Splitter
- * @subpackage  utils
- * @version	 $Id$
- */
-/**
  * Утилита переименования файла по маске или регулярному выражению.
  *
- * @package	 Splitter
- * @subpackage  utils
- * @see		 abstract_Object
+ * @version $Id$
  */
 class Splitter_Utils_Rename
 {
 	/**
 	 * Шаблон поиска
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_search;
 
 	/**
 	 * Строка для замены
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $_replace;
 
 	/**
 	 * Флаг исспользования регулярных выражений
 	 *
-	 * @var	 boolean
+	 * @var boolean
 	 */
 	var $_useRegExp = false;
 
 	/**
 	 * Конструктор.
 	 *
-	 * @param   string $search
-	 * @param   string $replace
-	 * @param   string $useRegExp
-	 * @return  Splitter_Utils_Rename
+	 * @param string $search
+	 * @param string $replace
+	 * @param string $useRegExp
+	 * @return Splitter_Utils_Rename
 	 */
 	function Splitter_Utils_Rename($search, $replace, $useRegExp)
 	{
@@ -74,8 +67,8 @@ class Splitter_Utils_Rename
 	/**
 	 * Возвращает содержимое ресурса.
 	 *
-	 * @param   array   $params   Параметры запуска
-	 * @return  string
+	 * @param array   $params   Параметры запуска
+	 * @return string
 	 */
 	function rename($fileName)
 	{
@@ -102,8 +95,8 @@ class Splitter_Utils_Rename
 	/**
 	 * Выполняет проверку шаблона регулярного выражения и возвращает ошибку.
 	 *
-	 * @param   string $pattern
-	 * @return  mixed
+	 * @param string $pattern
+	 * @return mixed
 	 */
 	function _getPatternError($pattern)
 	{

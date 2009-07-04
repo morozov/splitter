@@ -3,6 +3,7 @@
 /**
  * Класс объектов, сохраняющий скачанный файл в файловой системе.
  *
+ * @version $Id$
  */
 class Splitter_Storage_File extends Splitter_Storage_Abstract {
 
@@ -111,7 +112,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 
 	protected function getResource() {
 		if (!is_resource($this->resource)) {
-			Application::getResponse()->debug('Opening: ' . $this->getSavePath());
 			$this->resource = $this->implementation->open($this->getSavePath());
 		}
 		return $this->resource;

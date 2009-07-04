@@ -11,30 +11,23 @@ foreach (array(
 }
 
 /**
- * @package	 Splitter
- * @subpackage  connection
- * @version	 $Id$
- */
-/**
  * Класс соединеня с FTP-сервером.
  *
- * @package	 Splitter
- * @subpackage  connection
- * @see		 Splitter_Connection_Abstract
+ * @version $Id$
  */
 class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 {
 	/**
 	 * Порт соединения по умолчанию.
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $DEFAULT_PORT = 21;
 
 	/**
 	 * Регулярное выражение для разбора ответа на код и текстовую часть.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_RESPONSE = '/^(\d{3})((-(.*\r\n)+\\1)? [^\r\n]+\r\n)/';
 
@@ -42,28 +35,28 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	 * Регулярное выражение для разбора ответа сервера при установке пассивного
 	 * соединения.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $REGEXP_PASV = '^.+ \\(?([0-9]{1,3},[0-9]{1,3},[0-9]{1,3},[0-9]{1,3},[0-9]+,[0-9]+)\\)?.*';
 
 	/**
 	 * Имя пользователя по умолчанию.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $DEFAULT_USERNAME = 'anonymous';
 
 	/**
 	 * Пароль по умолчанию.
 	 *
-	 * @var	 string
+	 * @var string
 	 */
 	var $DEFAULT_PASSWORD = 'splitter@splitter.com';
 
 	/**
 	 * Допусимые режимы передачи данных.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $TRANSFER_MODES = array(FTP_AUTOASCII, FTP_ASCII, FTP_BINARY);
 
@@ -71,7 +64,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	 * Расширения файлов, для которых по умолчанию используется текстовый режим
 	 * передачи данных.
 	 *
-	 * @var	 array
+	 * @var array
 	 */
 	var $AUTO_ASCII_EXTENSIONS = array
 	(
@@ -84,22 +77,22 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Определяет, должен ли использоваться пассивный режим передачи данных.
 	 *
-	 * @var	 boolean
+	 * @var boolean
 	 */
 	var $_passive = true;
 
 	/**
 	 * Тип передачи данных (текстовый, двоичный или авто).
 	 *
-	 * @var	 integer
+	 * @var integer
 	 */
 	var $_type = FTP_AUTOASCII;
 
 	/**
 	 * Открывает соединение с сервером.
 	 *
-	 * @param   string   $url
-	 * @return  boolean
+	 * @param string   $url
+	 * @return boolean
 	 */
 	function connect($url)
 	{
@@ -109,9 +102,9 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Выполняет авторизацию на сервере.
 	 *
-	 * @param   string   $userName
-	 * @param   string   $password
-	 * @return  boolean
+	 * @param string   $userName
+	 * @param string   $password
+	 * @return boolean
 	 */
 	function login($userName, $password)
 	{
@@ -146,8 +139,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос восстановления передачи данных.
 	 *
-	 * @param   integer  $pos
-	 * @return  boolean
+	 * @param integer  $pos
+	 * @return boolean
 	 */
 	function restore($pos)
 	{
@@ -157,7 +150,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос закрытия соединения.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function quit()
 	{
@@ -167,8 +160,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос смены активной директории.
 	 *
-	 * @param   string   $dir
-	 * @return  boolean
+	 * @param string   $dir
+	 * @return boolean
 	 */
 	function chdir($dir)
 	{
@@ -178,8 +171,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос удаления директории.
 	 *
-	 * @param   string   $dir
-	 * @return  boolean
+	 * @param string   $dir
+	 * @return boolean
 	 */
 	function rmdir($dir)
 	{
@@ -189,8 +182,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос создания директории.
 	 *
-	 * @param   string   $dir
-	 * @return  boolean
+	 * @param string   $dir
+	 * @return boolean
 	 */
 	function mkdir($dir)
 	{
@@ -200,8 +193,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет запрос на получение размера файла и возвращает результат.
 	 *
-	 * @param   string   $file
-	 * @return  integer
+	 * @param string   $file
+	 * @return integer
 	 */
 	function filesize($file)
 	{
@@ -213,7 +206,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	 * Отправляет запрос на получение типа операционной системы сервера файла
 	 * и возвращает результат.
 	 *
-	 * @return  string
+	 * @return string
 	 */
 	function system()
 	{
@@ -227,8 +220,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Устанавливает тип передачи данных и выполняет соответствующий запрос.
 	 *
-	 * @param   integer  $mode
-	 * @return  boolean
+	 * @param integer  $mode
+	 * @return boolean
 	 */
 	function setType($mode = FTP_AUTOASCII)
 	{
@@ -250,8 +243,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Выполняет запрос на получение файла.
 	 *
-	 * @param   string  $fileName
-	 * @return  mixed
+	 * @param string  $fileName
+	 * @return mixed
 	 */
 	function retrieve($fileName, $pos = 0)
 	{
@@ -284,7 +277,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Пытается прочитать приветствие сервера.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _onAfterConnect()
 	{
@@ -294,8 +287,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Выполняет запрос на выполнение указанной команды.
 	 *
-	 * @param   string  $fileName
-	 * @return  boolean
+	 * @param string  $fileName
+	 * @return boolean
 	 */
 	function _exec($cmd)
 	{
@@ -309,7 +302,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Производит разбор ответа сервера на код и текстовое сообщение.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _readmsg()
 	{
@@ -344,7 +337,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Проверяет статус ответа сервера.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _checkStatus()
 	{
@@ -356,8 +349,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Возвращает сообщение о типе передачи данных для отправки в запрос.
 	 *
-	 * @param   integer  $mode
-	 * @return  string
+	 * @param integer  $mode
+	 * @return string
 	 */
 	function _getTypeMessage($mode)
 	{
@@ -383,8 +376,8 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Создает сокет для передачи данных с указанным режимом.
 	 *
-	 * @param   integer  $mode
-	 * @return  boolean
+	 * @param integer  $mode
+	 * @return boolean
 	 */
 	function _openDataSocket($mode)
 	{
@@ -424,7 +417,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Закрывает сокет передачи данных.
 	 *
-	 * @return  boolean
+	 * @return boolean
 	 */
 	function _closeDataSocket()
 	{
@@ -434,7 +427,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	/**
 	 * Разбирает ответ сервера при установке пассивного соединения.
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	function _parsePasvResponse()
 	{
