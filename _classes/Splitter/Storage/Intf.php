@@ -59,21 +59,24 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	/**
 	 * Контекст хэша для вычисления контрольной суммы файла.
 	 *
-	 * @var		resource
+	 * @var resource
 	 */
 	private $hash;
+
+	private $constructor_arguments = array();
 
 	/**
 	 * Конструктор.
 	 *
 	 * @param	string	$type
-	 * @param	string	$target
 	 * @param	integer $splitSize
 	 */
-	function Splitter_Storage_Intf($type, $target, $splitSize) {
-		parent::Splitter_Storage_Abstract($target);
+	function __construct($type, $split_size) {
 		$this->type = $type;
-		$this->split_size = $splitSize;
+		$this->split_size = $split_size;
+		$this->constructor_arguments = array_slice(func_get_args(), 2);
+		$this->hash = hash_init('crc32b');
+		$this->part = floor($this->getResumePosition() / $this->split_size);
 	}
 
 	/**
@@ -126,31 +129,16 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	}
 
 	/**
-	 * Открывает хранилище.
-	 *
-	 * @param	integer $size
-	 * @return	boolean
-	 */
-	function open($size) {
-
-		$this->hash = hash_init('crc32b');
-
-		$resume = $this->getResumePosition();
-
-		$this->part = floor($resume / $this->split_size);
-
-		$written = $resume - $this->part * $this->split_size;
-
-		return parent::open($size) && $this->_next($written);
-	}
-
-	/**
 	 * Пишет данные в хранилище.
 	 *
 	 * @param	string $data
 	 * @return	boolean
 	 */
 	function write($data) {
+
+		if (!$this->storage) {
+			$this->_next($this->getResumePosition() - $this->part * $this->split_size);
+		}
 
 		hash_update($this->hash, $data);
 
@@ -159,19 +147,15 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			$space = $this->split_size - $this->written_part;
 
 			// если в текущей части закончилось место, пытаемся открыть следующую
-			if ($space <= 0 && !$this->_next())
-			{
-				return false;
+			if ($space <= 0) {
+				$this->_next();
 			}
 
 			// этот кусок данных нужно записать в текущую часть
 			$portion = substr($data, 0, $space);
 
 			// пытаемся записать в нее кусок данных
-			if (!$this->storage->write($portion))
-			{
-				return false;
-			}
+			$this->storage->write($portion);
 
 			// собираем суммарный размер данных, записанных в текущую часть
 			$written = strlen($portion);
@@ -190,45 +174,15 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 *
 	 * @return	boolean
 	 */
-	function close() {
-		$closed = parent::close();
+	public function __destruct() {
+		Application::getResponse()->debug('__destruct');
 		$crc32 = hash_final($this->hash);
-		$storage = $this->_createStorage();
-		$storage->setFileName($this->_getPartFileName('crc'));
-		$storage->open(null);
-		$storage->write(
+		$this->_createStorage()
+			->setFileName($this->_getPartFileName('crc'))
+			->write(
 			$this->getCrcFileContents($this->filename, $this->written_total, $crc32)
 		);
-		$storage->close();
-		return $closed;
-	}
-
-	/**
-	 * Завершает сохранение данных. Закрывает хранилище для текущей части.
-	 *
-	 * @return	boolean
-	 */
-	function _close() {
-
-		$result = $this->storage->close();
-
-		// разрушаем ссылку на реализацию хранилища, иначе при скачивании
-		// следующего файла в self::_next() оно будет закрыто еще раз.
-		// :TODO: morozov 07032007: подумать, может это можно решить
-		// каким-нибудь более красивым способом, к примеру, почтовое хранилище
-		// не должно отправлять сообщение с одним и тем же фалом дважды
-		$this->storage = null;
-
-		return $result;
-	}
-
-	/**
-	 * Возвращает содержимое хранилища.
-	 *
-	 * @return  string
-	 */
-	function getContents() {
-		throw new Exception('Not applicable');
+		unset($this->storage);
 	}
 
 	/**
@@ -238,8 +192,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @return	splitter_storage_Abstract
 	 */
 	function _createStorage() {
-		$storage =& Splitter_Storage_Abstract::factory($this->type, $this->target);
-		return $storage;
+		return call_user_func_array(array('Splitter_Storage_Abstract', 'factory'), array_merge(array($this->type), $this->constructor_arguments));
 	}
 
 	/**
@@ -250,37 +203,15 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 */
 	function _next($position = 0) {
 
-		// пытаемся закрыть предыдущую часть
-		if (is_object($this->storage) && !$this->_close())
-		{
-			return false;
-		}
-
 		// следующая часть
 		++$this->part;
 
-		$this->storage =& $this->_createStorage();
+		$this->storage = $this->_createStorage();
 
 		$this->storage->setFileName($this->_getPartFileName($this->part));
 
 		$this->written_part = $position;
-
-		// предполагаемый размер следующей части
-		$size = !is_null($this->size)
-
-			// если это последняя часть
-			? ($this->part == ($parts = $this->split_size ? ceil($this->size / $this->split_size) : 1)
-
-				// определяем размер последней части
-				? $this->size - ($parts - 1) * $this->split_size
-
-				// иначе размер должен быть равен размеру разбиения
-				: $this->split_size)
-
-			: null;
-
-		return $this->storage->open($size)
-			&& $this->storage->truncate($position);
+		//$this->storage->truncate($position);
 	}
 
 	/**
@@ -318,7 +249,6 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	function getCrcFileContents($filename, $size, $crc32) {
 		// :KLUDGE: morozov 15062009: похоже, это зависит от ОС, но не факт
 		if (!Application::isWindows()) {
-			$crc32 = sprintf('%08x', 0x100000000 + hexdec($crc32));
 			$corrected = '';
 			for ($i = strlen($crc32) - 2; $i >= 0; $i -= 2) {
 				$corrected .= substr($crc32, $i, 2);

@@ -40,16 +40,15 @@ abstract class Splitter_Storage_Abstract {
 	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
-	 * @return string
+	 * @return Splitter_Storage_Abstract
 	 */
-	public function setFileName($fileName) {
-
+	public function setFileName($filename) {
 		// здесь нужно убедиться, что установлена верная локаль
-		if ($fileName != basename($fileName)) {
+		if ($filename != basename($filename)) {
 			throw new Splitter_Storage_Exception(sprintf('No path allowed in filename, "%s" is given', $fileName));
 		}
-
-		$this->filename = $fileName;
+		$this->filename = $filename;
+		return $this;
 	}
 
 	/**

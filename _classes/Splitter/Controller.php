@@ -19,6 +19,9 @@ define('DOWNLOAD_STATUS_INCOMPLETE', 3);
  */
 final class Splitter_Controller {
 
+	/**
+	 * Запускает контроллер.
+	 */
 	public function main() {
 		try {
 			$this->process();
@@ -32,16 +35,13 @@ final class Splitter_Controller {
 	 *
 	 * @return  boolean
 	 */
-	protected function process()
-	{
+	private function process() {
+
 		$request =& Application::getRequest();
 
-		if ($request->hasParam('in-background'))
-		{
+		if ($request->hasParam('in-background')) {
 			Application::runAsCli();
-		}
-		elseif ($request->hasParam('url'))
-		{
+		} elseif ($request->hasParam('url')) {
 			// собираем массив параметров запуска сервиса
 			$params = $request->getParams();
 
@@ -74,13 +74,13 @@ final class Splitter_Controller {
 				);
 			}
 
-			if ($this->_isDownloadNeeded())
+			if ($this->isDownloadNeeded())
 			{
 				$type = $request->getParam('storage', 'file');
 
-				$target = $this->_getTarget($type);
+				$target = $this->getTarget($type);
 
-				$params['storage'] =& $this->_getStorage($type, $target, $request->getParam('split-size'));
+				$params['storage'] =& $this->getStorage($type, $request->getParam('split-size'), $target);
 			}
 			else
 			{
@@ -103,7 +103,7 @@ final class Splitter_Controller {
 				{
 					$url = new Lib_Url($url);
 
-					if (is_object($handler =& $this->_getShareHandler($url, $request->getParam('method', 'get'))))
+					if (is_object($handler =& $this->getShareHandler($url, $request->getParam('method', 'get'))))
 					{
 						$handler->process($url, $params);
 
@@ -147,14 +147,14 @@ final class Splitter_Controller {
 	/**
 	 * Возвращает хранилище указанного типа.
 	 *
-	 * @param   string $type
-	 * @param   string $target
-	 * @param   integer $splitSize
-	 * @return  Splitter_Storage_Abstract
+	 * @param string $type
+	 * @param integer $split_size
+	 * @param string $target
+	 * @return Splitter_Storage_Abstract
 	 */
-	function _getStorage($type, $target, $splitSize) {
-		return $splitSize > 0
-			? new Splitter_Storage_Intf($type, $target, $splitSize)
+	private function getStorage($type, $split_size, $target) {
+		return $split_size > 0
+			? new Splitter_Storage_Intf($type, $split_size, $target)
 			: Splitter_Storage_Abstract::factory($type, $target);
 	}
 
@@ -164,10 +164,8 @@ final class Splitter_Controller {
 	 * @param   string $type
 	 * @return  string
 	 */
-	function _getTarget($type)
-	{
-		$request =& Application::getRequest();
-		return $request->getParam('target-' . $type);
+	private function getTarget($type) {
+		return Application::getRequest()->getParam('target-' . $type);
 	}
 
 	/**
@@ -176,23 +174,14 @@ final class Splitter_Controller {
 	 * @param   Lib_Url $url
 	 * @return  Splitter_Share_Abstract
 	 */
-	function _getShareHandler($url, $method)
-	{
-		$result = null;
-
-		foreach (System_Loader::getPackageClasses('Splitter_Share') as $className)
-		{
-			$handler = new $className();
-
-			if ($handler->canProcess($url, $method))
-			{
-				$result =& $handler;
-
-				break;
+	private function getShareHandler($url, $method) {
+		foreach (System_Loader::getPackageClasses('Splitter_Share') as $class) {
+			$handler = new $class;
+			if ($handler->canProcess($url, $method)) {
+				return $handler;
 			}
 		}
-
-		return $result;
+		return null;
 	}
 
 	/**
@@ -200,13 +189,9 @@ final class Splitter_Controller {
 	 *
 	 * @return  boolean
 	 */
-	function _isDownloadNeeded()
-	{
-		// определяем по кнопке, нажатой при отправке формы
-		$request =& Application::getRequest();
-
+	private function isDownloadNeeded() {
 		// проверяем, не была ли нажата кнопка "получить размер", т.к. если
 		// форма была отправлена не по нажатию кнопки, файл нужно скачивать
-		return !$request->hasParam('get-size');
+		return !Application::getRequest()->hasParam('get-size');
 	}
 }

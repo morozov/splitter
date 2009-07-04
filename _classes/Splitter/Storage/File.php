@@ -52,7 +52,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
-	 * @return string
+	 * @return Splitter_Storage_Abstract
 	 */
 	public function setFileName($fileName) {
 		if (is_resource($this->resource)) {
@@ -61,7 +61,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 		if (0 === strpos($fileName, '.ht')) {
 			throw new Splitter_Storage_Exception(sprintf('Given filename "%s" is not acceptable', $fileName));
 		}
-		parent::setFileName($fileName);
+		return parent::setFileName($fileName);
 	}
 
 	/**
@@ -82,10 +82,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function write($data) {
-		if (!is_resource($this->resource)) {
-			$this->resource = $this->implementation->open($this->getSavePath());
-		}
-		if (strlen($data) != fwrite($this->resource, $data)) {
+		if (strlen($data) != fwrite($this->getResource(), $data)) {
 			throw new Splitter_Storage_Exception('Unable to write to storage');
 		}
 	}
@@ -98,7 +95,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function truncate($size) {
-		if (ftruncate($this->resource, $size)) {
+		if (ftruncate($this->getResource(), $size)) {
 			throw new Splitter_Storage_Exception('Unable to truncate storage');
 		}
 	}
@@ -110,5 +107,13 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 */
 	protected function getSavePath() {
 		return $this->dir . $this->filename;
+	}
+
+	protected function getResource() {
+		if (!is_resource($this->resource)) {
+			Application::getResponse()->debug('Opening: ' . $this->getSavePath());
+			$this->resource = $this->implementation->open($this->getSavePath());
+		}
+		return $this->resource;
 	}
 }
