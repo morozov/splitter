@@ -136,7 +136,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * Пишет данные в хранилище.
 	 *
 	 * @param string $data
-	 * @return Splitter_Storage_Interface
+	 * @return Splitter_Storage_Abstract
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function write($data) {

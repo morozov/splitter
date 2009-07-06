@@ -5,7 +5,7 @@
  *
  * @version $Id$
  */
-abstract class Splitter_Storage_Abstract implements Splitter_Storage_Interface {
+abstract class Splitter_Storage_Abstract {
 
 	/**
 	 * Имя файла, в котором будут сохранены данные.
@@ -41,6 +41,7 @@ abstract class Splitter_Storage_Abstract implements Splitter_Storage_Interface {
 	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
+	 * @param string $filename
 	 * @return Splitter_Storage_Abstract
 	 */
 	public function setFileName($filename) {
@@ -51,6 +52,38 @@ abstract class Splitter_Storage_Abstract implements Splitter_Storage_Interface {
 		$this->filename = $filename;
 		return $this;
 	}
+
+	/**
+	 * Возвращает позицию, с которой нужно возобновить скачивание файла.
+	 *
+	 * @return integer
+	 */
+	abstract public function getResumePosition();
+
+	/**
+	 * Обрезает сохраняемый файл до указанной длины. Используется в случае, если
+	 * сервер не поддерживает докачку.
+	 *
+	 * @param integer $size
+	 * @throws Splitter_Storage_Exception
+	 */
+	abstract public function truncate($size);
+
+	/**
+	 * Пишет данные в хранилище.
+	 *
+	 * @param string $data
+	 * @return Splitter_Storage_Abstract
+	 * @throws Splitter_Storage_Exception
+	 */
+	abstract public function write($data);
+
+	/**
+	 * Фиксирует данные в хранилище.
+	 *
+	 * @throws Splitter_Storage_Exception
+	 */
+	abstract public function commit();
 
 	/**
 	 * Преобразует строку из UTF-8 в Windows-1251, если есть такая возможность.

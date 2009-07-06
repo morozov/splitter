@@ -79,7 +79,7 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 * Пишет данные в файл.
 	 *
 	 * @param string $data
-	 * @return Splitter_Storage_Interface
+	 * @return Splitter_Storage_Abstract
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function write($data) {
