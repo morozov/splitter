@@ -10,22 +10,18 @@ define('DOWNLOAD_STATUS_REDIRECT', 3);
  *
  * @version $Id$
  */
-class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
-{
+class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
+
 	/**
 	 * Протокол по умолчанию.
-	 *
-	 * @var string
 	 */
-	var $DEFAULT_PROTOCOL = 'http';
+	const DEFAULT_PROTOCOL = 'http';
 
 	/**
 	 * Максимальное количество перенаправлений, которое должен обработать клиент
-	 * (пока не реализовано).
-	 *
-	 * @var integer
+	 * во избежание бесконечного зацикливания (пока не реализовано).
 	 */
-	var $MAX_REDIRECTS_COUNT = 10;
+	const MAX_REDIRECTS_COUNT = 10;
 
 	/**
 	 * Добавляет загрузку файла.
@@ -84,7 +80,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 
 		// определяем протокол урла
 		$className = 'Splitter_Service_Download_'
-			. ucfirst($url->getScheme($this->DEFAULT_PROTOCOL));
+			. ucfirst($url->getScheme(self::DEFAULT_PROTOCOL));
 
 		if (class_exists($className))
 		{
