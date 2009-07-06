@@ -5,8 +5,8 @@
  *
  * @version $Id$
  */
-abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstract
-{
+abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstract {
+
 	/**
 	 * Размер буфера чтения из сокета.
 	 */

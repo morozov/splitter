@@ -47,7 +47,7 @@ abstract class Splitter_Storage_Abstract {
 	public function setFileName($filename) {
 		// здесь нужно убедиться, что установлена верная локаль
 		if ($filename != basename($filename)) {
-			throw new Splitter_Storage_Exception(sprintf('No path allowed in filename, "%s" is given', $fileName));
+			throw new Splitter_Storage_Exception(sprintf('No path allowed in filename, "%s" is given', $filename));
 		}
 		$this->filename = $filename;
 		return $this;

@@ -19,7 +19,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 
 	/**
 	 * Максимальное количество перенаправлений, которое должен обработать клиент
-	 * во избежание бесконечного зацикливания (пока не реализовано).
+	 * во избежание бесконечного зацикливания.
 	 */
 	const MAX_REDIRECTS_COUNT = 10;
 
@@ -33,34 +33,30 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 	{
 		$result = parent::run($params, $reset);
 
+		$redirects = 0;
+
 		do
 		{
 			$isRedirected = false;
 
-			// пытаемся создать сервис скачивания файла
-			if (is_object($service = $this->_createDownloadService($params['url'])))
-			{
-				// запускаем сервис
-				$result = $this->_runService($service, $params);
+			$service = $this->getDownloadService($params['url']);
 
-				if (DOWNLOAD_STATUS_REDIRECT == $result->offsetGet('status'))
-				{
-					$params['method'] = 'get';
-					$params['url'] = $result->offsetGet('url');
-					$params['referer'] = $result->offsetGet('referer');
+			// запускаем сервис
+			$result = $this->_runService($service, $params);
 
-					$isRedirected = true;
-				}
-			}
-			else
-			{
-				// отправляем сообщение об ошибке протокола
-				trigger_error('Скачивание по протоколу "'
-					. strtoupper($params['url']->getScheme())
-					. '" не реализовано', E_USER_WARNING);
+			if (DOWNLOAD_STATUS_REDIRECT == $result->offsetGet('status')) {
+				$params['method'] = 'get';
+				$params['url'] = $result->offsetGet('url');
+				$params['referer'] = $result->offsetGet('referer');
 
-				// передаем ошибку в результат
-				$result->offsetSet('status', DOWNLOAD_STATUS_ERROR);
+				$isRedirected = true;
+				if (++$redirects > self::MAX_REDIRECTS_COUNT) {
+					throw new Splitter_Service_Download_Exception(
+						sprintf('Количество перенаправлений превысило %d',
+							self::MAX_REDIRECTS_COUNT
+						)
+					);
+				};
 			}
 		}
 		while ($isRedirected);
@@ -71,24 +67,20 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 	/**
 	 * Создает и возвращает объект сервиса скачивания файла.
 	 *
-	 * @param Url
+	 * @param Lib_Url $url
 	 * @return Splitter_Service_Download_Abstract
 	 */
-	function _createDownloadService(&$url)
-	{
-		$service = null;
-
-		// определяем протокол урла
-		$className = 'Splitter_Service_Download_'
+	protected function getDownloadService(Lib_Url $url) {
+		$class = 'Splitter_Service_Download_'
 			. ucfirst($url->getScheme(self::DEFAULT_PROTOCOL));
-
-		if (class_exists($className))
-		{
-			// создаем экземпляр сервиса для обработки данного протокола
-			$service = new $className();
+		if (!class_exists($class)) {
+			throw new Splitter_Service_Download_Exception(
+				sprintf('Скачивание по протоколу "%s" не реализовано',
+					strtoupper($url->getScheme())
+				)
+			);
 		}
-
-		return $service;
+		return new $class;
 	}
 
 	/**

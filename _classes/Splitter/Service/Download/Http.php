@@ -5,51 +5,24 @@
  *
  * @version $Id$
  */
-class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
-{
+class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract {
+
 	/**
 	 * Массив наименований заголовков ответа и директив, из которых можно
 	 * получить имя скачиваемого файла.
 	 *
 	 * @var array
 	 */
-	var $FILENAME_SOURCE_HEADERS = array
-	(
+	protected static $filename_source_headers = array (
 		'Content-Disposition' => 'filename',
-		'Content-Type' => 'name',
+		'Content-Type'        => 'name',
 	);
-
-	/**
-	 * Шаблон шаблона регулярного выражения для определения значения директивы
-	 * заголовка. Да, да. именно шаблон шаблона, см. реализацию.
-	 *
-	 * @var string
-	 */
-	var $REGEXP_HEADER_DIRECTIVE = '/%s\s*=\s*(?(?=")"([^"]*)|([^;]*))/i';
-
-	/**
-	 * Шаблон регулярного выражения для определения длины файла из заголовка
-	 * Content-Length
-	 *
-	 * @var string
-	 */
-	var $REGEXP_CONTENT_LENGTH = '|(\d+)|';
-
-	/**
-	 * Шаблон регулярного выражения для определения диапазона данных и длины
-	 * файла из заголовка Content-Range
-	 *
-	 * @var string
-	 */
-	var $REGEXP_CONTENT_RANGE = '|bytes\s+(\d*)\-((\d*)(/(\d*))?)?$|';
 
 	/**
 	 * Имя файла по умолчанию. используется, если не удалось определить ни
 	 * одним из доступных способов.
-	 *
-	 * @var string
 	 */
-	var $DEFAULT_FILENAME = 'noname.html';
+	const DEFAULT_FILENAME = 'noname.html';
 
 	/**
 	 * Запускает скачивание файла по протоколу HTTP.
@@ -100,16 +73,9 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 *
 	 * @return string
 	 */
-	function _getFileName()
-	{
-		// если имя файла не удалось определить
-		if (is_null($fileName = parent::_getFileName()))
-		{
-			// выставляем в значение по умолчанию
-			$fileName = $this->DEFAULT_FILENAME;
-		}
-
-		return $fileName;
+	function _getFileName() {
+		return null !== ($filename = parent::_getFileName())
+			? $filename : self::DEFAULT_FILENAME;
 	}
 
 	/**
@@ -143,9 +109,8 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 		switch (true)
 		{
 			// пытаемся определить размер файла по Content-Range
-			case preg_match
-			(
-				$this->REGEXP_CONTENT_RANGE,
+			case preg_match(
+				'|bytes\s+(\d*)\-((\d*)(/(\d*))?)?$|',
 				$this->_conn->getResponseHeader('Content-Range'),
 				$matches
 			) && isset($matches[5]):
@@ -153,9 +118,8 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 				break;
 
 			// пытаемся определить размер файла по Content-Length
-			case preg_match
-			(
-				$this->REGEXP_CONTENT_LENGTH,
+			case preg_match(
+				'|(\d+)|',
 				$this->_conn->getResponseHeader('Content-Length'),
 				$matches
 			):
@@ -191,7 +155,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	{
 		return preg_match
 		(
-			$this->REGEXP_CONTENT_RANGE,
+			'|(\d+)|',
 			$this->_conn->getResponseHeader('Content-Range'),
 			$matches
 		) ? (int)$matches[1] : 0;
@@ -383,7 +347,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 				// было указано явно, то все изменения игнорируем, оно имеет
 				// самый высокий приоритет
 				if (!$this->_hasParam('filename')
-					&& (!is_null($fileName = $this->_getFileNameFromResponse())))
+					&& (!is_null($fileName = $this->getFileNameFromResponse())))
 				{
 					// устанавливаем измененное имя файла
 					$storage->setFileName($fileName);
@@ -453,37 +417,35 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 *
 	 * @return string
 	 */
-	function _getFileNameFromResponse()
-	{
-		$fileName = null;
+	protected function getFileNameFromResponse() {
+
+		$filename = null;
 
 		// проходим по массиву заголовков и директив для определения имени файла,
 		// пока не определим имя файла по одному из них
-		for (reset($this->FILENAME_SOURCE_HEADERS);
-			is_null($fileName)
-				&& list($headerName, $directiveName)
-					= each($this->FILENAME_SOURCE_HEADERS);)
-		{
+		for (reset(self::$filename_source_headers);
+			is_null($filename)
+				&& list($header_name, $directive_name)
+					= each(self::$filename_source_headers);) {
 			// определяем имя файла как значение соответствующей директивы
-			$fileName = $this->_getHeaderDirective($headerName, $directiveName);
+			$filename = $this->_getHeaderDirective($header_name, $directive_name);
 		}
 
 		// если не удалось определить, и ответ сервера содержит HTML
-		if (is_null($fileName) &&  $this->_isHtml())
-		{
+		if (is_null($filename) && $this->isHtml()) {
+
 			// определяем, под каким именем мы собираемся сохранить файл
-			$storage = $this->_getStorage();
-			$storageFileName = $storage->getFileName();
+			$filename_from_storage = $this->_getStorage()->getFileName();
 
 			// если это имя не содержит расширения 'html'
-			if (!preg_match('|\.html?$|', $storageFileName))
-			{
+			if (!preg_match('|\.html?$|', $filename_from_storage)) {
+
 				// добавляем его
-				$fileName = $storageFileName . '.html';
+				$filename = $filename_from_storage . '.html';
 			}
 		}
 
-		return $fileName;
+		return $filename;
 	}
 
 	/**
@@ -494,12 +456,9 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 */
 	function _getHeaderDirective($headerName, $directiveName)
 	{
-		return preg_match
-		(
-			// составляем шаблон регулярного выражения
-			sprintf
-			(
-				$this->REGEXP_HEADER_DIRECTIVE,
+		return preg_match(
+			sprintf(
+				'/%s\s*=\s*(?(?=")"([^"]*)|([^;]*))/i',
 				preg_quote($directiveName)
 			),
 			// проверяем совпадение в искомом заголовке ответа
@@ -539,8 +498,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 *
 	 * @return boolean
 	 */
-	function _isHtml()
-	{
+	protected function isHtml() {
 		return 'text/html' == $this->_conn->getResponseHeader('Content-Type', false);
 	}
 }
