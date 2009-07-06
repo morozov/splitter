@@ -111,7 +111,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Возвращает указанный заголовок ответа сервера в полной или краткой форме.
 	 *
-	 * @access public
 	 * @param string   $param
 	 * @param boolean  $complete
 	 * @return string
@@ -128,7 +127,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Возвращает все заголовки ответа сервера.
 	 *
-	 * @access public
 	 * @return array
 	 */
 	function getAllResponseHeaders()
@@ -139,7 +137,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Устанавливает заголовок запроса к серверу.
 	 *
-	 * @access public
 	 * @param string   $param
 	 * @param string   $value
 	 */
@@ -152,7 +149,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Перекрывает метод предка и возвращает управляющий сокет, т.к. в HTTP
 	 * управление и передача данных осуществляются вместе.
 	 *
-	 * @access public
 	 * @return Socket
 	 */
 	function getDataSocket()
@@ -163,7 +159,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Устанавливает заголовки запроса в значения по умолчанию.
 	 *
-	 * @access protected
 	 */
 	function _onAfterConnect()
 	{
@@ -181,7 +176,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Возвращает значение элемента массива с указанным ключом.
 	 * Нечувствителен к регистру.
 	 *
-	 * @access private
 	 * @param array	$searchArray
 	 * @param string   $searchKey
 	 * @return string
@@ -205,7 +199,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Устанавливает значение элемента массива с указанным ключом.
 	 * Нечувствителен к регистру.
 	 *
-	 * @access private
 	 * @param array	$searchArray
 	 * @param string   $searchKey
 	 * @param string   $value
@@ -231,7 +224,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Разбирает текст заголовков ответа сервера.
 	 *
-	 * @access private
 	 */
 	function _parseHeaders($headers)
 	{
@@ -293,7 +285,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Читает заголовки ответа сервера.
 	 *
-	 * @access private
 	 */
 	function _readHeaders()
 	{
@@ -325,7 +316,6 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	/**
 	 * Отправляет заголовки запроса.
 	 *
-	 * @access private
 	 */
 	function _sendHeaders()
 	{
