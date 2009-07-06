@@ -3,13 +3,9 @@
 class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 
 	private
-		$dir = '.',
+		$dir = '/tmp',
 		$filename = 'test.txt',
 		$contents = 'Lorem ipsum';
-
-	public function setUp() {
-		$this->dir = dirname(__FILE__) . '/tmp';
-	}
 
 	public function testAllowedFilename() {
 		try {

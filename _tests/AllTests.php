@@ -16,6 +16,8 @@ class AllTests {
 		$suite = new PHPUnit_Framework_TestSuite('Splitter');
 		$suite->addTestSuite('Splitter_Storage_EmailTest');
 		$suite->addTestSuite('Splitter_Storage_FileTest');
+
+		$suite->addTestSuite('Splitter_Service_Download_IntfTest');
 		return $suite;
 	}
 }
