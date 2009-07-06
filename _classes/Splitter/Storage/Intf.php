@@ -270,6 +270,6 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			'filename=%s',
 			'size=%d',
 			'crc32=%s',
-		)), self::utf2win($filename), $size, strtoupper($crc32));
+		)), Application::utf2win($filename), $size, strtoupper($crc32));
 	}
 }

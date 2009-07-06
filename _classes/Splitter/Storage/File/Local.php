@@ -22,7 +22,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 
 		$resource = parent::open(
 			Application::isWindows()
-				? Splitter_Storage_Abstract::utf2win($path)
+				? Application::utf2win($path)
 				: $path);
 
 		if (!flock($resource, LOCK_EX | LOCK_NB)) {
