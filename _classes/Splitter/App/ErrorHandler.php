@@ -42,7 +42,7 @@ class Splitter_App_ErrorHandler
 				: $this->_getPrefix($errno) . $errstr . ' in ' . $errfile . ':' . $errline;
 
 			// отправляем сообщение об ошибке в ответ
-			$response =& Application::getResponse();
+			$response = Application::getResponse();
 			$response->write($message, 'error');
 
 			if (!$isUserDefined)

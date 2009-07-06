@@ -30,7 +30,7 @@ final class Splitter_Controller {
 	 */
 	private function process() {
 
-		$request =& Application::getRequest();
+		$request = Application::getRequest();
 
 		if ($request->hasParam('in-background')) {
 			Application::runAsCli();
@@ -73,7 +73,7 @@ final class Splitter_Controller {
 
 				$target = $this->getTarget($type);
 
-				$params['storage'] =& $this->getStorage($type, $request->getParam('split-size'), $target);
+				$params['storage'] = $this->getStorage($type, $request->getParam('split-size'), $target);
 			}
 			else
 			{
@@ -96,16 +96,16 @@ final class Splitter_Controller {
 				{
 					$url = new Lib_Url($url);
 
-					if (is_object($handler =& $this->getShareHandler($url, $request->getParam('method', 'get'))))
+					if (is_object($handler = $this->getShareHandler($url, $request->getParam('method', 'get'))))
 					{
 						$handler->process($url, $params);
 
 						break;
 					}
 
-					$params['url'] =& $url;
+					$params['url'] = $url;
 
-					$result =& $service->run($params);
+					$result = $service->run($params);
 
 					if (DOWNLOAD_STATUS_FATAL == $result->offsetGet('status'))
 					{
@@ -116,7 +116,7 @@ final class Splitter_Controller {
 
 			if ($make_links)
 			{
-				$response =& Application::getResponse();
+				$response = Application::getResponse();
 
 				$messages = array();
 

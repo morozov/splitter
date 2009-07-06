@@ -398,7 +398,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 			{
 				list($host, $port) = $hostnport;
 
-				$this->_dataSocket =& $this->_createSocket($host, $port);
+				$this->_dataSocket = $this->_createSocket($host, $port);
 			}
 			else
 			{

@@ -141,7 +141,7 @@ abstract class Splitter_Connection_Abstract {
 		$port = $this->_url->getPort($this->DEFAULT_PORT);
 
 		// пытаемся открыть управляющий сокет
-		$this->_controlSocket =& $this->_createSocket($host, $port);
+		$this->_controlSocket = $this->_createSocket($host, $port);
 
 		// если соединились
 		return $this->_isConnected()

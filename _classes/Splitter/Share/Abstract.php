@@ -62,7 +62,7 @@ abstract class Splitter_Share_Abstract
 	 */
 	function _getParams(&$url, $params = array(), $name = null)
 	{
-		$parser =& $this->_getParser($name);
+		$parser = $this->_getParser($name);
 
 		return $parser->parse($url, $params);
 	}

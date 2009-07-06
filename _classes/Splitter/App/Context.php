@@ -40,7 +40,7 @@ class Splitter_App_Context
 	{
 		if (!array_key_exists($name, $this->_objects))
 		{
-			$this->_objects[$name] =& $this->_createObject($name);
+			$this->_objects[$name] = $this->_createObject($name);
 		}
 
 		return $this->_objects[$name];

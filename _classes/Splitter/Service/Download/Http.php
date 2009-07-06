@@ -63,10 +63,10 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 */
 	function run($params, $reset = true)
 	{
-		$result =& parent::run($params, $reset);
+		$result = parent::run($params, $reset);
 
 		// получаем объект URL из параметров запуска
-		$url =& $this->_getUrl();
+		$url = $this->_getUrl();
 
 		// подправляем значение метода запроса
 		$this->_setParam('method', $method = $this->_getRequestMethod());
@@ -232,7 +232,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	function _setAuthHeader()
 	{
 		// получаем объект URL скачиваемого файла
-		$url =& $this->_getUrl();
+		$url = $this->_getUrl();
 
 		// определяем имя пользователя для доступа к файлу
 		$userName = $url->getUserName();
@@ -298,7 +298,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 */
 	function _setRangeHeader()
 	{
-		$storage =& $this->_getStorage();
+		$storage = $this->_getStorage();
 
 		// определяем, нужно ли докачивать частично скачанный файл
 		if (($pos = $storage->getResumePosition()) > 0)
@@ -314,7 +314,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	 */
 	function _setUserAgentHeader()
 	{
-		$settings =& Application::getSettings();
+		$settings = Application::getSettings();
 
 		if (strlen($agent = $settings->getParam('user-agent')) > 0)
 		{
@@ -345,13 +345,13 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 	function _processResponse(&$result)
 	{
 		// в случае, если было получено перенаправление, прекращаем обработку
-		if (is_object($url =& $this->_getRedirectUrl()))
+		if (is_object($url = $this->_getRedirectUrl()))
 		{
 			// генерируем сообщение о преренаправлении
-			$response =& Application::getResponse();
+			$response = Application::getResponse();
 			$response->write('Получено перенаправление на ' . $url->toString());
 
-			$referer =& $this->_getUrl();
+			$referer = $this->_getUrl();
 
 			// перезапускаем закачку с указанием старого урла в качестве
 			// реферера, нового урла и старого явного имени
@@ -377,7 +377,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 				// для которого определялась стартовая позиция скачивания
 				$fileNameChanged = false;
 
-				$storage =& $this->_getStorage();
+				$storage = $this->_getStorage();
 
 				// определяем, изменилось ли имя файла. при этом если имя файла
 				// было указано явно, то все изменения игнорируем, оно имеет
@@ -472,7 +472,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract
 		if (is_null($fileName) &&  $this->_isHtml())
 		{
 			// определяем, под каким именем мы собираемся сохранить файл
-			$storage =& $this->_getStorage();
+			$storage = $this->_getStorage();
 			$storageFileName = $storage->getFileName();
 
 			// если это имя не содержит расширения 'html'

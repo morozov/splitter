@@ -22,10 +22,10 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 	 */
 	function run($params, $reset = true)
 	{
-		$result =& parent::run($params, $reset);
+		$result = parent::run($params, $reset);
 
 		// получаем объект URL из параметров запуска
-		$url =& $this->_getUrl();
+		$url = $this->_getUrl();
 
 		// открываем соединение с сервером
 		if ($this->_conn->connect($url->toString()))
@@ -61,7 +61,7 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 				// если нужно скачивать файл
 				if ($this->_isDownloadNeeded())
 				{
-					$storage =& $this->_getStorage();
+					$storage = $this->_getStorage();
 
 					// отправляем запрос на получение данных
 					if (false !== ($start = $this->_conn->retrieve($fileName, $storage->getResumePosition()))

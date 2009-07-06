@@ -22,7 +22,7 @@ abstract class Splitter_Resource_Abstract
 	 */
 	function Splitter_Resource_Abstract(&$url)
 	{
-		$this->_url =& $url;
+		$this->_url = $url;
 	}
 
 	/**
@@ -52,7 +52,7 @@ abstract class Splitter_Resource_Abstract
 		}
 		else
 		{
-			$resource =& new Splitter_Resource_Abstract($url, $params);
+			$resource = new Splitter_Resource_Abstract($url, $params);
 		}
 
 		return $resource;

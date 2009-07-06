@@ -57,7 +57,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	 */
 	function run($params, $reset = true)
 	{
-		$result =& parent::run($params, $reset);
+		$result = parent::run($params, $reset);
 
 		// по умолчанию статус закачки - ERROR. Успешный статус будет выставлен
 		// только после успешного сохранения файла
@@ -107,7 +107,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 
 		if ($this->_isDownloadNeeded())
 		{
-			$storage =& $this->_getStorage();
+			$storage = $this->_getStorage();
 
 			if (isset($GLOBALS['rename'])) {
 				$fileName = $GLOBALS['rename']->rename($fileName);
@@ -129,7 +129,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	function _store(&$result, $position, $size)
 	{
 		// получаем ссылку на хранилище
-		$storage =& $this->_getStorage();
+		$storage = $this->_getStorage();
 
 		// если позиция возобновления закачки сервера не соответствует размеру
 		// скачанного файла, обрезаем файл до соответствующего размера
@@ -144,7 +144,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 		}
 
 		// получаем ссылку на сокет с данными
-		$socket =& $this->_conn->getDataSocket();
+		$socket = $this->_conn->getDataSocket();
 
 		// устанавливаем временную метку в значение начала чтения данных
 		$timer = new System_Timer();
@@ -209,7 +209,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	function _getFileNameFromUrl()
 	{
 		// получаем объект URL из параметров запуска
-		$url =& $this->_getUrl();
+		$url = $this->_getUrl();
 
 		return rawurldecode($url->getFileName());
 	}
@@ -222,7 +222,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	function _getUrl()
 	{
 		// получаем объект URL из параметров запуска
-		$url =& $this->_getParam('url');
+		$url = $this->_getParam('url');
 
 		return $url;
 	}
@@ -234,7 +234,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	 */
 	function _getStorage()
 	{
-		$storage =& $this->_getParam('storage');
+		$storage = $this->_getParam('storage');
 
 		return $storage;
 	}
@@ -246,7 +246,7 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 	 */
 	function _isDownloadNeeded()
 	{
-		return is_object($storage =& $this->_getStorage())
+		return is_object($storage = $this->_getStorage())
 			&& (!method_exists($storage, 'isDownloadNeeded') || $storage->isDownloadNeeded());
 	}
 

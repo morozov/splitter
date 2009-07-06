@@ -47,7 +47,7 @@ class Splitter_Share_DepositFiles extends Splitter_Share_Abstract
 	 */
 	function _output($params)
 	{
-		$response =& Application::getResponse();
+		$response = Application::getResponse();
 		$response->call('captcha', $this->CAPTCHA_FIELD, $params['captcha']);
 		$response->call('param', 'post-data', 'file_password=&gateway_result=1&icid=' . $params['icid'] . '&go=1');
 		$response->call('param', 'method', 'post');

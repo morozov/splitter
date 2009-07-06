@@ -23,7 +23,7 @@ class System_RunInBg
 	 */
 	function run()
 	{
-		$imp =& $this->_getImplementation();
+		$imp = $this->_getImplementation();
 		return $imp->run($_SERVER['SCRIPT_FILENAME'] . ' ' . $this->_getArgs());
 	}
 
@@ -39,7 +39,7 @@ class System_RunInBg
 		// @link http://bugs.php.net/bug.php?id=40928
 		$PERCENT = '__' . md5(uniqid(rand(), true)) . '__';
 
-		$request =& Application::getRequest();
+		$request = Application::getRequest();
 
 		// проходим по массиву параметров пользовательского запроса
 		foreach ($request->getParams() as $name => $value)

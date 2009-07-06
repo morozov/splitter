@@ -23,8 +23,8 @@ class Application
 	 * @static */
 	function getRequest()
 	{
-		$context =& Application::_getContext();
-		$request =& $context->getObject('request');
+		$context = Application::_getContext();
+		$request = $context->getObject('request');
 		return $request;
 	}
 
@@ -35,8 +35,8 @@ class Application
 	 * @static */
 	function getResponse()
 	{
-		$context =& Application::_getContext();
-		$response =& $context->getObject('response');
+		$context = Application::_getContext();
+		$response = $context->getObject('response');
 		return $response;
 	}
 
@@ -47,8 +47,8 @@ class Application
 	 * @static */
 	function getSettings()
 	{
-		$context =& Application::_getContext();
-		$settings =& $context->getObject('settings');
+		$context = Application::_getContext();
+		$settings = $context->getObject('settings');
 		return $settings;
 	}
 
@@ -60,7 +60,7 @@ class Application
 	{
 		if (!Application::_isCli())
 		{
-			$response =& Application::getResponse();
+			$response = Application::getResponse();
 			$response->write('Перезапуск в режиме командной строки');
 
 			$intf = new System_RunInBg();

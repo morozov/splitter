@@ -16,13 +16,13 @@ class Splitter_Utils_GetSize
 	function getSize(&$url)
 	{
 		//:TODO: morozov 03122006: надо создать отдельный класс ресурсов
-		$params['url'] =& $url;
+		$params['url'] = $url;
 
 		// создаем сервис закачки
 		$service = new Splitter_Service_Download_Intf();
 
 		// запускаем сервис
-		$result =& $service->run($params);
+		$result = $service->run($params);
 
 		// если сервис отработал успешно
 		return DOWNLOAD_STATUS_OK == $result->offsetGet('status')

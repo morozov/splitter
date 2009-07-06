@@ -85,7 +85,7 @@ class Splitter_Share_RapidShare extends Splitter_Share_Abstract
 	 */
 	function _output($params)
 	{
-		$response =& Application::getResponse();
+		$response = Application::getResponse();
 		if (isset($params['counter'])) {
 			$response->call('counter', $params['counter']);
 		}

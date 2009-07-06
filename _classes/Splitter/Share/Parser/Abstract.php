@@ -36,7 +36,7 @@ abstract class Splitter_Share_Parser_Abstract
 	 */
 	function _getElementAttribute($contents, $tagName, $attribute, $callback = null)
 	{
-		$parser =& new HtmlParser($contents);
+		$parser = new HtmlParser($contents);
 
 		// парсер идет по документу
 		while ($parser->parse())

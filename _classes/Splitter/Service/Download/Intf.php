@@ -35,22 +35,22 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 	 */
 	function run($params, $reset = true)
 	{
-		$result =& parent::run($params, $reset);
+		$result = parent::run($params, $reset);
 
 		do
 		{
 			$isRedirected = false;
 
 			// пытаемся создать сервис скачивания файла
-			if (is_object($service =& $this->_createDownloadService($params['url'])))
+			if (is_object($service = $this->_createDownloadService($params['url'])))
 			{
 				// запускаем сервис
-				$result =& $this->_runService($service, $params);
+				$result = $this->_runService($service, $params);
 
 				if (DOWNLOAD_STATUS_REDIRECT == $result->offsetGet('status'))
 				{
 					$params['method'] = 'get';
-					$params['url'] =& $result->offsetGet('url');
+					$params['url'] = $result->offsetGet('url');
 					$params['referer'] = $result->offsetGet('referer');
 
 					$isRedirected = true;
@@ -104,7 +104,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 	 */
 	function _runService(&$service, $params)
 	{
-		$settings =& Application::getSettings();
+		$settings = Application::getSettings();
 
 		$useAutoResume = $settings->getParam('use-auto-resume');
 		$autoResumeCount = $settings->getParam('auto-resume-count');
@@ -117,7 +117,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 			$restartNeeded = false;
 
 			// запускаем сервис-реализацию
-			$result =& $service->run($params);
+			$result = $service->run($params);
 
 			// получаем статус результата
 			switch ($result->offsetGet('status'))
@@ -137,7 +137,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract
 
 					if ($useAutoResume && (++$restartsCount < $autoResumeCount))
 					{
-						$response =& Application::getResponse();
+						$response = Application::getResponse();
 						$response->write
 						(
 							sprintf

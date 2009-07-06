@@ -42,7 +42,7 @@ abstract class Splitter_Service_Abstract
 	 */
 	function fireEvent()
 	{
-		$response =& Application::getResponse();
+		$response = Application::getResponse();
 
 		$args = func_get_args();
 

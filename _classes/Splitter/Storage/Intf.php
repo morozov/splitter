@@ -86,7 +86,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			return 0;
 		}
 
-		$storage =& $this->_createStorage();
+		$storage = $this->_createStorage();
 
 		$part = 0;
 
