@@ -8,6 +8,11 @@
 class Splitter_Storage_Email extends Splitter_Storage_Ram {
 
 	/**
+	 * Набор символов почтового сообщения.
+	 */
+	const CHARSET = 'utf-8';
+
+	/**
 	 * Адрес, на который нужно отправить сообщение.
 	 *
 	 * @var string
@@ -34,13 +39,13 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function commit() {
-		$mail = new Zend_Mail('utf-8');
+		$mail = new Zend_Mail(self::CHARSET);
 		$mail->setFrom($this->_getFrom())
 			->addTo($this->to)
 			->setSubject($this->_getSubject())
 			->setBodyText($this->_getText());
 		$attachment = $mail->createAttachment($this->getContents());
-		$attachment->filename = $this->filename;
+		$attachment->filename = Zend_Mime::encodeBase64Header($this->filename, self::CHARSET);
 		try {
 			$mail->send();
 		} catch (Zend_Mail_Transport_Exception $e) {
