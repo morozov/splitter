@@ -30,9 +30,12 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract {
 	 * Пишет данные в файл.
 	 *
 	 * @param string $data
+	 * @return Splitter_Storage_Interface
+	 * @throws Splitter_Storage_Exception
 	 */
 	public function write($data) {
 		$this->_contents .= $data;
+		return $this;
 	}
 
 	/**
@@ -43,6 +46,13 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract {
 	public function truncate($size) {
 		$this->_contents = substr($this->_contents, 0, $size);
 	}
+
+	/**
+	 * Фиксирует данные в хранилище.
+	 *
+	 * @throws Splitter_Storage_Exception
+	 */
+	public function commit() { }
 
 	/**
 	 * Возвращает содержимое хранилища.

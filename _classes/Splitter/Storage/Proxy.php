@@ -76,36 +76,19 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	}
 
 	/**
-	 * Открывает хранилище.
-	 *
-	 * @param integer $size
-	 * @return boolean
-	 */
-	function open($size)
-	{
-		$this->_opened = true;
-
-		return parent::open($size);
-	}
-
-	/**
 	 * Пишет данные в файл.
 	 *
-	 * @param string   $data   Данные для записи
-	 * @return boolean		  Были ли данные успешно записаны
+	 * @param string $data
+	 * @return Splitter_Storage_Interface
+	 * @throws Splitter_Storage_Exception
 	 */
-	function write($data)
-	{
-		if (!$this->_headersSent)
-		{
+	public function write($data) {
+		if (!$this->_headersSent) {
 			$this->_sendHeaders();
-
 			$this->_headersSent = true;
 		}
-
 		echo $data;
-
-		return true;
+		return $this;
 	}
 
 	/**
@@ -156,4 +139,11 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 			header($_SERVER['SERVER_PROTOCOL'] . ' ' . '404 Not Found');
 		}
 	}
+
+	/**
+	 * Фиксирует данные в хранилище.
+	 *
+	 * @throws Splitter_Storage_Exception
+	 */
+	public function commit() { }
 }

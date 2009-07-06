@@ -183,6 +183,9 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 		// в случае, если успешно дошли до конца данных
 		if (DOWNLOAD_STATUS_FATAL != $result->offsetGet('status'))
 		{
+			// фиксируем данные в хранилище
+			$storage->commit();
+
 			// если известен размер скачиваемого  файла, и размер сохраненного
 			// файла меньше, чем оригинала
 			if (!is_null($size) && $position < $size)

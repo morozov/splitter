@@ -122,12 +122,24 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	}
 
 	/**
+	 * Обрезает сохраняемый файл до указанной длины. Используется в случае, если
+	 * сервер не поддерживает докачку.
+	 *
+	 * @param integer $size
+	 * @throws Splitter_Storage_Exception
+	 */
+	public function truncate($size) {
+		throw new Splitter_Storage_Exception('Currently not implemented');
+	}
+
+	/**
 	 * Пишет данные в хранилище.
 	 *
 	 * @param string $data
-	 * @return boolean
+	 * @return Splitter_Storage_Interface
+	 * @throws Splitter_Storage_Exception
 	 */
-	function write($data) {
+	public function write($data) {
 
 		if (!$this->storage) {
 			$this->_next($this->getResumePosition() - $this->part * $this->split_size);
@@ -158,14 +170,16 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			// а этот кусок данных нужно дописать в следующую часть
 			$data = substr($data, $space);
 		} while (strlen($data) > 0);
+		return $this;
 	}
 
 	/**
-	 * Завершает сохранение данных. Закрывает хранилище для текущей части.
+	 * Фиксирует данные в хранилище.
 	 *
-	 * @return boolean
+	 * @throws Splitter_Storage_Exception
 	 */
-	public function __destruct() {
+	public function commit() {
+		$this->storage->commit();
 		$this->_createStorage()
 			->setFileName($this->_getPartFileName('crc'))
 			->write(
@@ -174,7 +188,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 					$this->written_total,
 					hash_final($this->hash)
 				)
-			);
+			)->commit();
 	}
 
 	/**
@@ -194,6 +208,11 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @return boolean
 	 */
 	function _next($position = 0) {
+
+		// пытаемся закрыть предыдущую часть
+		if ($this->storage) {
+			$this->storage->commit();
+		}
 
 		// следующая часть
 		++$this->part;

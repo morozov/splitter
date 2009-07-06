@@ -41,10 +41,11 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	}
 
 	/**
-	 * Деструктор.
+	 * Фиксирует данные в хранилище.
 	 *
+	 * @throws Splitter_Storage_Exception
 	 */
-	public function __destruct() {
+	public function commit() {
 		if (is_resource($this->resource)) {
 			fclose($this->resource);
 		}
@@ -80,12 +81,14 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 * Пишет данные в файл.
 	 *
 	 * @param string $data
+	 * @return Splitter_Storage_Interface
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function write($data) {
 		if (strlen($data) != fwrite($this->getResource(), $data)) {
 			throw new Splitter_Storage_Exception('Unable to write to storage');
 		}
+		return $this;
 	}
 
 	/**

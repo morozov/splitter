@@ -5,7 +5,7 @@
  *
  * @version $Id$
  */
-abstract class Splitter_Storage_Abstract {
+abstract class Splitter_Storage_Abstract implements Splitter_Storage_Interface {
 
 	/**
 	 * Имя файла, в котором будут сохранены данные.

@@ -29,11 +29,11 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	}
 
 	/**
-	 * Деструктор.
+	 * Фиксирует данные в хранилище.
 	 *
+	 * @throws Splitter_Storage_Exception
 	 */
-	public function __destruct() {
-		Application::getResponse()->debug('sending');
+	public function commit() {
 		$mail = new Zend_Mail('utf-8');
 		$mail->setFrom($this->_getFrom())
 			->addTo($this->to)

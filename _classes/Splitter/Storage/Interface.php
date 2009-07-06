@@ -41,7 +41,15 @@ interface Splitter_Storage_Interface {
 	 * Пишет данные в хранилище.
 	 *
 	 * @param string $data
+	 * @return Splitter_Storage_Interface
 	 * @throws Splitter_Storage_Exception
 	 */
 	public function write($data);
+
+	/**
+	 * Фиксирует данные в хранилище.
+	 *
+	 * @throws Splitter_Storage_Exception
+	 */
+	public function commit();
 }
