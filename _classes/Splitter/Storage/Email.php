@@ -15,17 +15,6 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	protected $to;
 
 	/**
-	 * Означает, что при закрытии была выполнена попытка отправить файл.
-	 * Используется как мера безопасности для избежания двойной отправки
-	 * сообщения в случае, если клиент выполнит close() более одного раза для
-	 * одного файла.
-	 *
-	 * @access private
-	 * @var boolean
-	 */
-	var $_sent = false;
-
-	/**
 	 * Конструктор.
 	 *
 	 * @param string $to
@@ -40,120 +29,49 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	}
 
 	/**
-	 * Открывает хранилище.
+	 * Деструктор.
 	 *
-	 * @access public
-	 * @param integer $size
-	 * @return boolean
 	 */
-	function open($size)
-	{
-		// сбрасываем флаг попытки отправки сообщения
-		$this->_sent = false;
-
-		return parent::open($size);
-	}
-
-	/**
-	 * Завершает сохранение данных. �?нициирует отправку почтового сообщения.
-	 *
-	 * @access protected
-	 * @return boolean
-	 */
-	function _close()
-	{
-		$result = false;
-
-		switch (false)
-		{
-			case parent::_close():
-				break;
-
-			case $this->_send():
-				trigger_error('Невозможно отправить почтовое сообщение');
-				break;
-
-			default:
-				$result = true;
-				break;
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Возвращает сообщение об успешном сохранении данных.
-	 *
-	 * @access protected
-	 * @return mixed
-	 */
-	function _getSucessMessage()
-	{
-		return 'Файл "' . $this->filename . '" успешно отправлен на <a href="mailto:'
-			. $this->to . '" target="_blank">' . $this->to . '</a>';
-	}
-
-	/**
-	 * Отправляет скачанные данные по e-mail.
-	 *
-	 * @access private
-	 * @return boolean
-	 */
-	function _send()
-	{
-		// если сообщение с текущим файлом уже было отправлено
-		if ($this->_sent)
-		{
-			return true;
-		}
-
-		// для текущего файла эта операция больше не должна быть выполнена
-		$this->_sent = true;
-
-		// отключаем ограничение используемой памяти
-		ini_set('memory_limit', -1);
-
-		// создаем почтовое сообщение
+	public function __destruct() {
+		Application::getResponse()->debug('sending');
 		$mail = new Zend_Mail('utf-8');
 		$mail->setFrom($this->_getFrom())
 			->addTo($this->to)
 			->setSubject($this->_getSubject())
 			->setBodyText($this->_getText());
-		$at = $mail->createAttachment($this->getContents());
-		$at->filename = $this->filename;
-		return $mail->send();
+		$attachment = $mail->createAttachment($this->getContents());
+		$attachment->filename = $this->filename;
+		try {
+			$mail->send();
+		} catch (Zend_Mail_Transport_Exception $e) {
+			throw new Splitter_Storage_Exception($e->getMessage());
+		}
 	}
 
 	/**
 	 * Возвращает тему сообщения.
 	 *
-	 * @access private
 	 * @return string
 	 */
-	function _getSubject()
-	{
+	protected function _getSubject() {
 		return sprintf('Файл "%s"', $this->filename);
 	}
 
 	/**
 	 * Возвращает e-mail отправителя сообщения.
 	 *
-	 * @access private
 	 * @return string
 	 */
-	function _getFrom()
-	{
+	protected function _getFrom() {
 		return 'Splitter <splitter@forspammersonly.org>';
 	}
 
 	/**
 	 * Возвращает текст сообщения.
 	 *
-	 * @access private
 	 * @return string
 	 */
-	function _getText()
-	{
+	protected function _getText() {
 		return 'Здравствуйте, Вам письмо от Сплиттера.';
 	}
 }

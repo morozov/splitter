@@ -158,8 +158,6 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			// а этот кусок данных нужно дописать в следующую часть
 			$data = substr($data, $space);
 		} while (strlen($data) > 0);
-
-		return true;
 	}
 
 	/**
@@ -168,13 +166,15 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @return boolean
 	 */
 	public function __destruct() {
-		$crc32 = hash_final($this->hash);
 		$this->_createStorage()
 			->setFileName($this->_getPartFileName('crc'))
 			->write(
-			$this->getCrcFileContents($this->filename, $this->written_total, $crc32)
-		);
-		unset($this->storage);
+				$this->getCrcFileContents(
+					$this->filename,
+					$this->written_total,
+					hash_final($this->hash)
+				)
+			);
 	}
 
 	/**

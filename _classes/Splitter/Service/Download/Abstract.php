@@ -156,16 +156,13 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 			$data = $socket->read(self::BUFFER_SIZE);
 
 			// пытаемся записать данные в хранилище
-			if ($storage->write($data))
-			{
+			try {
+				$storage->write($data);
+
 				// если получилось, определяем текущий размер скачанных данных
 				$position += strlen($data);
-			}
-			// иначе прерываем скачивание
-			else
-			{
+			} catch (Splitter_Storage_Exception $e) {
 				$result->offsetSet('status', DOWNLOAD_STATUS_FATAL);
-
 				break;
 			}
 
@@ -186,9 +183,6 @@ abstract class Splitter_Service_Download_Abstract extends Splitter_Service_Abstr
 		// в случае, если успешно дошли до конца данных
 		if (DOWNLOAD_STATUS_FATAL != $result->offsetGet('status'))
 		{
-			// посылаем в хранилище сообщение об окончании передачи данных
-			$storage->close();
-
 			// если известен размер скачиваемого  файла, и размер сохраненного
 			// файла меньше, чем оригинала
 			if (!is_null($size) && $position < $size)
