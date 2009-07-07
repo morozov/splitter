@@ -64,11 +64,12 @@ class Splitter_Service_Download_Ftp extends Splitter_Service_Download_Abstract
 					$storage = $this->_getStorage();
 
 					// отправляем запрос на получение данных
-					if (false !== ($start = $this->_conn->retrieve($fileName, $storage->getResumePosition()))
-
-						// открываем хранилище
-						&& $storage->open($size))
+					if (false !== ($start = $this->_conn->retrieve($fileName, $storage->getResumePosition())))
 					{
+						if (method_exists($storage, 'setSize')) {
+							$storage->setSize($size);
+						}
+
 						// сохраняем скачанные данные
 						$this->_store($result, $start, $size);
 					}
