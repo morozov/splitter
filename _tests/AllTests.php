@@ -14,10 +14,10 @@ class AllTests {
 
 	public static function suite() {
 		$suite = new PHPUnit_Framework_TestSuite('Splitter');
+		$suite->addTestSuite('Splitter_Storage_CommonTest');
 		$suite->addTestSuite('Splitter_Storage_EmailTest');
 		$suite->addTestSuite('Splitter_Storage_FileTest');
-
-		$suite->addTestSuite('Splitter_Service_Download_IntfTest');
+		//$suite->addTestSuite('Splitter_Service_Download_IntfTest');
 		return $suite;
 	}
 }
