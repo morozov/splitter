@@ -3,7 +3,7 @@
 class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 
 	private
-		$dir = '/tmp',
+		$dir = '/tmp/splitter-test',
 		$filename = 'test.txt',
 		$contents = 'Lorem ipsum';
 
@@ -45,6 +45,15 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 		$storage = $this->_createStorage($this->dir, $this->filename);
 		$storage->write($this->contents);
 		$storage->setFileName('dummy');
+	}
+
+	public function testWriteBeforeFilenameIsSet() {
+		$this->setExpectedException('Splitter_Storage_Exception');
+		$path = $this->dir . '/testWriteBeforeFilenameIsSet';
+		@unlink($path);
+		touch($path);
+		$storage = $this->_createStorage($path, null);
+		$storage->write($this->contents);
 	}
 
 	public function testMkdirFileExists() {
