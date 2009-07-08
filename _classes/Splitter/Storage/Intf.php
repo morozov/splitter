@@ -56,20 +56,30 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 */
 	private $hash;
 
+	/**
+	 * Аргументы конструктора для создания экземпляров реализаций хранилища.
+	 *
+	 * @var array
+	 */
 	private $constructor_arguments = array();
 
 	/**
 	 * Конструктор.
 	 *
-	 * @param string	$type
-	 * @param integer $splitSize
+	 * @param string $type
+	 * @param integer $split_size
 	 */
 	function __construct($type, $split_size) {
 		$this->type = $type;
 		$this->split_size = $split_size;
 		$this->constructor_arguments = array_slice(func_get_args(), 2);
-		$this->hash = hash_init('crc32b');
-		$this->part = floor($this->getResumePosition() / $this->split_size);
+
+		$position = $this->getResumePosition();
+		$this->part = ceil($position / $this->split_size);
+
+		if (0 == $position) {
+			$this->hash = hash_init('crc32b');
+		}
 	}
 
 	/**
@@ -145,7 +155,9 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			$this->_next($this->getResumePosition() - $this->part * $this->split_size);
 		}
 
-		hash_update($this->hash, $data);
+		if ($this->hash) {
+			hash_update($this->hash, $data);
+		}
 
 		do {
 			// сколько места осталось в текущей части
@@ -180,15 +192,17 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 */
 	public function commit() {
 		$this->storage->commit();
-		$this->_createStorage()
-			->setFileName($this->_getPartFileName('crc'))
-			->write(
-				$this->getCrcFileContents(
-					$this->filename,
-					$this->written_total,
-					hash_final($this->hash)
-				)
-			)->commit();
+		if ($this->hash) {
+			$this->_createStorage()
+				->setFileName($this->_getPartFileName('crc'))
+				->write(
+					$this->getCrcFileContents(
+						$this->filename,
+						$this->written_total,
+						hash_final($this->hash)
+					)
+				)->commit();
+		}
 	}
 
 	/**
