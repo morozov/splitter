@@ -15,7 +15,7 @@ class Splitter_Storage_Ram extends Splitter_Storage_Abstract {
 	 *
 	 * @var string
 	 */
-	var $_contents = '';
+	protected $_contents = '';
 
 	/**
 	 * Возвращает позицию, с которой нужно докачивать файл.

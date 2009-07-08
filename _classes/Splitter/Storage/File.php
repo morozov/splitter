@@ -41,17 +41,6 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	}
 
 	/**
-	 * Фиксирует данные в хранилище.
-	 *
-	 * @throws Splitter_Storage_Exception
-	 */
-	public function commit() {
-		if (is_resource($this->resource)) {
-			fclose($this->resource);
-		}
-	}
-
-	/**
 	 * Устанавливает имя файла, в котором будут сохранены данные.
 	 *
 	 * @return Splitter_Storage_Abstract
@@ -64,6 +53,17 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 			throw new Splitter_Storage_Exception(sprintf('Given filename "%s" is not acceptable', $fileName));
 		}
 		return parent::setFileName($fileName);
+	}
+
+	/**
+	 * Фиксирует данные в хранилище.
+	 *
+	 * @throws Splitter_Storage_Exception
+	 */
+	public function commit() {
+		if (is_resource($this->resource)) {
+			fclose($this->resource);
+		}
 	}
 
 	/**
