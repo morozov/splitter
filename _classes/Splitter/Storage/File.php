@@ -72,6 +72,9 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 * @return integer
 	 */
 	public function getResumePosition() {
+		if (!$this->isFilenameSet()) {
+			return 0;
+		}
 		clearstatcache();
 		$path = $this->getSavePath();
 		return file_exists($path) ? filesize($path) : 0;
@@ -113,8 +116,26 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 		return $this->dir . $this->filename;
 	}
 
+	/**
+	 * Возвращает, установлено ли имя файла для сохранения.
+	 *
+	 * @return boolean
+	 */
+	protected function isFilenameSet() {
+		return strlen($this->filename) > 0;
+	}
+
+	/**
+	 * Возвращает ресурс файла для записи.
+	 *
+	 * @return resource
+	 * @throws Splitter_Storage_Exception
+	 */
 	protected function getResource() {
 		if (!is_resource($this->resource)) {
+			if (!$this->isFilenameSet()) {
+				throw new Splitter_Storage_Exception('Couldn’t create storage resource: filename id not set');
+			}
 			$this->resource = $this->implementation->open($this->getSavePath());
 		}
 		return $this->resource;
