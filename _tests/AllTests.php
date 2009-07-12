@@ -17,6 +17,7 @@ class AllTests {
 		$suite->addTestSuite('Splitter_Storage_CommonTest');
 		$suite->addTestSuite('Splitter_Storage_EmailTest');
 		$suite->addTestSuite('Splitter_Storage_FileTest');
+		$suite->addTestSuite('Splitter_StorageTest');
 		//$suite->addTestSuite('Splitter_Service_Download_IntfTest');
 		return $suite;
 	}

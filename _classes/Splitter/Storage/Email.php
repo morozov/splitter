@@ -13,24 +13,36 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	const CHARSET = 'utf-8';
 
 	/**
-	 * Адрес, на который нужно отправить сообщение.
+	 * Опции хранилища.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	protected $to;
+	protected $options = array('to' => null);
 
 	/**
 	 * Конструктор.
 	 *
+	 * @param array $options
+	 */
+	public function __construct(array $options = array()) {
+		if (!isset($options['to'])) {
+			throw new Splitter_Storage_Exception('E-mail recepient is required to be set');
+		}
+		parent::__construct($options);
+	}
+
+	/**
+	 * Устанавливает адресата почтового сообщения.
+	 *
 	 * @param string $to
 	 */
-	public function __construct($to) {
+	protected function setTo($to) {
 		$validator = new Zend_Validate_EmailAddress();
 		if (!$validator->isValid($to)) {
 			$messages = $validator->getMessages();
 			throw new Splitter_Storage_Exception(current($messages));
 		}
-		$this->to = $to;
+		$this->options['to'] = $to;
 	}
 
 	/**
@@ -41,7 +53,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	public function commit() {
 		$mail = new Zend_Mail(self::CHARSET);
 		$mail->setFrom($this->_getFrom())
-			->addTo($this->to)
+			->addTo($this->options['to'])
 			->setSubject($this->_getSubject())
 			->setBodyText($this->_getText());
 		$attachment = $mail->createAttachment($this->getContents());

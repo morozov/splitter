@@ -8,6 +8,13 @@
 abstract class Splitter_Storage_Abstract {
 
 	/**
+	 * Опции хранилища.
+	 *
+	 * @var array
+	 */
+	protected $options = array();
+
+	/**
 	 * Имя файла, в котором будут сохранены данные.
 	 *
 	 * @var string
@@ -15,18 +22,60 @@ abstract class Splitter_Storage_Abstract {
 	protected $filename;
 
 	/**
+	 * Конструктор.
+	 *
+	 * @param array $options
+	 */
+	public function __construct(array $options = array()) {
+		foreach ($options as $name => $value) {
+			$this->setOption($name, $value);
+		}
+	}
+
+	/**
+	 * Устанавливает значение указанной опции.
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @return Splitter_Storage_Abstract
+	 * @throws Splitter_Storage_Exception
+	 */
+	protected function setOption($name, $value) {
+		if (!array_key_exists($name, $this->options)) {
+			$this->onSetOptionFailed($name, $value);
+		}
+		$method = 'set' . ucfirst($name);
+		if (method_exists($this, $method)) {
+			$this->$method($value);
+		} else {
+			$this->options[$name] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Обрабатывает установку неподдерживаемой опции.
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @throws Splitter_Storage_Exception
+	 */
+	protected function onSetOptionFailed($name, $value) {
+		throw new Splitter_Storage_Exception('Unsupported option ' . $name . ' => ' . var_export($value, true));
+	}
+
+	/**
 	 * Фабрика хранилищ. Создает хранилище с указанными параметрами.
 	 *
 	 * @param string $type
 	 * @return Splitter_Storage_Abstract
 	 */
-	public static function factory($type) {
-		$arguments = func_get_args();
-		array_shift($arguments);
-		$reflection = new ReflectionClass('Splitter_Storage_' . ucfirst($type));
-		return count($arguments) > 0
-			? $reflection->newInstanceArgs($arguments)
-			: $reflection->newInstance();
+	public static function factory($type, array $options = array()) {
+		$class = 'Splitter_Storage_' . ucfirst($type);
+		if (!class_exists($class)) {
+			throw new Splitter_Storage_Exception('Wrong storage type "' . $type . '" specified');
+		}
+		return new $class($options);
 	}
 
 	/**

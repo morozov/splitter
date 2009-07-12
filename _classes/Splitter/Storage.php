@@ -5,7 +5,7 @@
  *
  * @version $Id$
  */
-final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
+class Splitter_Storage extends Splitter_Storage_Abstract {
 
 	/**
 	 * Номер текущий части, на которые разбивается файл.
@@ -57,11 +57,11 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	private $hash;
 
 	/**
-	 * Аргументы конструктора для создания экземпляров реализаций хранилища.
+	 * Опции для создания экземпляров реализаций хранилища.
 	 *
 	 * @var array
 	 */
-	private $constructor_arguments = array();
+	private $storage_options = array();
 
 	/**
 	 * Конструктор.
@@ -69,10 +69,12 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @param string $type
 	 * @param integer $split_size
 	 */
-	function __construct($type, $split_size) {
+	public function __construct($type, $split_size, array $options = array()) {
+
 		$this->type = $type;
 		$this->split_size = $split_size;
-		$this->constructor_arguments = array_slice(func_get_args(), 2);
+
+		parent::__construct($options);
 
 		$position = $this->getResumePosition();
 		$this->part = ceil($position / $this->split_size);
@@ -83,12 +85,23 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	}
 
 	/**
+	 * Обрабатывает установку неподдерживаемой опции.
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @throws Splitter_Storage_Exception
+	 */
+	protected function onSetOptionFailed($name, $value) {
+		$this->storage_options[$name] = $value;
+	}
+
+	/**
 	 * Возвращает позицию, с которой нужно возобновить скачивание файла.
 	 * Реализуется в производных классах.
 	 *
 	 * @return integer
 	 */
-	function getResumePosition() {
+	public function getResumePosition() {
 
 		// если не указано, под каким именем сохранять файл, о докачке говорить
 		// еще рано
@@ -96,14 +109,14 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 			return 0;
 		}
 
-		$storage = $this->_createStorage();
+		$storage = $this->getStorage();
 
 		$part = 0;
 
 		do {
 			$next = false;
 
-			$storage->setFileName($this->_getPartFileName(++$part));
+			$storage->setFileName($this->getPartFileName(++$part));
 
 			$position = $storage->getResumePosition();
 
@@ -152,7 +165,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	public function write($data) {
 
 		if (!$this->storage) {
-			$this->_next($this->getResumePosition() - $this->part * $this->split_size);
+			$this->next($this->getResumePosition() - $this->part * $this->split_size);
 		}
 
 		if ($this->hash) {
@@ -165,7 +178,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 
 			// если в текущей части закончилось место, пытаемся открыть следующую
 			if ($space <= 0) {
-				$this->_next();
+				$this->next();
 			}
 
 			// этот кусок данных нужно записать в текущую часть
@@ -193,8 +206,8 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	public function commit() {
 		$this->storage->commit();
 		if ($this->hash) {
-			$this->_createStorage()
-				->setFileName($this->_getPartFileName('crc'))
+			$this->getStorage()
+				->setFileName($this->getPartFileName('crc'))
 				->write(
 					$this->getCrcFileContents(
 						$this->filename,
@@ -211,8 +224,8 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @param string
 	 * @return splitter_storage_Abstract
 	 */
-	function _createStorage() {
-		return call_user_func_array(array('Splitter_Storage_Abstract', 'factory'), array_merge(array($this->type), $this->constructor_arguments));
+	protected function getStorage() {
+		return Splitter_Storage_Abstract::factory($this->type, $this->storage_options);
 	}
 
 	/**
@@ -221,7 +234,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @param integer $position
 	 * @return boolean
 	 */
-	function _next($position = 0) {
+	protected function next($position = 0) {
 
 		// пытаемся закрыть предыдущую часть
 		if ($this->storage) {
@@ -231,9 +244,9 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 		// следующая часть
 		++$this->part;
 
-		$this->storage = $this->_createStorage();
+		$this->storage = $this->getStorage();
 
-		$this->storage->setFileName($this->_getPartFileName($this->part));
+		$this->storage->setFileName($this->getPartFileName($this->part));
 
 		$this->written_part = $position;
 		//$this->storage->truncate($position);
@@ -245,7 +258,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @param mixed $postfix
 	 * @return string
 	 */
-	function _getPartFileName($postfix) {
+	protected function getPartFileName($postfix) {
 
 		// приделываем номер части в том случае, если включено разбивание на
 		// части, и при этом либо размер файла больше размера части (т.е. частей
@@ -271,7 +284,7 @@ final class Splitter_Storage_Intf extends Splitter_Storage_Abstract {
 	 * @param integer $crc32
 	 * @return string
 	 */
-	function getCrcFileContents($filename, $size, $crc32) {
+	protected function getCrcFileContents($filename, $size, $crc32) {
 		// :KLUDGE: morozov 15062009: похоже, это зависит от ОС, но не факт
 		if (!Application::isWindows()) {
 			$corrected = '';

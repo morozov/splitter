@@ -9,7 +9,7 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 
 	public function testAllowedFilename() {
 		try {
-			$storage = new Splitter_Storage_File('.');
+			$storage = new Splitter_Storage_File(array('dir' => '.'));
 			$storage->setFilename($this->filename);
 		} catch (Splitter_Storage_Exception $e) {
 			$this->fail($e->getMessage());
@@ -77,14 +77,14 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function _createStorage($dir, $filename) {
-		$storage = new Splitter_Storage_File($dir);
+		$storage = new Splitter_Storage_File(array('dir' =>  $dir));
 		$storage->setFilename($filename);
 		return $storage;
 	}
 
 	protected function _testInvalidFilename($filename) {
 		$this->setExpectedException('Splitter_Storage_Exception');
-		$storage = new Splitter_Storage_File('.');
+		$storage = new Splitter_Storage_File(array('dir' => '.'));
 		$storage->setFilename($filename);
 	}
 }

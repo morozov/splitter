@@ -70,10 +70,11 @@ final class Splitter_Controller {
 			if ($this->isDownloadNeeded())
 			{
 				$type = $request->getParam('storage', 'file');
-
-				$target = $this->getTarget($type);
-
-				$params['storage'] = $this->getStorage($type, $request->getParam('split-size'), $target);
+				$params['storage'] = $this->getStorage(
+					$type,
+					$request->getParam('split-size'),
+					$this->getStorageOptions($request, $type)
+				);
 			}
 			else
 			{
@@ -145,10 +146,10 @@ final class Splitter_Controller {
 	 * @param string $target
 	 * @return Splitter_Storage_Abstract
 	 */
-	private function getStorage($type, $split_size, $target) {
+	private function getStorage($type, $split_size, $options) {
 		return $split_size > 0
-			? new Splitter_Storage_Intf($type, $split_size, $target)
-			: Splitter_Storage_Abstract::factory($type, $target);
+			? new Splitter_Storage($type, $split_size, $options)
+			: Splitter_Storage_Abstract::factory($type, $options);
 	}
 
 	/**
@@ -157,8 +158,20 @@ final class Splitter_Controller {
 	 * @param string $type
 	 * @return string
 	 */
-	private function getTarget($type) {
-		return Application::getRequest()->getParam('target-' . $type);
+	private function getStorageOptions($request, $type) {
+		$params_map = array(
+			'file'  => array('dir'),
+			'email' => array('to', 'subject'),
+		);
+		$options = array();
+		if (isset($params_map[$type])) {
+			foreach ($params_map[$type] as $param) {
+				if ($request->hasParam($param)) {
+					$options[$param] = $request->getParam($param);
+				}
+			}
+		}
+		return $options;
 	}
 
 	/**

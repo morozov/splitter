@@ -8,11 +8,11 @@
 class Splitter_Storage_File extends Splitter_Storage_Abstract {
 
 	/**
-	 * Директория для сохранения файла.
+	 * Опции хранилища.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	protected $dir = '.';
+	protected $options = array('dir' => null);
 
 	/**
 	 * Реализация сохранения.
@@ -31,13 +31,25 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	/**
 	 * Конструктор.
 	 *
+	 * @param array $options
+	 */
+	public function __construct(array $options = array()) {
+		if (!isset($options['dir'])) {
+			throw new Splitter_Storage_Exception('Directory option is required to be set');
+		}
+		parent::__construct($options);
+	}
+
+	/**
+	 * Устанавливает директорию сохранения файла.
+	 *
 	 * @param string $dir
 	 */
-	public function __construct($dir) {
+	protected function setDir($dir) {
 		$this->implementation = 0 === strpos($dir, 'ftp://')
 			? new Splitter_Storage_File_Ftp
 			: new Splitter_Storage_File_Local;
-		$this->dir = $this->implementation->transformPath($dir);
+		$this->options['dir'] = $this->implementation->transformPath($dir);
 	}
 
 	/**
@@ -113,7 +125,7 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 * @return string
 	 */
 	protected function getSavePath() {
-		return $this->dir . $this->filename;
+		return $this->options['dir'] . $this->filename;
 	}
 
 	/**
@@ -133,6 +145,9 @@ class Splitter_Storage_File extends Splitter_Storage_Abstract {
 	 */
 	protected function getResource() {
 		if (!is_resource($this->resource)) {
+			if (!$this->isFilenameSet()) {
+				throw new Splitter_Storage_Exception('Couldn’t create storage resource: filename id not set');
+			}
 			if (!$this->isFilenameSet()) {
 				throw new Splitter_Storage_Exception('Couldn’t create storage resource: filename id not set');
 			}
