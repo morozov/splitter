@@ -34,10 +34,10 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 
 		$storage = $this->_createStorage($this->dir, $this->filename);
 		$storage->write($this->contents);
-		// unset is important to close the storage
-		unset($storage);
+		$storage->write($this->contents);
+		$storage->commit();
 
-		$this->assertStringEqualsFile($path, $this->contents);
+		$this->assertStringEqualsFile($path, str_repeat($this->contents, 2));
 	}
 
 	public function testSetFilenameAfterWritten() {

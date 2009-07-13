@@ -17,7 +17,12 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 *
 	 * @var array
 	 */
-	protected $options = array('to' => null);
+	protected $options = array(
+		'from' => 'Splitter <splitter@forspammersonly.org>',
+		'to' => null,
+		'subject' => 'Файл "%filename%"',
+		'text' => 'Здравствуйте, Вам письмо от Сплиттера.',
+	);
 
 	/**
 	 * Конструктор.
@@ -52,10 +57,10 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 */
 	public function commit() {
 		$mail = new Zend_Mail(self::CHARSET);
-		$mail->setFrom($this->_getFrom())
+		$mail->setFrom($this->getOptionValue('from'))
 			->addTo($this->options['to'])
-			->setSubject($this->_getSubject())
-			->setBodyText($this->_getText());
+			->setSubject($this->getOptionValue('subject'))
+			->setBodyText($this->getOptionValue('text'));
 		$attachment = $mail->createAttachment($this->getContents());
 		$attachment->filename = Zend_Mime::encodeBase64Header($this->filename, self::CHARSET);
 		try {
@@ -66,29 +71,15 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	}
 
 	/**
-	 * Возвращает тему сообщения.
+	 * Возвращает значение указанной опции с подстановкой параметров.
 	 *
-	 * @return string
+	 * @param string $option
+	 * @return mixed
 	 */
-	protected function _getSubject() {
-		return sprintf('Файл "%s"', $this->filename);
-	}
-
-	/**
-	 * Возвращает e-mail отправителя сообщения.
-	 *
-	 * @return string
-	 */
-	protected function _getFrom() {
-		return 'Splitter <splitter@forspammersonly.org>';
-	}
-
-	/**
-	 * Возвращает текст сообщения.
-	 *
-	 * @return string
-	 */
-	protected function _getText() {
-		return 'Здравствуйте, Вам письмо от Сплиттера.';
+	protected function getOptionValue($name) {
+		if (!array_key_exists($name, $this->options)) {
+			throw new Splitter_Storage_Exception('Option "' . $option . '" doesn’t exist');
+		}
+		return str_replace('%filename%', $this->filename, $this->options[$name]);
 	}
 }
