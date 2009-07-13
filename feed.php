@@ -125,8 +125,23 @@ function is_media($type) {
 function download($url) {
 	global $email, $split_size;
 	echo 'Downloading ' . $url . '...';
-	system('php splitter.php -url ' . escapeshellarg($url) . ' -storage email -target-email ' . $email . ' -split-size ' . $split_size, $exit_code);
-	$success = 0 == $exit_code;
+	$success = run(array(
+		'url' => $url,
+		'to' => $email,
+		'subject' => 'Foo Bar',
+		'split-size' => $split_size,
+	));
 	echo ($success ? 'Done' : 'Failed') . "\n";
 	return $success;
+}
+
+function run(array $params) {
+	$cmd = 'php splitter.php';
+	foreach (array_merge(array(
+		'storage' => 'email',
+	), $params) as $param => $value) {
+		$cmd .= ' -' . $param . ' ' . escapeshellarg($value);
+	}
+	system($cmd, $exit_code);
+	return 0 == $exit_code;
 }
