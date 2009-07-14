@@ -102,7 +102,7 @@ function get_downloaded() {
  */
 function get_log() {
 	global $email;
-	return '_logs/' . $email;
+	return '_logs/' . $email . '.log';
 }
 
 /**
