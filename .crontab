@@ -1,1 +1,1 @@
-0 * * * * php -f /path/to/splitter/feed.php http://somehost.com/feed.xml somebox@somehost.com > /dev/null
+0 * * * * php -f /path/to/splitter/feed.php "http://somehost.com/feed.xml" "somebox@somehost.com" > /dev/null
