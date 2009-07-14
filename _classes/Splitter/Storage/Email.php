@@ -59,8 +59,14 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 		$mail = new Zend_Mail(self::CHARSET);
 		$mail->setFrom($this->getOptionValue('from'))
 			->addTo($this->options['to'])
-			->setSubject($this->getOptionValue('subject'))
-			->setBodyText($this->getOptionValue('text'));
+			->setSubject(
+				// :KLUDGE: morozov 14072009: вручную кодируем заголовок, т.к.
+				// функция mail() на Валодькиной FreeBSD валится с Fatal error в
+				// случае, если тема письма содержит переводы строк (указываем
+				// очень большую макс. длину строки)
+				Zend_Mime::encodeBase64Header(
+					$this->getOptionValue('subject'), self::CHARSET, 1024)
+			)->setBodyText($this->getOptionValue('text'));
 		$attachment = $mail->createAttachment($this->getContents());
 		$attachment->filename = Zend_Mime::encodeBase64Header($this->filename, self::CHARSET);
 		try {
