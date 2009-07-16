@@ -135,7 +135,7 @@ function download($url) {
 }
 
 function run(array $params) {
-	$cmd = 'php splitter.php';
+	$cmd = 'php -f splitter.php';
 	foreach (array_merge(array(
 		'storage' => 'email',
 	), $params) as $param => $value) {
