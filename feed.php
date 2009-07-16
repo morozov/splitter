@@ -128,7 +128,6 @@ function download($url) {
 	$success = run(array(
 		'url' => $url,
 		'to' => $email,
-		'subject' => 'Foo Bar',
 		'split-size' => $split_size,
 	));
 	echo ($success ? 'Done' : 'Failed') . "\n";
