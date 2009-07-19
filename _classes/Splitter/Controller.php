@@ -14,13 +14,17 @@ final class Splitter_Controller {
 
 	/**
 	 * Запускает контроллер.
+	 *
+	 * @return boolean
 	 */
 	public function main() {
 		try {
 			$this->process();
+			return true;
 		} catch (Exception $e) {
 			Application::getResponse()->write($e->getMessage(), 'error');
 		}
+		return false;
 	}
 
 	/**
