@@ -43,13 +43,13 @@ class Splitter_App_ErrorHandler
 
 			// отправляем сообщение об ошибке в ответ
 			$response = Application::getResponse();
-			$response->write($message, 'error');
+			$response->error($message);
 
 			if (!$isUserDefined)
 			{
 				foreach ($this->_getBacktrace() as $message)
 				{
-					$response->write($message, 'error');
+					$response->error($message);
 				}
 			}
 

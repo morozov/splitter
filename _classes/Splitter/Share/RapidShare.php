@@ -87,11 +87,11 @@ class Splitter_Share_RapidShare extends Splitter_Share_Abstract
 	{
 		$response = Application::getResponse();
 		if (isset($params['counter'])) {
-			$response->call('counter', $params['counter']);
+			$response->counter($params['counter']);
 		}
 		if (isset($params['captcha'])) {
-			$response->call('captcha', $this->CAPTCHA_FIELD, $params['captcha']);
+			$response->captcha($this->CAPTCHA_FIELD, $params['captcha']);
 		}
-		$response->call('param', 'url', $params['action']);
+		$response->param('url', $params['action']);
 	}
 }

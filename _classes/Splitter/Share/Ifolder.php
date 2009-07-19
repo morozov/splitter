@@ -51,9 +51,9 @@ class Splitter_Share_Ifolder extends Splitter_Share_Abstract
 	function _output($params)
 	{
 		$response = Application::getResponse();
-		$response->call('captcha', $this->CAPTCHA_FIELD, $params['captcha']);
-		$response->call('param', 'post-data', 'session=' . $params['session-id'] . '&file_id=' . $params['file-id'] . 'action=1');
-		$response->call('param', 'method', 'post');
+		$response->captcha($this->CAPTCHA_FIELD, $params['captcha']);
+		$response->param('post-data', 'session=' . $params['session-id'] . '&file_id=' . $params['file-id'] . 'action=1');
+		$response->param('method', 'post');
 	}
 }
 

@@ -22,7 +22,7 @@ final class Splitter_Controller {
 			$this->process();
 			return true;
 		} catch (Exception $e) {
-			Application::getResponse()->write($e->getMessage(), 'error');
+			Application::getResponse()->error($e->getMessage());
 		}
 		return false;
 	}
@@ -130,7 +130,7 @@ final class Splitter_Controller {
 					$messages[] = '<a href="' . $link . '" target="_blank">' . $link . '</a>';
 				}
 
-				$response->write(implode(PHP_EOL, $messages));
+				$response->info(implode(PHP_EOL, $messages));
 			}
 		}
 		else

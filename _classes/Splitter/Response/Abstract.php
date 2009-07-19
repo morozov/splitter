@@ -5,37 +5,64 @@
  *
  * @version $Id$
  */
-abstract class Splitter_Response_Abstract
-{
+abstract class Splitter_Response_Abstract {
+
+	/**
+	 * Формат отображения времени.
+	 *
+	 */
+	const TIME_FORMAT = 'd.m.Y H:i:s';
+
+	/**
+	 * Типы сообщений, которые можно вывести в ответ приложения.
+	 *
+	 * @var array
+	 */
+	protected static $types = array('info', 'request', 'response', 'error', 'debug');
+
 	/**
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
-	 * @param string   $method   Наименование метода
+	 * @param string $method
+	 * @param array $arguments
 	 */
-	abstract function call($method);
+	public function __call($method, array $arguments) {
+		if (in_array($method, self::$types)) {
+			foreach ($arguments as $message) {
+				$this->write($message, $method);
+			}
+		} else {
+			$this->onCallFailed($method, $arguments);
+		}
+	}
 
 	/**
-	 * Выводит сообщение в журнал.
+	 * Выводит сообщение указанного типа.
 	 *
-	 * @param string  $message
-	 * @param string  $type
+	 * @param string $message
+	 * @param string $type
 	 */
-	abstract function write($message, $type = 'info');
+	abstract protected function write($message, $type);
 
 	/**
-	 * Регистрирует ошибку вызвавшую завершение приложения.
+	 * Обрабатывает вывод несуществующего метода.
 	 *
-	 * @param string  $message
+	 * @param string $method
+	 * @param array $arguments
+	 * @throws Splitter_Response_Exception
 	 */
-	function error($message) { }
+	protected function onCallFailed($method, array $arguments) {
+		throw new Splitter_Response_Exception('Call to undefined method "' . $method . '" on '. get_class($this));
+	}
 
-	function debug() {
+	/**
+	 * Выводит отладочное сообщение через var_dump().
+	 */
+	public function debug() {
 		$args = func_get_args();
 		ob_start();
 		call_user_func_array('var_dump', $args);
-		$message = ob_get_contents();
-		ob_end_clean();
-		$this->write($message, 'debug');
+		$this->write(ob_get_clean(), 'debug');
 	}
 }

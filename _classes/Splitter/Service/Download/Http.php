@@ -313,7 +313,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract 
 		{
 			// генерируем сообщение о преренаправлении
 			$response = Application::getResponse();
-			$response->write('Получено перенаправление на ' . $url->toString());
+			$response->info('Получено перенаправление на ' . $url->toString());
 
 			$referer = $this->_getUrl();
 

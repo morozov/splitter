@@ -40,16 +40,16 @@ Splitter.Log.prototype = {
 	 * @access  public
 	 * @param   integer  type
 	 * @param   string   date
-	 * @param   array	messages
+	 * @param   string	message
 	 */
-	register: function(type, date, messages)
+	register: function(type, date, message)
 	{
 		var first = true,
 			self = this;
 
 		var count = ++self._count;
 
-		$A(messages).each(function(message)
+		$A(message.split(/[\r\n]+/)).each(function(line)
 		{
 			// добавляем в таблицу лога строку записи
 			var row = self._table.insertRow(-1);
@@ -77,7 +77,7 @@ Splitter.Log.prototype = {
 			}
 
 			cell2.className = 'datetime';
-			$(cell3.appendChild(document.createElement('pre'))).update(message);
+			$(cell3.appendChild(document.createElement('pre'))).update(line);
 		});
 
 		// прокручиваем лог вниз

@@ -126,7 +126,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 					if ($useAutoResume && (++$restartsCount < $autoResumeCount))
 					{
 						$response = Application::getResponse();
-						$response->write
+						$response->info
 						(
 							sprintf
 							(

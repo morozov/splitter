@@ -219,13 +219,9 @@ abstract class Splitter_Connection_Abstract {
 	 * "Вещает" системное сообщение в объект-слушатель.
 	 *
 	 */
-	function _trace()
+	function _trace($message, $type = 'info')
 	{
-		$response = &Application::getResponse();
-
-		$args = func_get_args();
-
-		call_user_func_array(array($response, 'write'), $args);
+		Application::getResponse()->$type($message);
 	}
 
 	/**

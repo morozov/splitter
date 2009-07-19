@@ -40,13 +40,10 @@ abstract class Splitter_Service_Abstract
 	 * зарегистрированные обозреватели.
 	 *
 	 */
-	function fireEvent()
-	{
-		$response = Application::getResponse();
-
+	function fireEvent() {
 		$args = func_get_args();
-
-		call_user_func_array(array($response, 'call'), $args);
+		$method = array_shift($args);
+		Application::getResponse()->$method($args);
 	}
 
 	/**
