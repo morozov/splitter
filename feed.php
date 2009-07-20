@@ -17,20 +17,31 @@ require_once 'Zend/Loader.php';
 
 Zend_Loader::registerAutoload();
 
-start();
+start($url, $email, $count);
 
 /**
  * Запускает процесс.
  *
  */
-function start() {
-	global $url, $count;
-	foreach (array_slice(array_diff(get_enclosures($url), get_downloaded()), 0, $count) as $enclosure) {
-		if (download($enclosure)) {
+function start($url, $email, $count) {
+	$log = get_log($email);
+
+	$downloaded = get_downloaded($log);
+
+	if (!$resource = fopen($log, 'a')) {
+		die('Couldn’t open log file');
+	}
+	if (!flock($resource, LOCK_EX | LOCK_NB)) {
+		exit('Log file is locked');
+	}
+	foreach (array_slice(array_diff(get_enclosures($url), $downloaded), 0, $count) as $enclosure) {
+		if (download($enclosure, $email, $split_size)) {
 			// добавляем запись в лог
-			file_put_contents(get_log(), $enclosure . PHP_EOL, FILE_APPEND);
+			fwrite($resource, $enclosure . PHP_EOL);
 		}
 	}
+	flock($resource, LOCK_UN);
+	fclose($resource);
 }
 
 /**
@@ -88,20 +99,20 @@ function get_enclosures($url) {
 /**
  * Возвращает массив вложений, отправленных на текущий e-mail.
  *
+ * @param string $log
  * @return array
  */
-function get_downloaded() {
-	$log = get_log();
+function get_downloaded($log) {
 	return is_file($log) ? array_map('trim', file($log)) : array();
 }
 
 /**
  * Возвращает путь к файлу лога.
  *
+ * @param string $email
  * @return string
  */
-function get_log() {
-	global $email;
+function get_log($email) {
 	return '_logs/' . $email . '.log';
 }
 
@@ -122,8 +133,7 @@ function is_media($type) {
  * @param  string   $url
  * @return boolean
  */
-function download($url) {
-	global $email, $split_size;
+function download($url, $email, $split_size) {
 	echo 'Downloading ' . $url . '...';
 	$success = run(array(
 		'url' => $url,
