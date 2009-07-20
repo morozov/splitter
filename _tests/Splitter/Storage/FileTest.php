@@ -7,6 +7,25 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 		$filename = 'test.txt',
 		$contents = 'Lorem ipsum';
 
+	public function setUp() {
+		$this->cleanup();
+		mkdir($this->dir);
+	}
+
+	public function tearDown() {
+		$this->cleanup();
+	}
+
+	protected function cleanup() {
+		if (file_exists($this->dir)) {
+			if (is_file($this->dir)) {
+				unlink($this->dir);
+			} elseif (is_dir($this->dir)) {
+				$this->rmdir($this->dir);
+			}
+		}
+	}
+
 	public function testAllowedFilename() {
 		try {
 			$storage = new Splitter_Storage_File(array('dir' => '.'));
@@ -28,10 +47,6 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	public function testWriteToANewFile() {
 		$path = $this->dir . '/' . $this->filename;
 
-		if (file_exists($path) && !unlink($path)) {
-			$this->fail('Unable to unlink an existing file');
-		}
-
 		$storage = $this->_createStorage($this->dir, $this->filename);
 		$storage->write($this->contents);
 		$storage->write($this->contents);
@@ -50,8 +65,6 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	public function testWriteBeforeFilenameIsSet() {
 		$this->setExpectedException('Splitter_Storage_Exception');
 		$path = $this->dir . '/testWriteBeforeFilenameIsSet';
-		@unlink($path);
-		touch($path);
 		$storage = $this->_createStorage($path, null);
 		$storage->write($this->contents);
 	}
@@ -59,8 +72,6 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	public function testMkdirFileExists() {
 		$this->setExpectedException('Splitter_Storage_Exception');
 		$dir = $this->dir . '/dummy';
-		@rmdir($dir);
-		@unlink($dir);
 		touch($dir);
 		$storage = $this->_createStorage($dir, $this->filename);
 		$storage->write($this->contents);
@@ -69,11 +80,6 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	public function testMkdirRecursive() {
 		$dir = $this->dir . '/dummy1/dummy2';
 		$path = $dir . '/' . $this->filename;
-		@unlink($path);
-		@rmdir($dir);
-		@rmdir(dirname($dir));
-		@unlink($dir);
-		@unlink(dirname($dir));
 		$storage = $this->_createStorage($dir, $this->filename);
 		$storage->write($this->contents);
 		$storage->commit();
@@ -83,8 +89,6 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	public function testSaveToDirectory() {
 		$this->setExpectedException('Splitter_Storage_Exception');
 		$dir = $this->dir . '/dummy';
-		@rmdir($dir);
-		@unlink($dir);
 		mkdir($dir);
 		$storage = $this->_createStorage($this->dir, 'dummy');
 		$storage->write($this->contents);
@@ -100,5 +104,18 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 		$this->setExpectedException('Splitter_Storage_Exception');
 		$storage = new Splitter_Storage_File(array('dir' => '.'));
 		$storage->setFilename($filename);
+	}
+
+	protected function rmdir($path) {
+		$dir = new RecursiveDirectoryIterator($path);
+		foreach (new RecursiveIteratorIterator($dir) as $file) {
+			unlink($file);
+		}
+		foreach ($dir as $subdir) {
+			if (!@rmdir($subdir)) {
+				$this->rmdir($subdir);
+			}
+		}
+		rmdir($path);
 	}
 }
