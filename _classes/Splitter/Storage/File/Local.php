@@ -16,8 +16,8 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 
 		$dir = dirname($path);
 
-		if (!is_dir($dir)) {
-			$this->mkdir($dir);
+		if (!is_dir($dir) && !@mkdir($dir, 0777, true)) {
+			throw new Splitter_Storage_Exception('Could not create directory "' . $path . '"');
 		}
 
 		$resource = parent::open(
@@ -63,63 +63,5 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 			'$1' . DIRECTORY_SEPARATOR, $path);
 
 		return $path;
-	}
-
-	/**
-	 * Проверяет, существует ли директория с указанным путем, и в случае, если нет,
-	 * пытается ее создать. Возвращает результат (существует или создана).
-	 *
-	 * @return boolean
-	 */
-	private function mkdir($path) {
-
-		// убираем закрывающий слэш, иначе после разбиении строки на секции
-		// последним элементом массива будет пустая строка, а следовательно,
-		// при сборке в конце появится второй закрывающий слэш
-		$path = preg_replace('|' . preg_quote(DIRECTORY_SEPARATOR) . '+$|', '', $path);
-
-		$sections = explode(DIRECTORY_SEPARATOR, $path);
-
-		foreach ($this->getPathsToCreate($sections) as $path) {
-			if (!@mkdir($path)) {
-				throw new Splitter_Storage_Exception('Could not create directory "' . $path . '"');
-			}
-		}
-	}
-
-	/**
-	 * Возвращает пути директорий, которые нужно создать.
-	 *
-	 * @param array $sections
-	 * @return array
-	 */
-	private function getPathsToCreate($sections) {
-		$result = array();
-		for ($i = count($sections); $i >= 1; $i--) {
-			// формируем проверяемый путь
-			$path = $this->getSubPath($sections, $i);
-			// если указанный путь существует
-			if (file_exists($path)) {
-				// если существующий путь — не директория, путь создать не удастся
-				if (!is_dir($path)) {
-					throw new Splitter_Storage_Exception('"' . $path . '" already exists and it’s not a directory');
-				}
-				break;
-			}
-			array_unshift($result, $path);
-		}
-		return $result;
-	}
-
-	/**
-	 * Возвращает путь поддиректории указанной длины, собранный из секций.
-	 *
-	 * @param array $sections
-	 * @param integer $length
-	 * @return string
-	 */
-	function getSubPath($sections, $length) {
-		$path = implode(DIRECTORY_SEPARATOR, array_slice($sections, 0, $length));
-		return 0 == strlen($path) ? DIRECTORY_SEPARATOR : $path;
 	}
 }

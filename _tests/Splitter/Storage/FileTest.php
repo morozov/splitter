@@ -66,6 +66,20 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 		$storage->write($this->contents);
 	}
 
+	public function testMkdirRecursive() {
+		$dir = $this->dir . '/dummy1/dummy2';
+		$path = $dir . '/' . $this->filename;
+		@unlink($path);
+		@rmdir($dir);
+		@rmdir(dirname($dir));
+		@unlink($dir);
+		@unlink(dirname($dir));
+		$storage = $this->_createStorage($dir, $this->filename);
+		$storage->write($this->contents);
+		$storage->commit();
+		$this->assertStringEqualsFile($path, $this->contents);
+	}
+
 	public function testSaveToDirectory() {
 		$this->setExpectedException('Splitter_Storage_Exception');
 		$dir = $this->dir . '/dummy';
