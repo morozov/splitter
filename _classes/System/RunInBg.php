@@ -60,18 +60,8 @@ class System_RunInBg
 	 *
 	 * @return System_Run_Abstract
 	 */
-	function _getImplementation()
-	{
-		foreach (getPackageClasses('System_Run') as $className)
-		{
-			$candidate = new $className();
-
-			if ($candidate->suits())
-			{
-				return $candidate;
-			}
-		}
-
-		return null;
+	function _getImplementation() {
+		return Application::isWindows()
+			? new System_Run_Windows : new System_Run_Unix
 	}
 }

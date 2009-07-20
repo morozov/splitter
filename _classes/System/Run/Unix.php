@@ -29,15 +29,4 @@ class System_Run_Unix extends System_Run_Abstract
 
 		return is_numeric($pid) ? (int)$pid : false;
 	}
-
-	/**
-	 * Возвращает, подходит ли данная реализация для платформы, на которой
-	 * запущено приложение.
-	 *
-	 * @return boolean
-	 */
-	function suits()
-	{
-		return !Application::isWindows();
-	}
 }

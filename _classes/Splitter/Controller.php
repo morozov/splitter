@@ -185,7 +185,7 @@ final class Splitter_Controller {
 	 * @return Splitter_Share_Abstract
 	 */
 	private function getShareHandler($url, $method) {
-		foreach (System_Loader::getPackageClasses('Splitter_Share') as $class) {
+		foreach (System_Loader::getClasses('Splitter_Share') as $class) {
 			$handler = new $class;
 			if ($handler->canProcess($url, $method)) {
 				return $handler;

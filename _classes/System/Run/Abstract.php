@@ -30,17 +30,6 @@ abstract class System_Run_Abstract
 	}
 
 	/**
-	 * Возвращает, подходит ли данная реализация для платформы, на которой
-	 * запущено приложение.
-	 *
-	 * @return boolean
-	 */
-	function suits()
-	{
-		return false;
-	}
-
-	/**
 	 * Возвращает команду процесса.
 	 *
 	 * @param string   $cmd

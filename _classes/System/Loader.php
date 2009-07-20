@@ -1,13 +1,11 @@
 <?php
 
-require_once 'Zend/Loader.php';
-
 /**
  * Системный загрузчик.
  *
  * @version $Id$
  */
-class System_Loader extends Zend_Loader {
+class System_Loader {
 
 	/**
 	 * Возвращает массив наименований классов пакета за исключением 'Abstract'.
@@ -15,7 +13,7 @@ class System_Loader extends Zend_Loader {
 	 * @param string $package
 	 * @return array
 	 */
-	public function getPackageClasses($package) {
+	public function getClasses($package) {
 		$result = false;
 		if (false !== ($handle = opendir(realpath(dirname(__FILE__) . '/..') . DIRECTORY_SEPARATOR
 			. str_replace('_', DIRECTORY_SEPARATOR, $package)))) {

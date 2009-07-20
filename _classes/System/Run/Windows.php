@@ -27,15 +27,4 @@ class System_Run_Windows extends System_Run_Abstract
 
 		pclose(popen('start "splitter" ' . $this->_getCommand($args), 'r'));
 	}
-
-	/**
-	 * Возвращает, подходит ли данная реализация для платформы, на которой
-	 * запущено приложение.
-	 *
-	 * @return boolean
-	 */
-	function suits()
-	{
-		return Application::isWindows();
-	}
 }

@@ -6,5 +6,3 @@ AddDefaultCharset Off
     ExpiresByType image/gif "access plus 1 week"
     ExpiresByType text/css  "access plus 1 week"
 </IfModule>
-
-php_value output_buffering 0

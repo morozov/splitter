@@ -11,11 +11,7 @@ $count = 10;
 
 chdir(dirname(__FILE__));
 
-set_include_path('_lib');
-
-require_once 'Zend/Loader.php';
-
-Zend_Loader::registerAutoload();
+require_once '_classes/bootstrap.php';
 
 start($url, $email, $count);
 
