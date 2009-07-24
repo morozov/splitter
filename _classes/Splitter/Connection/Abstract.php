@@ -36,14 +36,14 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Сокет управления соединением.
 	 *
-	 * @var Socket
+	 * @var Splitter_Socket
 	 */
 	var $_controlSocket;
 
 	/**
 	 * Сокет передачи данных.
 	 *
-	 * @var Socket
+	 * @var Splitter_Socket
 	 */
 	var $_dataSocket;
 
@@ -57,7 +57,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Возвращает управляющий сокет.
 	 *
-	 * @return Socket
+	 * @return Splitter_Socket
 	 */
 	function getControlSocket()
 	{
@@ -67,7 +67,7 @@ abstract class Splitter_Connection_Abstract {
 	/**
 	 * Возвращает сокет данных.
 	 *
-	 * @return Socket
+	 * @return Splitter_Socket
 	 */
 	function getDataSocket()
 	{
@@ -102,7 +102,7 @@ abstract class Splitter_Connection_Abstract {
 	{
 		if ($this->_isConnected())
 		{
-			$this->_controlSocket->close();
+			$this->_controlSocket = null;
 
 			$this->_trace('Закрытие соединения');
 		}
@@ -166,27 +166,16 @@ abstract class Splitter_Connection_Abstract {
 	 *
 	 * @param string   $host
 	 * @param integer  $port
-	 * @return Socket
+	 * @return Splitter_Socket
 	 */
-	function _createSocket($host, $port)
-	{
-		// выдаем сообщение в лог
+	function _createSocket($host, $port) {
 		$this->_trace('Установка соединения с ' . $host . ':' . $port, 'request');
-
-		// создаем объект сокета
-		$socket = new Lib_Socket();
-
-		// пытаемся установить соединение с сервером
-		if ($socket->open($host, $port))
-		{
-			// выдаем сообщение в лог
+		try {
+			$socket = new Splitter_Socket($host, $port);
 			$this->_trace('Соединение установлено');
+		} catch (Splitter_Socket_Exception $e) {
+			trigger_error($e->getMessage(), E_USER_WARNING);
 		}
-		else
-		{
-			trigger_error('Невозможно установить соединение с сервером.', E_USER_WARNING);
-		}
-
 		return $socket;
 	}
 
@@ -197,8 +186,7 @@ abstract class Splitter_Connection_Abstract {
 	 */
 	function _isConnected()
 	{
-		return is_object($this->_controlSocket)
-			&& $this->_controlSocket->isOpened();
+		return is_object($this->_controlSocket);
 	}
 
 	/**

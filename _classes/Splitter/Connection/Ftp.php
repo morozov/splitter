@@ -421,7 +421,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	 */
 	function _closeDataSocket()
 	{
-		return $this->_dataSocket->close();
+		$this->_dataSocket = null;
 	}
 
 	/**

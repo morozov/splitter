@@ -149,7 +149,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 	 * Перекрывает метод предка и возвращает управляющий сокет, т.к. в HTTP
 	 * управление и передача данных осуществляются вместе.
 	 *
-	 * @return Socket
+	 * @return Splitter_Socket
 	 */
 	function getDataSocket()
 	{
