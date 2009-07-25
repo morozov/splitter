@@ -22,6 +22,7 @@ class AllTests {
 		$suite->addTestSuite('Splitter_SocketTest');
 
 		$suite->addTestSuite('Splitter_Response_WebTest');
+		$suite->addTestSuite('Splitter_Response_CliTest');
 		//$suite->addTestSuite('Splitter_Service_Download_IntfTest');
 		return $suite;
 	}

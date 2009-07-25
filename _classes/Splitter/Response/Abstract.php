@@ -14,6 +14,15 @@ abstract class Splitter_Response_Abstract {
 	const TIME_FORMAT = 'd.m.Y H:i:s';
 
 	/**
+	 * Возвращает временную метку сообщения.
+	 *
+	 * @return string
+	 */
+	protected function getDate() {
+		return date(self::TIME_FORMAT);
+	}
+
+	/**
 	 * Записывает сообщение в журнал.
 	 *
 	 * @param string $message

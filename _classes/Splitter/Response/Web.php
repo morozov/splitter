@@ -30,6 +30,20 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	}
 
 	/**
+	 * Записывает сообщение в журнал.
+	 *
+	 * @param string $message
+	 * @param string $type
+	 */
+	public function log($message, $type = null) {
+		$arguments = array($message, $this->getDate());
+		if (null !== $type) {
+			$arguments[] = $type;
+		}
+		$this->callClient('log', $arguments);
+	}
+
+	/**
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
@@ -41,20 +55,6 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	}
 
 	/**
-	 * Записывает сообщение в журнал.
-	 *
-	 * @param string $message
-	 * @param string $type
-	 */
-	public function log($message, $type = null) {
-		$arguments = array($message, date(self::TIME_FORMAT));
-		if (null !== $type) {
-			$arguments[] = $type;
-		}
-		$this->callClient('log', $arguments);
-	}
-
-	/**
 	 * Вызывет метод на стороне клиента.
 	 *
 	 * @param string $method
@@ -62,7 +62,7 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	 */
 	protected function callClient($method, array $arguments) {
 		echo '<script type="text/javascript">' . self::CALLEE . '.' . $method
-			. '(' . implode(', ', array_map('json_encode', $arguments)) . ');</script>' . PHP_EOL;
+			. '(' . implode(',', array_map('json_encode', $arguments)) . ');</script>' . PHP_EOL;
 		flush();
 	}
 }
