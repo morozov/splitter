@@ -14,7 +14,7 @@ class Splitter_Response_Cli extends Splitter_Response_Abstract {
 	 */
 	protected static $types = array(
 		'request'  => '<',
-		'response' => '<',
+		'response' => '>',
 		'error'    => '!',
 		'debug'    => '*',
 	);
@@ -26,7 +26,17 @@ class Splitter_Response_Cli extends Splitter_Response_Abstract {
 	 * @param string $type
 	 */
 	public function log($message, $type = null) {
-		printf('%s | %s | %s' . PHP_EOL, isset(self::$types[$type]) ? self::$types[$type] : ' ', $this->getDate(), $message);
+		$first = true;
+		$sign = isset(self::$types[$type]) ? self::$types[$type] : ' ';
+		$date = $this->getDate();
+		foreach (preg_split('/[\r\n]+/', $message) as $line) {
+			printf('%s | %s | %s' . PHP_EOL, $sign , $date, $line);
+			if ($first) {
+				$sign = ' ';
+				$date = str_repeat(' ', strlen($date));
+				$first = false;
+			}
+		}
 	}
 
 	/**
