@@ -19,9 +19,9 @@ Splitter.Log.prototype = {
 	/**
 	 * Конструктор.
 	 *
-	 * @access  public
-	 * @param   HTMLElement  button
-	 * @param   integer  timeout
+	 * @access	public
+	 * @param	HTMLElement  button
+	 * @param	integer  timeout
 	 */
 	initialize: function(container)
 	{
@@ -37,12 +37,12 @@ Splitter.Log.prototype = {
 	/**
 	 * Регистрирует сообщение в логе.
 	 *
-	 * @access  public
-	 * @param   integer  type
-	 * @param   string   date
-	 * @param   string	message
+	 * @access public
+	 * @param string message
+	 * @param string date
+	 * @param string type
 	 */
-	register: function(type, date, message)
+	register: function(message, date, type)
 	{
 		var first = true,
 			self = this;
@@ -53,7 +53,10 @@ Splitter.Log.prototype = {
 		{
 			// добавляем в таблицу лога строку записи
 			var row = self._table.insertRow(-1);
-			row.className = type;
+
+			if (type) {
+				row.className = type;
+			}
 
 			// добавляем ячейку с иконкой
 			var cell1 = row.insertCell(-1);
@@ -87,7 +90,7 @@ Splitter.Log.prototype = {
 	/**
 	 * Очищает лог.
 	 *
-	 * @access  public
+	 * @access	public
 	 */
 	clear: function()
 	{

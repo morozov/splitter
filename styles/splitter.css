@@ -1,7 +1,7 @@
-BODY {
+body {
 	background-color: buttonface;
 	color: buttontext;
-	font-family: Microsoft Sans Serif;
+	font-family: microsoft sans serif;
 	font-size: 8pt;
 }
 
@@ -11,7 +11,7 @@ BODY {
 	margin: 10px auto;
 }
 
-#form-container TD {
+#form-container td {
 	padding: 2px 8px 2px 0px;
 }
 
@@ -21,24 +21,25 @@ BODY {
 	padding-bottom:10px;
 }
 
-#select-storage LABEL {
+#select-storage label {
 	margin-right: 10px;
 }
+
 .clear {
 	height: 2px;
 }
 
-OPTION, .text {
+option, .text {
 	padding: 4px 2px;
 }
 
 .text {
-	border: 1px solid #A5ACB2;
+	border: 1px solid #a5acb2;
 	display: inline;
 }
 
-.text, BUTTON, .button, SELECT {
-	font-family: Microsoft Sans Serif;
+.text, button, .button, select {
+	font-family: microsoft sans serif;
 	font-size: 8pt;
 }
 
@@ -46,7 +47,7 @@ OPTION, .text {
 	width: 600px;
 }
 
-TEXTAREA.text {
+textarea.text {
 	height: 28px;
 	padding: 0px 2px;
 }
@@ -56,12 +57,12 @@ TEXTAREA.text {
 	background-color: buttonface;
 }
 
-BUTTON, .button {
+button, .button {
 	width: 120px;
 	height: 24px;
 }
 
-LABEL.main {
+label.main {
 	width: 120px;
 	float: left;
 	display: block;
@@ -76,18 +77,18 @@ LABEL.main {
 	overflow: -moz-scrollbars-vertical;
 }
 
-#log-container TABLE {
+#log-container table {
 	table-layout: fixed;
 	width: 100%;
 }
 
-#log-container TABLE, #log-container TD {
+#log-container table, #log-container td {
 	border: 1px solid buttonface;
 	border-collapse: collapse;
 	cursor: default;
 }
 
-#log-container TD {
+#log-container td {
 	padding: 1px 4px;
 	vertical-align: top;
 	overflow: hidden;
@@ -95,63 +96,63 @@ LABEL.main {
 	white-space: nowrap;
 }
 
-#log-container TD.icon {
+#log-container td.icon {
 	background-position: 4px 2px;
 	background-repeat: no-repeat;
 	text-align: right;
 	width: 32px;
 }
 
-#log-container TD.datetime {
+#log-container td.datetime {
 	width: 102px;
 }
 
-TR.info {
-	background: #EBF2FE;
+tr {
+	background: #ebf2fe;
 }
 
-TR.info .icon {
+tr .icon {
 	background-image: url(../images/info.gif);
 }
 
-TR.request {
-	background: #FFFAED;
+tr.request {
+	background: #fffaed;
 }
 
-TR.request .icon {
+tr.request .icon {
 	background-image: url(../images/request.gif);
 }
 
-TR.response {
-	background: #EAFFE5;
+tr.response {
+	background: #eaffe5;
 }
 
-TR.response .icon {
+tr.response .icon {
 	background-image: url(../images/response.gif);
 }
 
-TR.error {
-	background: #FEEEE7;
+tr.error {
+	background: #feeee7;
 }
 
-TR.error .icon {
+tr.error .icon {
 	background-image: url(../images/error.gif);
 }
 
-TR.debug {
-	background: #FF8800;
+tr.debug {
+	background: #ff8800;
 }
 
-TR.debug .icon {
+tr.debug .icon {
 	background-image: url(../images/debug.gif);
 }
 
-#log-container A {
+#log-container a {
 	color: #000000;
 }
 
-#log-container PRE {
-	font-family: Microsoft Sans Serif;
+#log-container pre {
+	font-family: microsoft sans serif;
 	font-size: 8pt;
 	margin: 0px;
 }
@@ -167,7 +168,7 @@ TR.debug .icon {
 }
 
 #progress-bar {
-	background: #688FB8 url(../images/progress-fg.gif);
+	background: #688fb8 url(../images/progress-fg.gif);
 	border: none;
 	font-size: 8px;
 	height: 9px;
@@ -180,11 +181,11 @@ TR.debug .icon {
 }
 
 .text:focus,
-TEXTAREA:focus,
-SELECT:focus,
+textarea:focus,
+select:focus,
 .focus {
-	border-color : #00AA00 !important;
-	background-color: #FAFFFA !important;
+	border-color : #00aa00 !important;
+	background-color: #fafffa !important;
 }
 
 #part-from, #part-to {
@@ -195,7 +196,7 @@ SELECT:focus,
 }
 
 #options-link {
-	color: #0000FF;
+	color: #0000ff;
 	float: right;
 }
 
@@ -205,14 +206,14 @@ SELECT:focus,
 }
 
 
-#options FIELDSET {
+#options fieldset {
 	width: 264px;
 	height: 190px;
 	margin-bottom:15px;
 	float: left;
 }
 
-LEGEND {
+legend {
 	padding: 0px 6px;
 }
 
@@ -220,7 +221,7 @@ LEGEND {
 	width: 160px;
 }
 
-#options LABEL.left {
+#options label.left {
 	width: 80px;
 	float: left;
 	display: block;

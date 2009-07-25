@@ -39,8 +39,6 @@ class Splitter_Share_Parser_Rapidshare2 extends Splitter_Share_Parser_Abstract
 	{
 		$success = true;
 
-		$response = Application::getResponse();
-
 		$result = array();
 
 		// пытаемся время, на которое запущен таймер

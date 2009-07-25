@@ -61,7 +61,7 @@ class Application
 		if (!Application::_isCli())
 		{
 			$response = Application::getResponse();
-			$response->info('Перезапуск в режиме командной строки');
+			$response->log('Перезапуск в режиме командной строки');
 
 			$intf = new System_RunInBg();
 			$intf->run();

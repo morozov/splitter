@@ -34,7 +34,7 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	 * @param string  $message
 	 * @param string  $type
 	 */
-	function write($message, $type = 'info')
+	function log($message, $type)
 	{
 		$fp = fopen('files/log.txt', 'ab');
 		fwrite($fp, $message . "\r\n");

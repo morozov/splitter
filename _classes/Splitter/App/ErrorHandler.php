@@ -43,20 +43,20 @@ class Splitter_App_ErrorHandler
 
 			// отправляем сообщение об ошибке в ответ
 			$response = Application::getResponse();
-			$response->error($message);
+			$response->log($message, 'error');
 
 			if (!$isUserDefined)
 			{
 				foreach ($this->_getBacktrace() as $message)
 				{
-					$response->error($message);
+					$response->log($message, 'error');
 				}
 			}
 
 			if ($this->_isReasonable($errno))
 			{
 				// передаем ошибку в ответ
-				$response->error($errstr);
+				$response->log($errstr, 'error');
 			}
 
 			if ($this->_isFatal($errno))

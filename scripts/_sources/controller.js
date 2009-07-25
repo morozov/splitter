@@ -44,13 +44,10 @@ Splitter.Controller.prototype = {
 	 * Выводит сообщение в лог.
 	 *
 	 * @access  public
-	 * @param   string  type
-	 * @param   string  date
-	 * @param   string  message
 	 */
-	trace: function(type, date, message)
+	log: function()
 	{
-		this._log.register(type, date, message);
+		this._log.register.apply(this._log, arguments);
 	},
 
 	/**

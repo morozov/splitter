@@ -293,7 +293,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 	function _exec($cmd)
 	{
 		// отправляем сообщение в лог
-		$this->_trace($cmd, 'request');
+		Application::getResponse()->log($cmd, 'request');
 
 		// пишем данные в управляющий сокет
 		return $this->_writeln($cmd) && $this->_readmsg();
@@ -325,7 +325,7 @@ class Splitter_Connection_Ftp extends Splitter_Connection_Abstract
 				$this->_statusText = rtrim(ltrim($matches[2], ' '), self::CRLF);
 
 				// выдаем сообщение в лог
-				$this->_trace(rtrim($message, PHP_EOL), 'response');
+				Application::getResponse()->log(rtrim($message, PHP_EOL), 'response');
 
 				return true;
 			}

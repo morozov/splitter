@@ -30,24 +30,28 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	}
 
 	/**
-	 * Обрабатывает вывод несуществующего метода.
+	 * Вызывет указанный метод компонента представления с переданными
+	 * аргументами.
 	 *
 	 * @param string $method
 	 * @param array $arguments
 	 */
-	protected function onCallFailed($method, array $arguments) {
-		// перенаправляем вызов на клиента
+	public function __call($method, array $arguments) {
 		$this->callClient($method, $arguments);
 	}
 
 	/**
-	 * Выводит сообщение в журнал.
+	 * Записывает сообщение в журнал.
 	 *
 	 * @param string $message
 	 * @param string $type
 	 */
-	protected function write($message, $type) {
-		$this->callClient('trace', array($type, date(self::TIME_FORMAT), $message));
+	public function log($message, $type = null) {
+		$arguments = array($message, date(self::TIME_FORMAT));
+		if (null !== $type) {
+			$arguments[] = $type;
+		}
+		$this->callClient('log', $arguments);
 	}
 
 	/**

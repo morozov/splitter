@@ -103,8 +103,7 @@ abstract class Splitter_Connection_Abstract {
 		if ($this->_isConnected())
 		{
 			$this->_controlSocket = null;
-
-			$this->_trace('Закрытие соединения');
+			Application::getResponse()->log('Закрытие соединения');
 		}
 	}
 
@@ -169,13 +168,10 @@ abstract class Splitter_Connection_Abstract {
 	 * @return Splitter_Socket
 	 */
 	function _createSocket($host, $port) {
-		$this->_trace('Установка соединения с ' . $host . ':' . $port, 'request');
-		try {
-			$socket = new Splitter_Socket($host, $port);
-			$this->_trace('Соединение установлено');
-		} catch (Splitter_Socket_Exception $e) {
-			trigger_error($e->getMessage(), E_USER_WARNING);
-		}
+		$response = Application::getResponse();
+		$response->log('Установка соединения с ' . $host . ':' . $port, 'request');
+		$socket = new Splitter_Socket($host, $port);
+		$response->log('Соединение установлено');
 		return $socket;
 	}
 
@@ -201,15 +197,6 @@ abstract class Splitter_Connection_Abstract {
 			// устанавливаем переменную в значение по умолчанию
 			$this->$var = $value;
 		}
-	}
-
-	/**
-	 * "Вещает" системное сообщение в объект-слушатель.
-	 *
-	 */
-	function _trace($message, $type = 'info')
-	{
-		Application::getResponse()->$type($message);
 	}
 
 	/**

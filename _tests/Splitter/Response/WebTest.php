@@ -17,10 +17,13 @@ class Splitter_Response_WebTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCallExistingMethod() {
-		$this->response->info('dummy');
+		$date = date(Splitter_Response_Abstract::TIME_FORMAT);
+		$this->response->log('message1');
+		$this->response->log('message2', 'type2');
 		unset($this->response);
 		$contents = ob_get_clean();
-		$this->assertContains(Splitter_Response_Web::CALLEE . '.trace("info",', $contents);
+		$this->assertContains(Splitter_Response_Web::CALLEE . '.log("message1", "' . $date . '")', $contents);
+		$this->assertContains(Splitter_Response_Web::CALLEE . '.log("message2", "' . $date . '", "type2")', $contents);
 	}
 
 	public function testCallNonExistingMethod() {

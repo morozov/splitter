@@ -250,7 +250,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 		// проходим по оставшимся строкам
 		foreach ($headers as $header)
 		{
-			$messageArr[] = $header;
+			$messages[] = $header;
 
 			// разбиваем строки на пары параметр - значение
 			list($param, $value) = explode(':', $header, 2);
@@ -279,7 +279,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 		}
 
 		// выдаем заголовки в лог
-		$this->_trace(implode(PHP_EOL, $messageArr), 'response');
+		Application::getResponse()->log(implode(PHP_EOL, $messages), 'response');
 	}
 
 	/**
@@ -324,7 +324,7 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 
 		$this->_writeln($methodNUri);
 
-		$messageArr = array($methodNUri);
+		$messages = array($methodNUri);
 
 		// проходим по массиву заголовком
 		foreach ($this->_requestHeaders as $param => $value)
@@ -336,9 +336,9 @@ class Splitter_Connection_Http extends Splitter_Connection_Abstract
 			$this->_writeln($headerLine);
 
 			// добавляем строку в лог
-			$messageArr[] = $headerLine;
+			$messages[] = $headerLine;
 		}
 
-		$this->_trace(implode(PHP_EOL, $messageArr), 'request');
+		Application::getResponse()->log(implode(PHP_EOL, $messages), 'request');
 	}
 }

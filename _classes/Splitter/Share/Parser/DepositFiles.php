@@ -33,8 +33,6 @@ class Splitter_Share_Parser_DepositFiles extends Splitter_Share_Parser_Abstract
 	{
 		$success = true;
 
-		$response = Application::getResponse();
-
 		if (!is_string($icid = $this->_getICID($contents)))
 		{
 			$this->_throw('Невозможно определить icid', $contents);
