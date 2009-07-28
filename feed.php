@@ -13,13 +13,13 @@ chdir(dirname(__FILE__));
 
 require_once '_classes/bootstrap.php';
 
-start($url, $email, $count);
+start($url, $email, $split_size, $count);
 
 /**
  * Запускает процесс.
  *
  */
-function start($url, $email, $count) {
+function start($url, $email, $split_size, $count) {
 	$log = get_log($email);
 
 	$downloaded = get_downloaded($log);
