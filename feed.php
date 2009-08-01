@@ -50,6 +50,8 @@ function get_enclosures($url) {
 	$tries = 3;
 	$try = 0;
 
+	$feed = null;
+
 	do {
 		try {
 			$feed = Zend_Feed::import($url);
@@ -63,7 +65,7 @@ function get_enclosures($url) {
 				return array();
 			}
 		}
-	} while (!isset($feed));
+	} while (!$feed instanceof Zend_Feed_Abstract);
 
 	$i = 0;
 	$result = array();

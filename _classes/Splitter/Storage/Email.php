@@ -84,7 +84,7 @@ class Splitter_Storage_Email extends Splitter_Storage_Ram {
 	 */
 	protected function getOptionValue($name) {
 		if (!array_key_exists($name, $this->options)) {
-			throw new Splitter_Storage_Exception('Option "' . $option . '" doesn’t exist');
+			throw new Splitter_Storage_Exception('Option "' . $name . '" doesn’t exist');
 		}
 		return str_replace('%filename%', $this->filename, $this->options[$name]);
 	}

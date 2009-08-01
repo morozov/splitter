@@ -84,7 +84,7 @@ class Application
 	 */
 	function getTmpDir()
 	{
-		static $TMPDIR;
+		static $TMPDIR = null;
 
 		if (!isset($TMPDIR))
 		{
@@ -158,7 +158,7 @@ class Application
 		);
 
 		// в PHP4 статичесим переменным нельзя присваивать по ссылке
-		static $instance;
+		static $instance = null;
 
 		if (!is_array($instance))
 		{

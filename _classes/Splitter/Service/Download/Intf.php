@@ -35,10 +35,10 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 
 		$redirects = 0;
 
+		$isRedirected = false;
+
 		do
 		{
-			$isRedirected = false;
-
 			$service = $this->getDownloadService($params['url']);
 
 			// запускаем сервис
@@ -58,8 +58,7 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 					);
 				};
 			}
-		}
-		while ($isRedirected);
+		} while ($isRedirected);
 
 		return $result;
 	}
@@ -100,10 +99,10 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 
 		$restartsCount = 0;
 
+		$restartNeeded = false;
+
 		do
 		{
-			$restartNeeded = false;
-
 			// запускаем сервис-реализацию
 			$result = $service->run($params);
 

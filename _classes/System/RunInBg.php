@@ -62,6 +62,6 @@ class System_RunInBg
 	 */
 	function _getImplementation() {
 		return Application::isWindows()
-			? new System_Run_Windows : new System_Run_Unix
+			? new System_Run_Windows : new System_Run_Unix;
 	}
 }

@@ -100,6 +100,8 @@ class Splitter_Utils_Rename
 	 */
 	function _getPatternError($pattern)
 	{
+		$php_errormsg = null;
+
 		// выключаем отображение и включаем отслеживание ошибок
 		ini_set('error_reporting', '0');
 		ini_set('track_errors', '1');

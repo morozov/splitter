@@ -113,9 +113,9 @@ class Splitter_Storage extends Splitter_Storage_Abstract {
 
 		$part = 0;
 
-		do {
-			$next = false;
+		$next = false;
 
+		do {
 			$storage->setFileName($this->getPartFileName(++$part));
 
 			$position = $storage->getResumePosition();
