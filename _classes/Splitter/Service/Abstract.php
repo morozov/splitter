@@ -43,7 +43,7 @@ abstract class Splitter_Service_Abstract
 	function fireEvent() {
 		$args = func_get_args();
 		$method = array_shift($args);
-		Application::getResponse()->$method($args);
+		call_user_func_array(array(Application::getResponse(), $method), $args);
 	}
 
 	/**

@@ -64,7 +64,7 @@ class Splitter_Response_Cli extends Splitter_Response_Abstract {
 	 */
 	public function __call($method, array $arguments) {
 		$this->write(
-			sprintf('%s(%s)' . PHP_EOL, $method, implode(',', array_map('json_encode', $arguments)))
+			sprintf('%s(%s)' . PHP_EOL, $method, substr(json_encode($arguments), 1, -1))
 		);
 	}
 
