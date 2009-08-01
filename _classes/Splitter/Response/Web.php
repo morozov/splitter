@@ -63,6 +63,5 @@ class Splitter_Response_Web extends Splitter_Response_Abstract {
 	protected function callClient($method, array $arguments) {
 		echo '<script type="text/javascript">' . self::CALLEE . '.' . $method
 			. '(' . implode(',', array_map('json_encode', $arguments)) . ');</script>' . PHP_EOL;
-		flush();
 	}
 }
