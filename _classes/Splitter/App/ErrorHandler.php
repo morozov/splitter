@@ -139,10 +139,6 @@ class Splitter_App_ErrorHandler
 	{
 		$backtrace = array_slice(debug_backtrace(), $this->BACKTRACE_OFFSET);
 
-		// смещение, с которого нужно выводить пути относительно корня
-		// веб-сервера вместо корня файловой системы
-		$offset = strlen(realpath(dirname($_SERVER['SCRIPT_FILENAME']))) + 1;
-
 		$messages = array();
 
 		$i = 0;
@@ -186,7 +182,7 @@ class Splitter_App_ErrorHandler
 
 			$message .= ') in ';
 
-			$message .= isset($entry['file']) ? substr($entry['file'], $offset) : '[PHP Kernel]';
+			$message .= isset($entry['file']) ? $entry['file'] : '[PHP Kernel]';
 
 			if (isset($entry['line']))
 			{
