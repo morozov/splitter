@@ -31,6 +31,15 @@ abstract class Splitter_Response_Abstract {
 	abstract public function log($message, $type = null);
 
 	/**
+	 * Вызывет указанный метод компонента представления с переданными
+	 * аргументами.
+	 *
+	 * @param string $method
+	 * @param array $arguments
+	 */
+	abstract public function __call($method, array $arguments);
+
+	/**
 	 * Выводит отладочное сообщение через var_dump().
 	 *
 	 * @param mixed $value1[, mixed $value2...]
