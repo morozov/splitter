@@ -100,10 +100,10 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 
 		$restartsCount = 0;
 
-		$restartNeeded = false;
-
 		do
 		{
+			$restartNeeded = false;
+
 			// запускаем сервис-реализацию
 			$result = $service->run($params);
 
