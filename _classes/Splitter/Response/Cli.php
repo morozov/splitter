@@ -8,17 +8,19 @@
 class Splitter_Response_Cli extends Splitter_Response_Abstract {
 
 	/**
-	 * Windows ли?
+	 * Набор символов для перекодирования при выводе.
 	 *
-	 * @var boolean
+	 * @var string|null
 	 */
-	protected $is_windows;
+	protected $output_charset;
 
 	/**
 	 * Конструктор.
 	 */
 	public function __construct() {
-		$this->is_windows = Application::isWindows();
+		if (Application::isWindows()) {
+			$this->output_charset = Splitter_Os_Windows::getOEMCPCharset();
+		}
 	}
 
 	/**
@@ -76,8 +78,8 @@ class Splitter_Response_Cli extends Splitter_Response_Abstract {
 	 * @param string $message
 	 */
 	protected function write($message) {
-		if ($this->is_windows) {
-			$message = mb_convert_encoding($message, 'cp866', 'utf-8');
+		if (null !== $this->output_charset) {
+			$message = mb_convert_encoding($message, $this->output_charset, 'utf-8');
 		}
 		echo $message;
 	}

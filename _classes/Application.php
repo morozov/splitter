@@ -193,9 +193,8 @@ class Application
 		$encoding_from = 'utf-8';
 		$encoding_to = 'windows-1251';
 
-		if (extension_loaded('mbstring')
-			&& mb_check_encoding($string, $encoding_from)) {
-				$string = mb_convert_encoding($string, $encoding_to, $encoding_from);
+		if (mb_check_encoding($string, $encoding_from)) {
+			$string = mb_convert_encoding($string, $encoding_to, $encoding_from);
 		}
 
 		return $string;

@@ -28,6 +28,9 @@ class Splitter_Socket {
 	public function __construct($host, $port) {
 		$errmsg = $errno = null;
 		if (!$resource = @fsockopen($host, $port, $errno, $errmsg, self::CONNECTION_TIMEOUT)) {
+			if (Application::isWindows() && !mb_check_encoding($errmsg, 'utf-8')) {
+				$errmsg = mb_convert_encoding($errmsg, 'utf-8', Splitter_Os_Windows::getACPCharset());
+			}
 			throw new Splitter_Socket_Exception($errmsg, $errno);
 		}
 		$this->resource = $resource;

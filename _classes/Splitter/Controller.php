@@ -22,7 +22,11 @@ final class Splitter_Controller {
 			$this->process();
 			return true;
 		} catch (Exception $e) {
-			Application::getResponse()->log($e->getMessage(), 'error');
+			$message = $e->getMessage();
+			if (0 != ($code = $e->getCode())) {
+				$message = 'Ошибка №' . $code . ': ' . $message;
+			}
+			Application::getResponse()->log($message, 'error');
 		}
 		return false;
 	}
