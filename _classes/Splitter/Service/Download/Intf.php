@@ -35,21 +35,22 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 
 		$redirects = 0;
 
-		$isRedirected = false;
-
 		do
 		{
+			$isRedirected = false;
+
 			$service = $this->getDownloadService($params['url']);
 
 			// запускаем сервис
 			$result = $this->_runService($service, $params);
 
 			if (DOWNLOAD_STATUS_REDIRECT == $result->offsetGet('status')) {
+				$isRedirected = true;
+
 				$params['method'] = 'get';
 				$params['url'] = $result->offsetGet('url');
 				$params['referer'] = $result->offsetGet('referer');
 
-				$isRedirected = true;
 				if (++$redirects > self::MAX_REDIRECTS_COUNT) {
 					throw new Splitter_Service_Download_Exception(
 						sprintf('Количество перенаправлений превысило %d',
