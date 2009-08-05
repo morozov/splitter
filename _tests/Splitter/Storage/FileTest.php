@@ -95,12 +95,14 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testNonAsciiFilenameOnWindows() {
+		$utf8_filename = 'Имя файла по-русски.txt';
+		$storage = $this->_createStorage($this->dir, $utf8_filename);
+		$storage->write($this->contents);
 		if (Application::isWindows()) {
-			$utf8_filename = 'Имя файла по-русски.txt';
-			$windows1251_filename = mb_convert_encoding($utf8_filename, 'windows-1251', 'utf-8');
-			$storage = $this->_createStorage($this->dir, $utf8_filename);
-			$storage->write($this->contents);
+			$windows1251_filename = mb_convert_encoding($utf8_filename, Splitter_Os_Windows::getACPCharset(), 'utf-8');
 			$this->assertFileExists($this->dir . '/' . $windows1251_filename);
+		} else {
+			$this->assertFileExists($this->dir . '/' . $utf8_filename);
 		}
 	}
 
