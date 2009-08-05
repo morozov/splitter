@@ -8,7 +8,12 @@ class Splitter_SocketTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testFailedConnection() {
-		$this->setExpectedException('Splitter_Socket_Exception');
-		$socket = new Splitter_Socket('the-very-non-existing-hostname', 21);
+		try {
+			$socket = new Splitter_Socket('the-very-unreachable-host', 1111);
+		} catch (Splitter_Socket_Exception $e) {
+			$this->assertTrue(mb_check_encoding($e->getMessage(), 'utf-8'));
+			return;
+		}
+		$this->fail('Expected exception not caught');
 	}
 }

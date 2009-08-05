@@ -32,6 +32,24 @@ class Splitter_Os_Windows {
 		return self::toCharset($string, 'OEMCP');
 	}
 
+	/**
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function fromACPCharset($string) {
+		return self::fromCharset($string, 'ACP');
+	}
+
+	/**
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function fromOEMCPCharset($string) {
+		return self::fromCharset($string, 'OEMCP');
+	}
+
 	protected static function getCharset($type) {
 		static $cache = array();
 		if (!array_key_exists($type, $cache)) {
@@ -61,6 +79,13 @@ class Splitter_Os_Windows {
 	protected static function toCharset($string, $type) {
 		if (Application::isWindows() && mb_check_encoding($string, 'utf-8')) {
 			$string = mb_convert_encoding($string, self::getCharset($type), 'utf-8');
+		}
+		return $string;
+	}
+
+	protected static function fromCharset($string, $type) {
+		if (Application::isWindows() && !mb_check_encoding($string, 'utf-8')) {
+			$string = mb_convert_encoding($string, 'utf-8', self::getCharset($type));
 		}
 		return $string;
 	}
