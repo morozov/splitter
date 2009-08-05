@@ -18,4 +18,17 @@ class Splitter_Response_CliTest extends PHPUnit_Framework_TestCase {
 		$this->assertContains('  | ' . $date . ' | message1', $contents);
 		$this->assertContains('! | ' . $date . ' | message2', $contents);
 	}
+
+	public function testNonAsciiContentsOnWindows() {
+		$utf8_contents = 'Содержимое по-русски';
+		$this->response->log($utf8_contents);
+		unset($this->response);
+		$contents = ob_get_clean();
+		if (Application::isWindows()) {
+			$oemcp_contents = mb_convert_encoding($utf8_contents, Splitter_Os_Windows::getOEMCPCharset(), 'utf-8');
+			$this->assertContains($oemcp_contents, $contents);
+		} else {
+			$this->assertContains($utf8_contents, $contents);
+		}
+	}
 }

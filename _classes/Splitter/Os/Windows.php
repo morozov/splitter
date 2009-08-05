@@ -3,19 +3,11 @@
 class Splitter_Os_Windows {
 
 	public static function getACPCharset() {
-		static $charset = false;
-		if (false === $charset) {
-			$charset =  self::getCharset('ACP');
-		}
-		return $charset;
+		return self::getCharset('ACP');
 	}
 
 	public static function getOEMCPCharset() {
-		static $charset = false;
-		if (false === $charset) {
-			$charset =  self::getCharset('OEMCP');
-		}
-		return $charset;
+		return self::getCharset('OEMCP');
 	}
 
 	/**
@@ -26,17 +18,29 @@ class Splitter_Os_Windows {
 	 * @return string
 	 */
 	public static function toACPCharset($string) {
-		if (Application::isWindows()) {
-			$acp_charset = self::getACPCharset();
-			$src_charset = 'utf-8';
-			if (mb_check_encoding($string, $src_charset)) {
-				$string = mb_convert_encoding($string, $acp_charset, $src_charset);
-			}
-		}
-		return $string;
+		return self::toCharset($string, 'ACP');
 	}
 
-	private static function getCharset($type) {
+	/**
+	 * Перекодирует строку из предположительно utf-8 в набор символов OEM для
+	 * Windows.
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function toOEMCPCharset($string) {
+		return self::toCharset($string, 'OEMCP');
+	}
+
+	protected static function getCharset($type) {
+		static $cache = array();
+		if (!array_key_exists($type, $cache)) {
+			$cache[$type] = self::fetchCharset($type);
+		}
+		return $cache[$type];
+	}
+
+	protected static function fetchCharset($type) {
 		$shell = new COM('WScript.Shell');
 
 		try {
@@ -52,5 +56,12 @@ class Splitter_Os_Windows {
 		}
 
 		return null;
+	}
+
+	protected static function toCharset($string, $type) {
+		if (Application::isWindows() && mb_check_encoding($string, 'utf-8')) {
+			$string = mb_convert_encoding($string, self::getCharset($type), 'utf-8');
+		}
+		return $string;
 	}
 }

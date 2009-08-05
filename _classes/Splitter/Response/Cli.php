@@ -8,22 +8,6 @@
 class Splitter_Response_Cli extends Splitter_Response_Abstract {
 
 	/**
-	 * Набор символов для перекодирования при выводе.
-	 *
-	 * @var string|null
-	 */
-	protected $output_charset;
-
-	/**
-	 * Конструктор.
-	 */
-	public function __construct() {
-		if (Application::isWindows()) {
-			$this->output_charset = Splitter_Os_Windows::getOEMCPCharset();
-		}
-	}
-
-	/**
 	 * Проекция типов сообщений на знаки, которыми они помечаются в журнале.
 	 *
 	 * @var array
@@ -78,9 +62,6 @@ class Splitter_Response_Cli extends Splitter_Response_Abstract {
 	 * @param string $message
 	 */
 	protected function write($message) {
-		if (null !== $this->output_charset) {
-			$message = mb_convert_encoding($message, $this->output_charset, 'utf-8');
-		}
-		echo $message;
+		echo Splitter_Os_Windows::toOEMCPCharset($message);
 	}
 }
