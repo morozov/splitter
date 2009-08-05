@@ -94,6 +94,16 @@ class Splitter_Storage_FileTest extends PHPUnit_Framework_TestCase {
 		$storage->write($this->contents);
 	}
 
+	public function testNonAsciiFilenameOnWindows() {
+		if (Application::isWindows()) {
+			$utf8_filename = 'Имя файла по-русски.txt';
+			$windows1251_filename = mb_convert_encoding($utf8_filename, 'windows-1251', 'utf-8');
+			$storage = $this->_createStorage($this->dir, $utf8_filename);
+			$storage->write($this->contents);
+			$this->assertFileExists($this->dir . '/' . $windows1251_filename);
+		}
+	}
+
 	protected function _createStorage($dir, $filename) {
 		$storage = new Splitter_Storage_File(array('dir' =>  $dir));
 		$storage->setFilename($filename);

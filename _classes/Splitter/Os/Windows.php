@@ -3,11 +3,37 @@
 class Splitter_Os_Windows {
 
 	public static function getACPCharset() {
-		return self::getCharset('ACP');
+		static $charset = false;
+		if (false === $charset) {
+			$charset =  self::getCharset('ACP');
+		}
+		return $charset;
 	}
 
 	public static function getOEMCPCharset() {
-		return self::getCharset('OEMCP');
+		static $charset = false;
+		if (false === $charset) {
+			$charset =  self::getCharset('OEMCP');
+		}
+		return $charset;
+	}
+
+	/**
+	 * Перекодирует строку из предположительно utf-8 в набор символов ACP для
+	 * Windows.
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function toACPCharset($string) {
+		if (Application::isWindows()) {
+			$acp_charset = self::getACPCharset();
+			$src_charset = 'utf-8';
+			if (mb_check_encoding($string, $src_charset)) {
+				$string = mb_convert_encoding($string, $acp_charset, $src_charset);
+			}
+		}
+		return $string;
 	}
 
 	private static function getCharset($type) {

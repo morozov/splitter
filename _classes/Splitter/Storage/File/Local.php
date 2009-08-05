@@ -20,10 +20,7 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 			throw new Splitter_Storage_Exception('Could not create directory "' . $path . '"');
 		}
 
-		$resource = parent::open(
-			Application::isWindows()
-				? Application::utf2win($path)
-				: $path);
+		$resource = parent::open(Splitter_Os_Windows::toACPCharset($path));
 
 		if (!flock($resource, LOCK_EX | LOCK_NB)) {
 			throw new Splitter_Storage_Exception('Файл "' . $path . '" заблокирован другим процессом');
