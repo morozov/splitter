@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__FILE__) . '/../../TestHelper.php';
+
 class Splitter_Storage_EmailTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreationUsingValidEmail() {
