@@ -53,22 +53,6 @@ class Application
 	}
 
 	/**
-	 * Перезапускает приложение в режимн командной строки.
-	 *
-	 * @static */
-	function runAsCli()
-	{
-		if (!Application::_isCli())
-		{
-			$response = Application::getResponse();
-			$response->log('Перезапуск в режиме командной строки');
-
-			$intf = new System_RunInBg();
-			$intf->run();
-		}
-	}
-
-	/**
 	 * Возвращает, запущено ли приложение под Windows®.
 	 *
 	 * @return boolean

@@ -34,116 +34,108 @@ final class Splitter_Controller {
 	/**
 	 * Выполняет обработку данных пользовательского запроса.
 	 *
-	 * @return boolean
 	 */
 	private function process() {
 
 		$request = Application::getRequest();
 
-		if ($request->hasParam('in-background')) {
-			Application::runAsCli();
-		} elseif ($request->hasParam('url')) {
-			// собираем массив параметров запуска сервиса
-			$params = $request->getParams();
+		if (!$request->hasParam('url')) {
+			throw new Exception('Не указан URL источника');
+		}
 
-			// добавляем captcha
-			if ($request->hasParam('captcha-param'))
+		// собираем массив параметров запуска сервиса
+		$params = $request->getParams();
+
+		// добавляем captcha
+		if ($request->hasParam('captcha-param'))
+		{
+			$postData = $request->getParam('post-data');
+
+			if (strlen($postData) > 0)
 			{
-				$postData = $request->getParam('post-data');
-
-				if (strlen($postData) > 0)
-				{
-					$postData .= '&';
-				}
-
-				$postData .= $request->getParam('captcha-param')
-					. '=' . $request->getParam('captcha-text');
-
-				$params['post-data'] = $postData;
+				$postData .= '&';
 			}
 
-			// создаем абстракцию сервиса закачки
-			$service = new Splitter_Service_Download_Intf();
+			$postData .= $request->getParam('captcha-param')
+				. '=' . $request->getParam('captcha-text');
 
-			if ($request->getParam('rename'))
-			{
-				// пока не знаю, куда это запихнуть
-				$GLOBALS['rename'] = new Splitter_Utils_Rename(
-					$request->getParam('rename-search'),
-					$request->getParam('rename-replace'),
-					$request->getParam('rename-regexp')
-				);
-			}
+			$params['post-data'] = $postData;
+		}
 
-			if ($this->isDownloadNeeded())
-			{
-				$type = $request->getParam('storage', 'file');
-				$params['storage'] = $this->getStorage(
-					$type,
-					$request->getParam('split-size'),
-					$this->getStorageOptions($request, $type)
-				);
-			}
-			else
-			{
-				unset($params['storage']);
-			}
+		// создаем абстракцию сервиса закачки
+		$service = new Splitter_Service_Download_Intf();
 
-			$make_links = $request->hasParam('links');
+		if ($request->getParam('rename'))
+		{
+			// пока не знаю, куда это запихнуть
+			$GLOBALS['rename'] = new Splitter_Utils_Rename(
+				$request->getParam('rename-search'),
+				$request->getParam('rename-replace'),
+				$request->getParam('rename-regexp')
+			);
+		}
 
-			$comp = new Splitter_Utils_ProxyLink();
-
-			$links = array();
-
-			foreach (explode(PHP_EOL, trim($request->getParam('url'))) as $url)
-			{
-				if ($make_links)
-				{
-					$links = array_merge($links, $comp->generate($url, $request->getParam('split-size'), $request->getParam('encoding')));
-				}
-				else
-				{
-					$url = new Lib_Url($url);
-
-					if (is_object($handler = $this->getShareHandler($url, $request->getParam('method', 'get'))))
-					{
-						$handler->process($url, $params);
-
-						break;
-					}
-
-					$params['url'] = $url;
-
-					$result = $service->run($params);
-
-					if (DOWNLOAD_STATUS_FATAL == $result->offsetGet('status'))
-					{
-						return false;
-					}
-				}
-			}
-
-			if ($make_links)
-			{
-				$response = Application::getResponse();
-
-				$messages = array();
-
-				foreach ($links as $link)
-				{
-					$messages[] = '<a href="' . $link . '" target="_blank">' . $link . '</a>';
-				}
-
-				$response->log(implode(PHP_EOL, $messages));
-			}
+		if ($this->isDownloadNeeded())
+		{
+			$type = $request->getParam('storage', 'file');
+			$params['storage'] = $this->getStorage(
+				$type,
+				$request->getParam('split-size'),
+				$this->getStorageOptions($request, $type)
+			);
 		}
 		else
 		{
-			trigger_error('Не указан URL источника', E_USER_WARNING);
-			return false;
+			unset($params['storage']);
 		}
 
-		return true;
+		$make_links = $request->hasParam('links');
+
+		$comp = new Splitter_Utils_ProxyLink();
+
+		$links = array();
+
+		foreach (explode(PHP_EOL, trim($request->getParam('url'))) as $url)
+		{
+			if ($make_links)
+			{
+				$links = array_merge($links, $comp->generate($url, $request->getParam('split-size'), $request->getParam('encoding')));
+			}
+			else
+			{
+				$url = new Lib_Url($url);
+
+				if (is_object($handler = $this->getShareHandler($url, $request->getParam('method', 'get'))))
+				{
+					$handler->process($url, $params);
+
+					break;
+				}
+
+				$params['url'] = $url;
+
+				$result = $service->run($params);
+
+				if (DOWNLOAD_STATUS_FATAL == $result->offsetGet('status'))
+				{
+					return false;
+				}
+			}
+		}
+
+		if ($make_links)
+		{
+			$response = Application::getResponse();
+
+			$messages = array();
+
+			foreach ($links as $link)
+			{
+				$messages[] = '<a href="' . $link . '" target="_blank">' . $link . '</a>';
+			}
+
+			$response->log(implode(PHP_EOL, $messages));
+		}
 	}
 
 	/**
