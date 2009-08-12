@@ -7,8 +7,8 @@
  *
  * @version $Id$
  */
-class Application
-{
+abstract class Application {
+
 	/**
 	 * Контекст приложения.
 	 *
@@ -62,26 +62,6 @@ class Application
 	}
 
 	/**
-	 * Конструктор. Создает контекст приложения.
-	 *
-	 * @return Application
-	 */
-	function Application()
-	{
-		trigger_error('Application is an abstract class.', E_USER_ERROR);
-	}
-
-	/**
-	 * Возвращает, запущено ли приложение из интерфейса командной строки.
-	 *
-	 * @return boolean
-	 * @static */
-	function _isCli()
-	{
-		return !isset($_SERVER['SERVER_PROTOCOL']);
-	}
-
-	/**
 	 * Возвращает контекст приложения.
 	 *
 	 * @return Context Контекст приложения
@@ -132,7 +112,9 @@ class Application
 	 */
 	function _getInterfaceName()
 	{
-		return Application::_isCli() ? 'cli' : ('POST' == $_SERVER['REQUEST_METHOD'] ? 'web' : 'proxy');
+		return isset($_SERVER['SERVER_PROTOCOL'])
+			? ('POST' == $_SERVER['REQUEST_METHOD'] ? 'web' : 'proxy')
+			: 'cli';
 	}
 
 	/**
