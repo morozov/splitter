@@ -74,20 +74,7 @@
 	// наименования настроек и их значения по умолчанию
 	var _params = $H({
 
-		// настройки прокси-сервера
-		'use-proxy': false ,
-		'proxy-host': 'www.proxy.com' ,
-		'proxy-port': '3128' ,
-		'proxy-user': 'anonymous' ,
-		'proxy-password': '' ,
-
-		// настройки возобновления докачки
-		'use-auto-resume': false ,
-		'auto-resume-interval': 10 ,
-		'auto-resume-count': 50,
-
 		// пользовательские настройки
-		'user-agent':   'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)',
 		'dir':  'files/',
 		'to': '',
 		'storage':	  'file',

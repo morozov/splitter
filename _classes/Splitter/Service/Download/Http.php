@@ -278,12 +278,7 @@ class Splitter_Service_Download_Http extends Splitter_Service_Download_Abstract 
 	 */
 	function _setUserAgentHeader()
 	{
-		$settings = Application::getSettings();
-
-		if (strlen($agent = $settings->getParam('user-agent')) > 0)
-		{
-			$this->_conn->setRequestHeader('User-Agent', $agent);
-		}
+		$this->_conn->setRequestHeader('User-Agent', 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)');
 	}
 
 	/**

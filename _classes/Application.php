@@ -10,22 +10,12 @@
 abstract class Application {
 
 	/**
-	 * Контекст приложения.
-	 *
-	 * @var AppContext
-	 */
-	var $_context;
-
-	/**
 	 * Возвращает объект пользовательского запроса.
 	 *
 	 * @return Splitter_Request_Abstract
-	 * @static */
-	function getRequest()
-	{
-		$context = Application::_getContext();
-		$request = $context->getObject('request');
-		return $request;
+	 */
+	public static function getRequest() {
+		return self::getObject('request');
 	}
 
 	/**
@@ -33,23 +23,8 @@ abstract class Application {
 	 *
 	 * @return Splitter_Response_Abstract
 	 * @static */
-	function getResponse()
-	{
-		$context = Application::_getContext();
-		$response = $context->getObject('response');
-		return $response;
-	}
-
-	/**
-	 * Возвращает объект настроек.
-	 *
-	 * @return Settings
-	 * @static */
-	function getSettings()
-	{
-		$context = Application::_getContext();
-		$settings = $context->getObject('settings');
-		return $settings;
+	public static function getResponse() {
+		return self::getObject('response');
 	}
 
 	/**
@@ -62,47 +37,21 @@ abstract class Application {
 	}
 
 	/**
-	 * Возвращает контекст приложения.
+	 * Возвращает объект приложения.
 	 *
-	 * @return Context Контекст приложения
+	 * @return object
 	 */
-	function _getContext()
-	{
-		$CONTEXT_OBJECTS = array
-		(
-			'web' => array
-			(
-				'request'  => 'Splitter_Request_Web',
-				'response' => 'Splitter_Response_Web',
-				'settings' => 'Splitter_App_Settings',
-			),
-			'cli' => array
-			(
-				'request'  => 'Splitter_Request_Cli',
-				'response' => 'Splitter_Response_Cli',
-				'settings' => 'Splitter_App_Settings',
-			),
-			'proxy' => array
-			(
-				'request'  => 'Splitter_Request_Proxy',
-				'response' => 'Splitter_Response_Proxy',
-				'settings' => 'Splitter_App_Settings',
-			),
-		);
-
-		// в PHP4 статичесим переменным нельзя присваивать по ссылке
-		static $instance = null;
-
-		if (!is_array($instance))
-		{
-			$context = new Splitter_App_Context($CONTEXT_OBJECTS[Application::_getInterfaceName()]);
-
-			$instance = array($context);
-
-			set_error_handler(array(new Splitter_App_ErrorHandler(), 'handle'));
+	private static function getObject($name) {
+		static $context = array(),
+			$mode = null;
+		if (!isset($context[$name])) {
+			if (!isset($mode)) {
+				$mode = self::getMode();
+			}
+			$class = sprintf('Splitter_%s_%s', ucfirst($name), $mode);
+			$context[$name] = new $class;
 		}
-
-		return $instance[0];
+		return $context[$name];
 	}
 
 	/**
@@ -110,7 +59,7 @@ abstract class Application {
 	 *
 	 * @return string
 	 */
-	function _getInterfaceName()
+	private function getMode()
 	{
 		return isset($_SERVER['SERVER_PROTOCOL'])
 			? ('POST' == $_SERVER['REQUEST_METHOD'] ? 'web' : 'proxy')

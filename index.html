@@ -78,25 +78,6 @@
 		<!-- <label for="part-from">, скачать части c</label><input name="part-from" id="part-from" type="text" class="text disabled" disabled="disabled" onfocus="select();" />
 		<label for="part-to">по</label><input name="part-to" id="part-to" type="text" class="text disabled" disabled="disabled" onfocus="select();" /> //-->
 		<div class="clear"><!-- --></div>
-		<a id="options-link" href="./" title="Использовать прокси или автоматический перезапуск" onclick="switchOptions(); return false;">Дополнительные настройки</a>
-		<div id="options" style="display: none">
-			<fieldset>
-				<legend>Соединение</legend>
-				<p><input type="checkbox" id="use-proxy" name="use-proxy" disabled="disabled" /><label for="use-proxy">Использовать прокси-сервер</label></p>
-				<p><label class="left" for="proxy-host">Адрес: </label><input class="text" type="text" id="proxy-host" name="proxy-host" /></p>
-				<p><label class="left" for="proxy-port">Порт: </label><input class="text" type="text" id="proxy-port" name="proxy-port" /></p>
-				<p><label class="left" for="proxy-user">Пользователь: </label><input class="text" type="text" id="proxy-user" name="proxy-user" /></p>
-				<p><label class="left" for="proxy-password">Пароль: </label><input class="text" type="password" id="proxy-password" name="proxy-password" /></p>
-			</fieldset>
-			<fieldset>
-				<legend>Закачка</legend>
-				<p><input type="checkbox" id="use-auto-resume" name="use-auto-resume" /><label for="use-auto-resume">Автоматический перезапуск</label></p>
-				<p><label class="left" for="auto-resume-interval">Интервал, сек: </label><input class="text" type="text" id="auto-resume-interval" /></p>
-				<p><label class="left" for="auto-resume-count">Макс. кол-во: </label><input class="text" type="text" id="auto-resume-count" /></p>
-				<p><label class="left" for="user-agent">User-Agent: </label><input class="text" type="text" id="user-agent" /></p>
-			</fieldset>
-		</div>
-		<div class="clear"></div>
 		<div id="buttons-container">
 			<input class="button" type="submit" name="download" id="button-download" value="Скачать" />
 			<input class="button" type="submit" name="get-size" id="button-size" value="Получить размер" />

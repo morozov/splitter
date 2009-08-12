@@ -92,61 +92,26 @@ class Splitter_Service_Download_Intf extends Splitter_Service_Abstract {
 	 */
 	function _runService(&$service, $params)
 	{
-		$settings = Application::getSettings();
+		// запускаем сервис-реализацию
+		$result = $service->run($params);
 
-		$useAutoResume = $settings->getParam('use-auto-resume');
-		$autoResumeCount = $settings->getParam('auto-resume-count');
-		$autoResumeInterval = $settings->getParam('auto-resume-interval');
-
-		$restartsCount = 0;
-
-		do
+		// получаем статус результата
+		switch ($result->offsetGet('status'))
 		{
-			$restartNeeded = false;
+			// в случае, если получено содержимое файла
+			case DOWNLOAD_STATUS_OK:
+				break;
 
-			// запускаем сервис-реализацию
-			$result = $service->run($params);
+			// в случае, если получено перенаправление
+			// ничего не делаем, этот статус обрабатывается снаружи
+			case DOWNLOAD_STATUS_REDIRECT:
+				break;
 
-			// получаем статус результата
-			switch ($result->offsetGet('status'))
-			{
-				// в случае, если получено содержимое файла
-				case DOWNLOAD_STATUS_OK:
-					break;
-
-				// в случае, если получено перенаправление
-				// ничего не делаем, этот статус обрабатывается снаружи
-				case DOWNLOAD_STATUS_REDIRECT:
-					break;
-
-				// в случае, если файл недокачан
-				case DOWNLOAD_STATUS_ERROR:
-				case DOWNLOAD_STATUS_INCOMPLETE:
-
-					if ($useAutoResume && (++$restartsCount < $autoResumeCount))
-					{
-						$response = Application::getResponse();
-						$response->log
-						(
-							sprintf
-							(
-								'Повторный перезапуск закачки (%d из %d) через %d секунд',
-								$restartsCount,
-								$autoResumeCount,
-								$autoResumeInterval
-							)
-						);
-
-						// делаем паузу
-						sleep($autoResumeInterval);
-
-						$restartNeeded = true;
-					}
-
-					break;
-			}
+			// в случае, если файл недокачан
+			case DOWNLOAD_STATUS_ERROR:
+			case DOWNLOAD_STATUS_INCOMPLETE:
+				break;
 		}
-		while ($restartNeeded);
 
 		return $result;
 	}

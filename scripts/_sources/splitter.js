@@ -70,18 +70,6 @@ var Splitter = {
 		Splitter.Element.setAbilility( 'part-from', isSplittingOff ) ;
 		Splitter.Element.setAbilility( 'part-to', isSplittingOff ) ;*/
 
-		// параметры прокси-сервера
-		var useProxy = $( 'use-proxy' ).checked ;
-		Splitter.Element.setAbilility( 'proxy-host', useProxy ) ;
-		Splitter.Element.setAbilility( 'proxy-port', useProxy ) ;
-		Splitter.Element.setAbilility( 'proxy-user', useProxy ) ;
-		Splitter.Element.setAbilility( 'proxy-password', useProxy ) ;
-
-		// параметры автоматического перезапуска
-		var autoResume = $( 'use-auto-resume' ).checked ;
-		Splitter.Element.setAbilility( 'auto-resume-interval', autoResume ) ;
-		Splitter.Element.setAbilility( 'auto-resume-count', autoResume ) ;
-
 		//
 		var isPost = radio_value( 'the-form', 'method') == 'post' ;
 		Element[ isPost ? 'show' : 'hide' ]( 'post-params' ) ;
@@ -132,8 +120,3 @@ function radio_value(form, name)
 
 //
 var controller;
-
-function switchOptions()
-{
-	Element.toggle('options');
-}
