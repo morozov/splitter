@@ -18,6 +18,7 @@ final class Splitter_Controller {
 	 * @return boolean
 	 */
 	public function main() {
+		set_error_handler(array(new Splitter_ErrorHandler, 'handle'));
 		try {
 			$this->process();
 			return true;

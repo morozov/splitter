@@ -5,7 +5,7 @@
  *
  * @version $Id$
  */
-class Splitter_App_ErrorHandler
+class Splitter_ErrorHandler
 {
 	/**
 	 * Смещение, начиная с которого нужно выводить отладочные сообщения.
