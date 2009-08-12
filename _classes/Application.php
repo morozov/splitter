@@ -62,37 +62,6 @@ class Application
 	}
 
 	/**
-	 * Возвращает путь временной директории для сохранения файла.
-	 *
-	 * @return string
-	 */
-	function getTmpDir()
-	{
-		static $TMPDIR = null;
-
-		if (!isset($TMPDIR))
-		{
-			switch (true)
-			{
-				// пытаемся определить по переменным окружения
-				case $TMPDIR = getenv(Application::isWindows() ? 'TMP': 'TMPDIR');
-					break;
-
-				// пытаемся определить по настройкам PHP (встречается у некоторых хостеров)
-				case $TMPDIR = ini_get('upload_tmp_dir');
-					break;
-
-				// если дойдет досюда, придется создать временную папку руками
-				default:
-					$TMPDIR = './tmp';
-					break;
-			}
-		}
-
-		return $TMPDIR;
-	}
-
-	/**
 	 * Конструктор. Создает контекст приложения.
 	 *
 	 * @return Application
