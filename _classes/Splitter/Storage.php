@@ -8,6 +8,15 @@
 class Splitter_Storage extends Splitter_Storage_Abstract {
 
 	/**
+	 * Опции хранилища.
+	 *
+	 * @var array
+	 */
+	protected $options = array(
+		'crc32charset' => 'windows-1251',
+	);
+
+	/**
 	 * Номер текущий части, на которые разбивается файл.
 	 *
 	 * @var integer
@@ -293,10 +302,13 @@ class Splitter_Storage extends Splitter_Storage_Abstract {
 			}
 			$crc32 = $corrected;
 		}
+		if (null !== $this->options['crc32charset'] && mb_check_encoding($filename, 'utf-8')) {
+			$filename = mb_convert_encoding($filename, $this->options['crc32charset'], 'utf-8');
+		}
 		return sprintf(implode(PHP_EOL, array(
 			'filename=%s',
 			'size=%d',
 			'crc32=%s',
-		)), Application::utf2win($filename), $size, strtoupper($crc32));
+		)), $filename, $size, strtoupper($crc32));
 	}
 }
