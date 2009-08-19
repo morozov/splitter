@@ -3,7 +3,7 @@
 /**
  * Класс отправки скачанного файла по электронной почте.
  *
- * @version $Id$
+ * @version $Id: Email.php 77 2009-08-01 13:26:11Z Morozov $
  */
 class Splitter_Storage_Email extends Splitter_Storage_Ram {
 
