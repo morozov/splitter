@@ -1,7 +1,7 @@
 <?php
 
-ini_set('output_buffering', 0);
-ob_implicit_flush();
+@ob_end_flush();
+ini_set('implicit_flush', 1);
 
 error_reporting(E_ALL);
 
