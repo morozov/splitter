@@ -5,33 +5,29 @@
  *
  * @version $Id$
  */
-class System_Timer
-{
+class System_Timer {
+
 	/**
 	 * Временная метка начала работы таймера.
 	 *
 	 * @var float
-
 	 */
-	var $_startTime = 0;
+	protected $start_time;
 
 	/**
 	 * Временная метка окончания работы таймера.
 	 *
 	 * @var float
-
 	 */
-	var $_endTime = 0;
+	protected $end_time;
 
 	/**
-	 * Конструктор. Автоматически инициализирует запуск.
+	 * Конструктор.
 	 *
-	 * @param boolean  $autoStart
+	 * @param boolean $autoStart
 	 */
-	function System_Timer($autoStart = true)
-	{
-		if ($autoStart)
-		{
+	public function __construct($autostart = true) {
+		if ($autostart) {
 			$this->start();
 		}
 	}
@@ -40,19 +36,17 @@ class System_Timer
 	 * Запускает таймер.
 	 *
 	 */
-	function start()
-	{
-		$this->_startTime = $this->_getMicroTime();
-		$this->_endTime = null;
+	public function start() {
+		$this->start_time = microtime(true);
+		$this->end_time = null;
 	}
 
 	/**
 	 * Останавливает таймер.
 	 *
 	 */
-	function stop()
-	{
-		$this->_endTime = $this->_getMicroTime();
+	public function stop() {
+		$this->end_time = microtime(true);
 	}
 
 	/**
@@ -62,21 +56,8 @@ class System_Timer
 	 *
 	 * @return float
 	 */
-	function getTime()
-	{
-		return (is_null($this->_endTime)
-			? $this->_getMicroTime() : $this->_endTime) - $this->_startTime;
-	}
-
-	/**
-	 * Возвращет текущую временную метку в микросекундах.
-	 *
-	 * @return float
-	 */
-	function _getMicroTime()
-	{
-		$mtime = explode(' ', microtime());
-		$mtime = (float)$mtime[1] + (float)$mtime[0];
-		return $mtime;
+	public function getTime() {
+		return (null === $this->end_time
+			? microtime(true) : $this->end_time) - $this->start_time;
 	}
 }
