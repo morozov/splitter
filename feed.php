@@ -149,6 +149,7 @@ function run(array $params) {
 	), $params) as $param => $value) {
 		$cmd .= ' -' . $param . ' ' . escapeshellarg($value);
 	}
+	$exit_code = null;
 	system($cmd, $exit_code);
-	return 0 == $exit_code;
+	return 0 === $exit_code;
 }
