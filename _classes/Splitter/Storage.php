@@ -258,6 +258,8 @@ class Splitter_Storage extends Splitter_Storage_Abstract {
 		// следующая часть
 		++$this->part;
 
+		unset($this->storage);
+
 		$this->storage = $this->getStorage();
 
 		$this->storage->setFileName($this->getPartFileName($this->part));
