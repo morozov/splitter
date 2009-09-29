@@ -215,13 +215,18 @@ class Splitter_Storage extends Splitter_Storage_Abstract {
 	public function commit() {
 		$this->storage->commit();
 		if ($this->hash) {
+			$crc32 = hash_final($this->hash);
+			// @link http://bugs.php.net/bug.php?id=45028
+			if (version_compare(phpversion(), '5.2.6', '<=')) {
+				$crc32 = substr($crc32, 6, 2) . substr($crc32, 4, 2) . substr($crc32, 2, 2) . substr($crc32, 0, 2);
+			}
 			$this->getStorage()
 				->setFileName($this->getPartFileName('crc'))
 				->write(
 					$this->getCrcFileContents(
 						$this->filename,
 						$this->written_total,
-						hash_final($this->hash)
+						$crc32
 					)
 				)->commit();
 		}
@@ -294,14 +299,6 @@ class Splitter_Storage extends Splitter_Storage_Abstract {
 	 * @return string
 	 */
 	protected function getCrcFileContents($filename, $size, $crc32) {
-		// :KLUDGE: morozov 15062009: похоже, это зависит от ОС, но не факт
-		if (!Application::isWindows()) {
-			$corrected = '';
-			for ($i = strlen($crc32) - 2; $i >= 0; $i -= 2) {
-				$corrected .= substr($crc32, $i, 2);
-			}
-			$crc32 = $corrected;
-		}
 		if (null !== $this->options['crc32charset'] && mb_check_encoding($filename, 'utf-8')) {
 			$filename = mb_convert_encoding($filename, $this->options['crc32charset'], 'utf-8');
 		}
