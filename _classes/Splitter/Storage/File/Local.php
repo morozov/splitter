@@ -2,7 +2,6 @@
 
 /**
  * Реализация сохранения данных в локальной файловой системе.
- *
  */
 class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 
@@ -16,8 +15,12 @@ class Splitter_Storage_File_Local extends Splitter_Storage_File_Abstract {
 
 		$dir = dirname($path);
 
-		if (!is_dir($dir) && !@mkdir($dir, 0777, true)) {
-			throw new Splitter_Storage_Exception('Could not create directory "' . $path . '"');
+		if (!is_dir($dir)) {
+			$umask = umask(0);
+			if (!@mkdir($dir, 0777, true)) {
+				throw new Splitter_Storage_Exception('Could not create directory "' . $path . '"');
+			}
+			umask($umask);
 		}
 
 		$resource = parent::open(Splitter_Os_Windows::toACPCharset($path));
