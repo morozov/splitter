@@ -19,31 +19,30 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 *
 	 * @var boolean
 	 */
-	var $_headersSent = false;
+	protected $_headersSent = false;
 
 	/**
 	 * Позиция возобновления закачки
 	 *
 	 * @var integer
 	 */
-	var $_resume = 0;
+	protected $_resume = 0;
 
 	/**
 	 * Флаг, запоминающий, было ли хранилище открыто для записи данных.
 	 *
 	 * @var boolean
 	 */
-	var $_opened = false;
+	protected $_opened = false;
 
 	/**
 	 * Конструктор. Отключает вывод лога в браузер (временно).
-	 *
 	 */
 	public function __construct() {
 		$matches = null;
 		$this->_resume = (isset($_SERVER['HTTP_RANGE'])
 			&& preg_match('/bytes=(\d*)\-/', $_SERVER['HTTP_RANGE'], $matches))
-			? (int)$matches[1] : parent::getResumePosition();
+			? (int)$matches[1] : 0;
 	}
 
 	/**
@@ -60,8 +59,7 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 *
 	 * @return integer
 	 */
-	function getResumePosition()
-	{
+	public function getResumePosition() {
 		return $this->_resume;
 	}
 
@@ -70,9 +68,8 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 *
 	 * @return boolean
 	 */
-	function isDownloadNeeded()
-	{
-		return parent::isDownloadNeeded() && 'HEAD' != $_SERVER['REQUEST_METHOD'];
+	public function isDownloadNeeded() {
+		return 'HEAD' != $_SERVER['REQUEST_METHOD'];
 	}
 
 	/**
@@ -98,21 +95,16 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 * @param integer  $size
 	 * @return boolean
 	 */
-	function truncate($size)
-	{
+	public function truncate($size) {
 		$this->_resume = $size;
-
 		return true;
 	}
 
 	/**
 	 * Отправляет HTTP-заголовки.
-	 *
 	 */
-	function _sendHeaders()
-	{
-		if ($this->_opened)
-		{
+	public function _sendHeaders() {
+		if ($this->_opened) {
 			header($_SERVER['SERVER_PROTOCOL'] . ' '
 			. ($this->_resume > 0 ? '206 Partial Content' : '200 OK'));
 
@@ -124,18 +116,14 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 			// показываем агенту, что мы поддерживаем докачку
 			header('Accept-Ranges: bytes');
 
-			if ($this->_resume > 0)
-			{
+			if ($this->_resume > 0) {
 				header('Content-Range: bytes ' . $this->_resume . '-' . ($this->size - 1) . '/' . $this->size);
 			}
 
-			if (!is_null($this->size))
-			{
+			if (!is_null($this->size)) {
 				header('Content-Length: ' . ($this->size - $this->_resume));
 			}
-		}
-		else
-		{
+		} else {
 			header($_SERVER['SERVER_PROTOCOL'] . ' ' . '404 Not Found');
 		}
 	}
