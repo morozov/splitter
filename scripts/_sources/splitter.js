@@ -84,6 +84,11 @@ var Splitter = {
 		Splitter.Element.setAbilility('rename-search', rename);
 		Splitter.Element.setAbilility('rename-replace', rename);
 		Splitter.Element.setAbilility('rename-regexp', rename);
+
+		// прокси-режим
+		var isProxy = $('storage-proxy').checked;
+		Splitter.Element.setAbilility('button-download', !isProxy);
+		Splitter.Element.setAbilility('button-links', isProxy);
 	},
 
 	'onload': function()
