@@ -5,14 +5,13 @@
  *
  * @version $Id$
  */
-class Splitter_Response_Proxy extends Splitter_Response_Abstract
-{
+class Splitter_Response_Proxy extends Splitter_Response_Abstract {
+
 	/**
 	 * Конструктор.
 	 *
 	 */
-	function Splitter_Response_Proxy()
-	{
+	public function __construct() {
 		// на случай, если что-то обломится — выставляем статус ответа в 404 для
 		// того, чтобы пользовательский агент не сохранял данные
 		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
@@ -22,33 +21,26 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	 * Вызывет указанный метод компонента представления с переданными
 	 * аргументами.
 	 *
-	 * @param string   $method   Наименование метода
+	 * @param string $method
+	 * @param array $arguments
 	 */
-	function call($method)
-	{
-	}
+	public function __call($method, array $arguments) { }
 
 	/**
-	 * Выводит сообщение в журнал.
+	 * Записывает сообщение в журнал.
 	 *
-	 * @param string  $message
-	 * @param string  $type
+	 * @param string $message
+	 * @param string $type
 	 */
-	function log($message, $type)
-	{
-		$fp = fopen('files/log.txt', 'ab');
-		fwrite($fp, $message . "\r\n");
-		fclose($fp);
-	}
+	public function log($message, $type = null) { }
 
 	/**
 	 * Регистрирует ошибку вызвавшую завершение приложения.
 	 *
 	 * @param string  $message
 	 */
-	function error($message)
-	{
-		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found (' . $this->_truncate($message) . ')');
+	public function error($message) {
+		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found (' . $this->truncate($message) . ')');
 	}
 
 	/**
@@ -57,8 +49,7 @@ class Splitter_Response_Proxy extends Splitter_Response_Abstract
 	 * @param string  string
 	 * @return string
 	 */
-	function _truncate($string)
-	{
+	protected function truncate($string) {
 		return current(preg_split('/[\r\n]/', $string, -1, PREG_SPLIT_NO_EMPTY));
 	}
 }

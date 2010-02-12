@@ -29,13 +29,6 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	protected $_resume = 0;
 
 	/**
-	 * Флаг, запоминающий, было ли хранилище открыто для записи данных.
-	 *
-	 * @var boolean
-	 */
-	protected $_opened = false;
-
-	/**
 	 * Конструктор. Отключает вывод лога в браузер (временно).
 	 */
 	public function __construct() {
@@ -81,7 +74,7 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	 */
 	public function write($data) {
 		if (!$this->_headersSent) {
-			$this->_sendHeaders();
+			$this->sendHttpHeaders();
 			$this->_headersSent = true;
 		}
 		echo $data;
@@ -103,28 +96,24 @@ class Splitter_Storage_Proxy extends Splitter_Storage_Abstract {
 	/**
 	 * Отправляет HTTP-заголовки.
 	 */
-	public function _sendHeaders() {
-		if ($this->_opened) {
-			header($_SERVER['SERVER_PROTOCOL'] . ' '
-			. ($this->_resume > 0 ? '206 Partial Content' : '200 OK'));
+	protected function sendHttpHeaders() {
+		header($_SERVER['SERVER_PROTOCOL'] . ' '
+		. ($this->_resume > 0 ? '206 Partial Content' : '200 OK'));
 
-			// отправляем два заголовка с именем файла, чтобы удовлетворить всех
-			// польвательских агентов
-			header('Content-Type: text/plain; name="' . $this->filename . '"');
-			header('Content-Disposition: inline; filename="' . $this->filename . '"');
+		// отправляем два заголовка с именем файла, чтобы удовлетворить всех
+		// польвательских агентов
+		header('Content-Type: text/plain; name="' . $this->filename . '"');
+		header('Content-Disposition: inline; filename="' . $this->filename . '"');
 
-			// показываем агенту, что мы поддерживаем докачку
-			header('Accept-Ranges: bytes');
+		// показываем агенту, что мы поддерживаем докачку
+		header('Accept-Ranges: bytes');
 
-			if ($this->_resume > 0) {
-				header('Content-Range: bytes ' . $this->_resume . '-' . ($this->size - 1) . '/' . $this->size);
-			}
+		if ($this->_resume > 0) {
+			header('Content-Range: bytes ' . $this->_resume . '-' . ($this->size - 1) . '/' . $this->size);
+		}
 
-			if (!is_null($this->size)) {
-				header('Content-Length: ' . ($this->size - $this->_resume));
-			}
-		} else {
-			header($_SERVER['SERVER_PROTOCOL'] . ' ' . '404 Not Found');
+		if (!is_null($this->size)) {
+			header('Content-Length: ' . ($this->size - $this->_resume));
 		}
 	}
 
