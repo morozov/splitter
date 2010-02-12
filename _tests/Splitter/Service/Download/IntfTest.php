@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
 class Splitter_Service_Download_IntfTest extends PHPUnit_Framework_TestCase {
 

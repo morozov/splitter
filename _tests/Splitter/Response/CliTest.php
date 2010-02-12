@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
 class Splitter_Response_CliTest extends PHPUnit_Framework_TestCase {
 
